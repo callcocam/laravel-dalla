@@ -8,6 +8,7 @@
 namespace App\Suports\Common;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 trait File {
 
@@ -82,7 +83,7 @@ trait File {
 
 	public function upload_public(UploadedFile $UploadedFile, $file, &$input) {
 
-		$date = str_slug(date("Y|m"));
+		$date = Str::slug(date("Y|m"));
 
 		$extension = $UploadedFile->clientExtension();
 
@@ -95,7 +96,7 @@ trait File {
 
 		$original = explode('.', $UploadedFile->getClientOriginalName());
 
-		$name = sprintf("%s-%s-%s.%s", rand(),time(),str_slug(reset($original)), $extension);
+		$name = sprintf("%s-%s-%s.%s", rand(),time(),Str::slug(reset($original)), $extension);
 		
 		$path_upload = str_replace("|",DIRECTORY_SEPARATOR,sprintf("%s|%s|%s",  env('APP_PATH_UPLOAD', 'dist|uploads|files'),get_tenant_id(),$date));
 		

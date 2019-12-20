@@ -9,6 +9,7 @@
 namespace App\Suports\Common;
 
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -63,7 +64,11 @@ trait Helper
             return $input;
 
         }
+        if (!request()->hasFile(Options::DEFAULT_COLUMN_COVER) && !request()->file(Options::DEFAULT_COLUMN_COVER)->isValid()) {
 
+            return $input;
+
+        }
         $image = $input[Options::DEFAULT_COLUMN_COVER];
 
         return $this->initFile($input, $image);
@@ -78,29 +83,41 @@ trait Helper
 
         }
 
+        if (!request()->hasFile(Options::DEFAULT_COLUMN_AVATAR) && !request()->file(Options::DEFAULT_COLUMN_AVATAR)->isValid()) {
+
+            return $input;
+
+        }
         $image = $input[Options::DEFAULT_COLUMN_AVATAR];
 
         return $this->initFile($input, $image);
     }
 
-    protected function initFile(&$input, $image)
+    protected function initFile(&$input,UploadedFile  $image)
     {
+
 
         array_push($this->fillable,'company_id','uuid');
 
-        $file = new \Intervention\Image\File();
+        $date = Str::slug(date("Y|m"));
 
-        $info = $file->setFileInfoFromPath($image);
+        $extension = $image->clientExtension();
+
+        $original = explode('.', $image->getClientOriginalName());
+
+        $name = sprintf("%s-%s-%s.%s", rand(),time(),Str::slug(reset($original)), $extension);
+
+        $result = $image->storePubliclyAs(sprintf("%s/%s",$this->getTable(), $date),$name);
 
         $data = [
             'company_id'=>get_tenant_id(),
             'uuid'=>\Str::uuid(),
-            'name'=>$info->filename,
-            'fullPath'=>$info->basePath(),
+            'name'=>$name,
+            'fullPath'=>$result,
             'dir'=>'/dist/upload/images',
-            'fileType'=>$info->mime,
-            'ext'=>$info->extension,
-            'size'=>$info->extension
+            'fileType'=>$image->getMimeType(),
+            'ext'=>$image->getExtension(),
+            'size'=>$image->getSize()
         ];
 
         /**

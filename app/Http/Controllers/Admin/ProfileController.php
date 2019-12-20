@@ -9,7 +9,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Forms\ProfileForm;
-use App\Model\Admin\Admin;
+use App\Model\Admin\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +18,7 @@ class ProfileController extends AbstractController
 
     protected $template = "profile";
 
-    protected $model = Admin::class;
+    protected $model = User::class;
 
     public function profile()
     {

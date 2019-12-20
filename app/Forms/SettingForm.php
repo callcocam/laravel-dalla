@@ -15,7 +15,7 @@ class SettingForm extends AbstractForm
         $this->add('slug', 'hidden')
             ->add('name', 'text')
             ->add('email', 'email')
-            ->addPassword()
+            ->add('cover', 'file')
             ->add('phone', 'tel')
             ->add('document', 'text')
             ->add('address', 'form', [
@@ -31,14 +31,4 @@ class SettingForm extends AbstractForm
         parent::buildForm();
     }
 
-
-    protected function addPassword(){
-
-        if($this->getModel()){
-            return  $this;
-        }
-
-        return  $this->add('password', 'password');
-
-    }
 }

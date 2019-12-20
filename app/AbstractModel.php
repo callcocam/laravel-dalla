@@ -57,10 +57,12 @@ class AbstractModel extends ModelAlias
 
         $this->initArray($data);
 
+
+
         if(isset($data['id']) && (int)$data['id']){
 
            if($this->updateBy($data, $data['id'])){
-               //SITEMA DE TAGS
+              //SITEMA DE TAGS
                $this->initTags($data);
                //EX RELACIONA CATEGORIAS COM POST OU PRODUCTS
                //$this->initCategorizable($data);
