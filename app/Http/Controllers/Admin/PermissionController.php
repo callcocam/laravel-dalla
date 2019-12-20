@@ -7,9 +7,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Suports\Shinobi\Helper;
+use App\Forms\PermissionForm;
 use App\Suports\Shinobi\Models\Permission;
-use Kris\LaravelFormBuilder\FormBuilder;
 
 class PermissionController extends AbstractController
 {
@@ -18,14 +17,5 @@ class PermissionController extends AbstractController
 
    protected $model = Permission::class;
 
-
-
-   public function __construct(FormBuilder $formBuilder,Helper $helper)
-   {
-
-       parent::__construct($formBuilder);
-
-       $this->results['permissions'] = $helper->getPermissions();
-   }
-
+  protected $formClass = PermissionForm::class;
 }

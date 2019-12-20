@@ -42,7 +42,6 @@
                                         <thead>
                                         <tr class="ul-widget6__tr--sticky-th">
                                             <th scope="col">{{ __("Name") }}</th>
-                                            <th scope="col">{{ __("Updated At") }}</th>
                                             <th scope="col">{{ __("Status") }}</th>
                                             <th scope="col">{{ __("Description") }}</th>
                                             <th scope="col">{{ __("Action") }}</th>
@@ -53,7 +52,6 @@
                                         @foreach($rows as $row)
                                          <tr>
                                             <td>{{ $row->name }}</td>
-                                            <td>{{ $row->updated_at }}</td>
                                             <td>
                                                 <span class="badge badge-pill badge-outline-{{ check_status($row->status) }} p-2 m-1">{{ $row->status }}</span>
                                             </td>

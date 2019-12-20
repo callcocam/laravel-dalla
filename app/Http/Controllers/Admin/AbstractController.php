@@ -156,6 +156,11 @@ abstract class AbstractController extends Controller
 
         $rows = $this->getModel()->findById($id);
 
+        if(!$rows){
+            notify()->error(__("The model was not informed!!"));
+
+            return back()->withErrors(__("The model was not informed!!"));
+        }
         $form = null;
         if($this->formClass){
 
