@@ -5,10 +5,10 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li>{{ __('Auto Routes') }}</li>
+            <li>{{ __('Rotas Dinâmicas') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            <a href="{{ route('admin.auto-route.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Auto Route') }}</a>
+            <a href="{{ route('admin.auto-route.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Rotas Dinâmica') }}</a>
         </div>
     </div>
 @endsection
@@ -26,7 +26,7 @@
                                 <div class="card-header">
                                     <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
                                         <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Details") }}
+                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Detalhes") }}
                                         </a>
                                     </h6>
                                 </div>
@@ -72,8 +72,8 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.auto-route.edit',$row->id) }}">{{ __('Edit Auto Route') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.auto-route.show',$row->id) }}">{{ __('Delete Auto Route') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.auto-route.edit',$row->id) }}">{{ __('Editar Rotas Dinâmica') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.auto-route.show',$row->id) }}">{{ __('Excluir Rotas Dinâmica') }}</a>
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
                         </div>
                     </div>

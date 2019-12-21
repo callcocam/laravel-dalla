@@ -5,8 +5,8 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.events.index') }}">{{ __('Events') }}</a></li>
-            <li>{{ __('Delete') }} - {{ $rows->name }}</li>
+            <li><a href="{{ route('admin.events.index') }}">{{ __('Eventos') }}</a></li>
+            <li>{{ __('Ecluir Evento') }} - {{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
@@ -20,8 +20,8 @@
                    <form action="{{ route('admin.events.destroy',$rows->id) }}" method="POST">
                        @csrf
                        @method("DELETE")
-                       <button class="btn btn-warning btn-rounded">{{ __('Delete Event') }}</button>
-                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.index') }}">{{ __('Back Events') }}</a>
+                       <button class="btn btn-warning btn-rounded">{{ __('Ecluir Evento') }}</button>
+                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.index') }}">{{ __('Back Eventos') }}</a>
                    </form>
                </div>
            </div>

@@ -5,10 +5,10 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li>{{ __('Roles') }}</li>
+            <li>{{ __('Usuários') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Role') }}</a>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Usuário') }}</a>
         </div>
     </div>
 @endsection
@@ -26,7 +26,7 @@
                                 <div class="card-header">
                                     <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
                                         <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("List of Roles") }}
+                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Listar Papéis") }}
                                         </a>
                                     </h6>
                                 </div>
@@ -36,7 +36,7 @@
                                             <table class="table text-center" id="user_table">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">{{ __('Name') }}</th>
+                                                    <th scope="col">{{ __('Nome') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -53,8 +53,8 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.edit',$row->id) }}">{{ __('Edit User') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.show',$row->id) }}">{{ __('Delete User') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.edit',$row->id) }}">{{ __('Editar Usuário') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.show',$row->id) }}">{{ __('Excluir Usuário') }}</a>
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
                         </div>
                     </div>

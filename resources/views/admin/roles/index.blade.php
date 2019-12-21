@@ -8,7 +8,7 @@
             <li>{{ __('Roles') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Role') }}</a>
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Papel') }}</a>
         </div>
     </div>
 @endsection
@@ -26,7 +26,7 @@
                                 <div class="card-header">
                                     <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
                                         <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("List of Privileges") }}
+                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Listar Permissões") }}
                                         </a>
                                     </h6>
                                 </div>
@@ -36,7 +36,7 @@
                                             <table class="table text-center" id="user_table">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">{{ __('Name') }}</th>
+                                                    <th scope="col">{{ __('Nome') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -53,8 +53,8 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Edit Role') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.show',$row->id) }}">{{ __('Delete Role') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Editar Papél') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.show',$row->id) }}">{{ __('Excluir Papél') }}</a>
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
                         </div>
                     </div>

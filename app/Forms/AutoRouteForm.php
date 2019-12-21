@@ -29,7 +29,10 @@ class AutoRouteForm extends AbstractForm
             $this->add('id', 'hidden');
         }
         $this->add('slug', 'hidden')
-            ->add('name', 'text')
+            ->add('name', 'text',
+                [
+                    'label'=>'Nome'
+                ])
             ->add('pattern', 'text')
             ->add('route', 'text')
             ->add('verb', 'choice',[
@@ -46,7 +49,7 @@ class AutoRouteForm extends AbstractForm
                 ],
                 'expanded'=>true,
             ])
-            ->add('description', 'textarea')
+            ->addDescription()
             ->getStatus()
             ->addSubmit();
 

@@ -5,8 +5,8 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.auto-route.index') }}">{{ __('Auto Routes') }}</a></li>
-            <li>{{ __('Delete') }} - {{ $rows->name }}</li>
+            <li><a href="{{ route('admin.auto-route.index') }}">{{ __('Rotas Dinâmicas') }}</a></li>
+            <li>{{ __('Excluir Rotas Dinâmicas') }} - {{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
@@ -20,8 +20,8 @@
                    <form action="{{ route('admin.auto-route.destroy',$rows->id) }}" method="POST">
                        @csrf
                        @method("DELETE")
-                       <button class="btn btn-warning btn-rounded">{{ __('Delete Auto Route') }}</button>
-                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.auto-route.index') }}">{{ __('Back Auto Routes') }}</a>
+                       <button class="btn btn-warning btn-rounded">{{ __('Excluir Rotas Dinâmicas') }}</button>
+                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.auto-route.index') }}">{{ __('Voltar Rotas Dinâmicas') }}</a>
                    </form>
                </div>
            </div>

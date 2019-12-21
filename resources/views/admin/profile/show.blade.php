@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li>{{ __('Profile') }}</li>
+            <li>{{ __('Minha Conta') }}</li>
         </ul>
     </div>
 @endsection

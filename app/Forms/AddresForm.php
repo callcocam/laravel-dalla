@@ -9,13 +9,35 @@ class AddresForm extends AbstractForm
     public function buildForm()
     {
         $this
-            ->add('zip', 'text')
-            ->add('state', 'text')
-            ->add('city', 'text')
-            ->add('district', 'text')
-            ->add('street', 'text')
-            ->add('number', 'text')
-            ->add('complement', 'text');
+            ->add('zip', 'text',
+                [
+                    'label'=>'Cep'
+                ]
+                )
+            ->add('state', 'text',
+                [
+                    'label'=>'Estado'
+                ])
+            ->add('city', 'text',
+                [
+                    'label'=>'Cidade'
+                ])
+            ->add('district', 'text',
+                [
+                    'label'=>'Bairro'
+                ])
+            ->add('street', 'text',
+                [
+                    'label'=>'Rua'
+                ])
+            ->add('number', 'text',
+                [
+                    'label'=>'Número'
+                ])
+            ->add('complement', 'text',
+                [
+                    'label'=>'Complemento'
+                ]);
 
         parent::buildForm();
     }

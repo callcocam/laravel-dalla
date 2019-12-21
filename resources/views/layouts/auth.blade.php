@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ sprintf("%s-%s", get_tenant()->name, __("Sing In")) }}</title>
+    <title>{{ sprintf("%s-%s", get_tenant()->name, __("Login")) }}</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->

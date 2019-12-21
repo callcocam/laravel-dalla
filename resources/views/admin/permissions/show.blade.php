@@ -5,8 +5,8 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.permissions.index') }}">{{ __('Categories') }}</a></li>
-            <li>{{ __('Delete') }} - {{ $rows->name }}</li>
+            <li><a href="{{ route('admin.permissions.index') }}">{{ __('Permissões') }}</a></li>
+            <li>{{ __('Excluir') }} - {{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
@@ -20,8 +20,8 @@
                    <form action="{{ route('admin.permissions.destroy',$rows->id) }}" method="POST">
                        @csrf
                        @method("DELETE")
-                       <button class="btn btn-warning btn-rounded">{{ __('Delete Permission') }}</button>
-                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.permissions.index') }}">{{ __('Back Permissions') }}</a>
+                       <button class="btn btn-warning btn-rounded">{{ __('Excluir Permissão') }}</button>
+                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.permissions.index') }}">{{ __('Voltar Permissões') }}</a>
                    </form>
                </div>
            </div>

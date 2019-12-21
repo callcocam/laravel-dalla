@@ -34,15 +34,23 @@ abstract class AbstractForm extends Form
 
         return $this->add('status', 'choice',[
             'choices'=>[
-                'published'=>'Published',
-                'draft'=>'Draft',
+                'published'=>'Publicado',
+                'draft'=>'Rascunho',
             ],
+            'label'=>'Situação',
             'expanded'=>true,
         ]);
 
     }
+protected function addDescription(){
 
-    protected function addSubmit($label = "Save form", $options = [], $attr = []){
+        return $this->add('description', 'textarea', [
+            'label'=>'Descrição'
+        ]);
+
+    }
+
+    protected function addSubmit($label = "Finalizar Operação", $options = [], $attr = []){
 
         return  $this->add('submit', 'submit', array_merge(
             [

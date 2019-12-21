@@ -5,7 +5,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li>{{ __('Permissions') }}</li>
+            <li>{{ __('Permissões') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
             <a href="{{ route('admin.permissions.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Permission') }}</a>
@@ -28,11 +28,11 @@
                                 <span class="_dot _inline-dot bg-primary"></span>
                             </button>
                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                <a class="dropdown-item" href="{{ route('admin.permissions.create') }}">{{ __('Create Permission') }}</a>
-                                <a class="dropdown-item" href="{{ route('admin.roles.index') }}">{{ __('List Roles') }}</a>
-                                <a class="dropdown-item" href="{{ route('admin.roles.create') }}">{{ __('Create Role') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.permissions.create') }}">{{ __('Cadastrar Permissão') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.roles.index') }}">{{ __('Listar Papéis') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.roles.create') }}">{{ __('Cadastrar Papel') }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('admin.permissions.index') }}">{{ __('Reload Permission') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.permissions.index') }}">{{ __('Recaregar Permissões') }}</a>
                             </div>
                         </div>
                         <div class="ul-widget-body">
@@ -41,10 +41,10 @@
                                     <table class="table">
                                         <thead>
                                         <tr class="ul-widget6__tr--sticky-th">
-                                            <th scope="col">{{ __("Name") }}</th>
-                                            <th scope="col">{{ __("Status") }}</th>
-                                            <th scope="col">{{ __("Description") }}</th>
-                                            <th scope="col">{{ __("Action") }}</th>
+                                            <th scope="col">{{ __("Nome") }}</th>
+                                            <th scope="col">{{ __("Situação") }}</th>
+                                            <th scope="col">{{ __("Descrição") }}</th>
+                                            <th scope="col">{{ __("Ações") }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -63,8 +63,8 @@
                                                 <span class="_dot _inline-dot bg-primary"></span>
                                             </button>
                                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                <a class="dropdown-item ul-widget__link--font" href="{{ route('admin.permissions.edit',$row->id) }}"><i class="i-Edit"> </i> {{ __('Edit Permission') }}</a>
-                                                <a class="dropdown-item ul-widget__link--font" href="{{ route('admin.permissions.show',$row->id) }}"><i class="i-File-Trash"> </i> {{ __('Delete Permission') }}</a>
+                                                <a class="dropdown-item ul-widget__link--font" href="{{ route('admin.permissions.edit',$row->id) }}"><i class="i-Edit"> </i> {{ __('Editar Permissão') }}</a>
+                                                <a class="dropdown-item ul-widget__link--font" href="{{ route('admin.permissions.show',$row->id) }}"><i class="i-File-Trash"> </i> {{ __('Excluir Permissão') }}</a>
                                                 </div>
                                             </td>
                                         </tr>

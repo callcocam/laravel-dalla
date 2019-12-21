@@ -5,8 +5,8 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.roles.index') }}">{{ __('User') }}</a></li>
-            <li>{{ __('Delete') }} - {{ $rows->name }}</li>
+            <li><a href="{{ route('admin.roles.index') }}">{{ __('Usuário') }}</a></li>
+            <li>{{ __('Excluir Usuário') }} - {{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
@@ -20,8 +20,8 @@
                    <form action="{{ route('admin.users.destroy',$rows->id) }}" method="POST">
                        @csrf
                        @method("DELETE")
-                       <button class="btn btn-warning btn-rounded">{{ __('Delete User') }}</button>
-                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.users.index') }}">{{ __('Back User') }}</a>
+                       <button class="btn btn-warning btn-rounded">{{ __('Excluir Usuário') }}</button>
+                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.users.index') }}">{{ __('Voltar Usuários') }}</a>
                    </form>
                </div>
            </div>

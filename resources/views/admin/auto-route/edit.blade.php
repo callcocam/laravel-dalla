@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.auto-route.index') }}">{{ __('Auto Route') }}</a></li>
+            <li><a href="{{ route('admin.auto-route.index') }}">{{ __('Rotas Dinâmicas') }}</a></li>
             <li>{{ $rows->name }}</li>
         </ul>
     </div>

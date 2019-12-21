@@ -5,7 +5,7 @@
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
             <li><a href="{{ route('admin.permissions.index') }}">{{ __('Permissions') }}</a></li>
-            <li>{{ __('Create') }}</li>
+            <li>{{ __('Cadastrar') }}</li>
         </ul>
     </div>
 @endsection

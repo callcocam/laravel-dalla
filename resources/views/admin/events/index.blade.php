@@ -26,7 +26,7 @@
                                 <div class="card-header">
                                     <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
                                         <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("List of Tasks") }}
+                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Listar Tarefas") }}
                                         </a>
                                     </h6>
                                 </div>
@@ -36,7 +36,7 @@
                                             <table class="table text-center" id="user_table">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">{{ __('Name') }}</th>
+                                                    <th scope="col">{{ __('Nome') }}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -53,8 +53,8 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Edit Event') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Delete Event') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
+                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Excluir Evento') }}</a>
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
                         </div>
                     </div>

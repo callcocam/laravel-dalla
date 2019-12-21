@@ -4,8 +4,8 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.events.index') }}">{{ __('Events') }}</a></li>
-            <li>{{ __('Create') }}</li>
+            <li><a href="{{ route('admin.events.index') }}">{{ __('Eventos') }}</a></li>
+            <li>{{ __('Cadastrar') }}</li>
         </ul>
     </div>
 @endsection

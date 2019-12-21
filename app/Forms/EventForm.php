@@ -19,18 +19,31 @@ class EventForm extends AbstractForm
         $this->add('slug', 'hidden')
             ->add('name', 'text',[
                 'rules' => 'required',
+                'label' => 'Nome',
             ])
-            ->add('subtitle', 'text')
+            ->add('subtitle', 'text',
+                [
+                    'rules' => 'required',
+                    'label'=>'Sub titulo'
+                ])
             ->add('start_event', 'date',[
                 'rules' => 'required',
+                'label' => 'Inicio Do Evento',
             ])
             ->add('end_event', 'date',[
                 'rules' => 'required',
+                'name' => 'Fim Do Evento',
             ])
-            ->add('cover', 'file')
-            ->add('consumption', 'text')
+            ->add('cover', 'file',
+                [
+                    'label'=>'Imagem'
+                ])
+            ->add('consumption', 'text',
+                [
+                    'label'=>'Consumo'
+                ])
             //->addTask()
-            ->add('description', 'textarea')
+            ->addDescription()
             ->getStatus()
             ->addSubmit();
 

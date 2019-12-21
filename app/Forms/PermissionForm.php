@@ -31,7 +31,7 @@ class PermissionForm extends AbstractForm
             ->add('slug', 'hidden')
             ->addPermissions()
             ->add('groups', 'text')
-            ->add('description', 'textarea')
+            ->addDescription()
             ->getStatus()
             ->addSubmit();
 
@@ -50,7 +50,8 @@ class PermissionForm extends AbstractForm
 
 
         return  $this->add('name', 'select',[
-            'choices' => $model
+            'choices' => $model,
+            'label'=>'Nome'
         ]);
 
     }

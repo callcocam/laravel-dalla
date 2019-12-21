@@ -15,7 +15,9 @@ class RoleForm extends AbstractForm
         $this
             ->add('id', 'hidden')
             ->add('slug', 'hidden')
-            ->add('name', 'text')
+            ->add('name', 'text',[
+                'label'=>'Nome'
+            ])
 
            ->add('special', 'choice',[
                'choices'=>[
@@ -26,7 +28,7 @@ class RoleForm extends AbstractForm
                'expanded'=>true,
            ])
             ->addPrivilege()
-            ->add('description', 'textarea')
+            ->addDescription()
             ->getStatus()
             ->addSubmit();
 
