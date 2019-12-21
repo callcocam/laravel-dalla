@@ -13,7 +13,7 @@ class EmailRequestForm extends AbstractForm
         $this->add('email', 'email',[
             'template' => 'laravel-form-builder::text-inline',
             'label_show'=>false
-        ])->addSubmit('Send Password Reset Link',[
+        ])->addSubmit('Enviar link de recuperação de senha',[
             'template' => 'laravel-form-builder::button-inline'
         ]);
 
