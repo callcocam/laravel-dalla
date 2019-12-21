@@ -4,6 +4,7 @@
 /storage/*.key
 /resources/lang/pt-BR.json
 /vendor
+/.idea
 .env
 .env.backup
 .phpunit.result.cache
