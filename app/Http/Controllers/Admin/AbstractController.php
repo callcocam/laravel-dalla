@@ -86,7 +86,13 @@ abstract class AbstractController extends Controller
 
         $this->validator($request);
 
-        //dd($request->all());
+        $form = $this->formBuilder->create($this->formClass);
+
+        // It will automatically use current request, get the rules, and do the validation
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
         $this->getModel()->saveBy($request->all());
 
         if($this->getModel()->getResultLastId()){
@@ -102,7 +108,9 @@ abstract class AbstractController extends Controller
             }
             return redirect()->route(sprintf($this->route, $this->getModel()->getResultLastId()))->with('success', $this->getModel()->getMessage());
         }
+        dd($this->getModel()->getMessage());
         notify()->error($this->getModel()->getMessage());
+
         return back()->withInput()->withErrors($this->getModel()->getMessage());
     }
 
