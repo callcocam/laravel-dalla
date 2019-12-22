@@ -80,6 +80,8 @@ class AbstractModel extends ModelAlias
                $this->initPermissions($data);
                //RELACIONA AS MENUS COM SUB-MENUS
                $this->initMenuss($data);
+               //RELACIONA AS MENUS COM SUB-MENUS
+               $this->initTasks($data);
            }
 
         }
@@ -127,14 +129,6 @@ class AbstractModel extends ModelAlias
         return AvatarProcessor::get($this);
     }
 
-    public function getCreatedAttribute()
-    {
-        if (empty($this->created_at)) {
-            return null;
-        }
-
-        return $this->created_at->toFormattedDateString();
-    }
 
     public function getCreatedMmDdYyyyAttribute()
     {

@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\AbstractForm;
+use App\Model\Admin\Task;
 use App\Suports\Shinobi\Models\Permission;
 
 class EventForm extends AbstractForm
@@ -15,7 +16,10 @@ class EventForm extends AbstractForm
         if($this->getModel())
         {
             $this->add('id', 'hidden');
+
         }
+
+
         $this->add('slug', 'hidden')
             ->add('name', 'text',[
                 'rules' => 'required',
@@ -42,7 +46,7 @@ class EventForm extends AbstractForm
                 [
                     'label'=>'Consumo'
                 ])
-            //->addTask()
+            ->addTask()
             ->addDescription()
             ->getStatus()
             ->addSubmit();
@@ -59,29 +63,37 @@ class EventForm extends AbstractForm
         if(!$model)
             return $this;
 
-        if($model->special)
-            return $this;
+        $tasks = $model->tasks()->get();
 
-        $permissions = $this->getModel()->permissions()->get();
+        if($tasks->count()){
 
-        $data = [];
+            foreach ($tasks as $task) {
 
-        $map = $permissions->map(function($items){
-            $data = $items->id;
-            return $data;
-        });
-
-        if($map){
-            $data = $map->toArray();
+                $this ->add(sprintf('_tasks-%s', $task->id), 'form', [
+                    'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
+                    'class' => TaskForm::class,
+                    'wrapper' => false,
+                    'label' =>$task->name,
+                    'formOptions' => [
+                        'model'=>$task
+                    ],
+                    'wrapper_class' => false,
+                ]);
+            }
         }
 
-        return  $this->add('privilege', 'entity',[
-            'class' => Permission::class,
-            'selected'=>$data,
-            'multiple'=>true,
-            'expanded'=>true,
+        $this ->add('_tasks-0', 'form', [
+            'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
+            'class' => $this->formBuilder->create(TaskForm::class),
+            'wrapper' => false,
+            'formOptions' => [
+                'model'=>null
+            ],
+            'label' => "Tarefas",
+            'wrapper_class' => false,
         ]);
 
+        return  $this;
     }
 
 }

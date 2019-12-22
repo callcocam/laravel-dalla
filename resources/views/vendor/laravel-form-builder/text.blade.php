@@ -9,9 +9,17 @@
             @endif
             <div class="col-md-6 col-sm-6 ">
                 @if ($showField)
-                    {!! Form::input($type, $name, $options['value'], array_merge([
+                    @if($options['value'] instanceof \Illuminate\Support\Carbon)
+                        {!! Form::input($type, $name, $options['value']->format('Y-m-d'), array_merge([
                 'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name
                 ],$options['attr'])) !!}
+
+                    @else
+                        {!! Form::input($type, $name, $options['value'], array_merge([
+                'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name
+                ],$options['attr'])) !!}
+                    @endif
+
                     @include('laravel-form-builder::errors')
                     @include('laravel-form-builder::help_block')
                 @endif

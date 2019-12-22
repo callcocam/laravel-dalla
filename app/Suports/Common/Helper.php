@@ -192,6 +192,40 @@ trait Helper
         return $input;
     }
 
+    protected function initTasks(&$input)
+    {
+
+
+        $data = $input;
+
+        unset($data['id']);
+
+        foreach ($data as $key => $value) {
+
+            if(Str::contains($key,"tasks")){
+
+                $task = array_filter($value);
+
+                if($task):
+                    array_push($this->fillable,'company_id','uuid');
+                    /**
+                     * @var $fileExist MorphOne
+                     */
+                    $tasksExist = $this->model->tasks();
+
+                    if($current = $tasksExist->where('name',$task['name'])->first()):
+                        $tasksExist->update(array_merge($current->toArray(),$task));
+                    else:
+                        $tasksExist->create($task);
+                    endif;
+                endif;
+
+            }
+        }
+
+
+        return $input;
+    }
     protected function initCategorizable(&$input)
     {
         if (!isset($input['category'])) {
@@ -266,6 +300,7 @@ trait Helper
         return $input;
     }
 
+
     public function initArray(&$input)
     {
 
@@ -275,9 +310,9 @@ trait Helper
 
                 if (is_array($value)) :
 
-                    if (!in_array($key, ['tag','tags','role','privilege','address','submenus'])) :
+                    if (in_array($key, ['tag'])) :
 
-                        $input[$key] = json_encode($value);
+                        //$input[$key] = json_encode($value);
 
                     endif;
 
