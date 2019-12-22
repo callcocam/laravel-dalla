@@ -27,12 +27,13 @@ class ProfileForm extends AbstractForm
                 'label'=>'Cpf/Cnpj'
             ])
             ->add('cover', 'file',[
-                'label'=>'Capa'
+                'label'=>'Foto'
             ])
             ->add('address', 'form', [
                 'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
                 'class' => $this->formBuilder->create(AddresForm::class),
                 'wrapper' => false,
+                'label' => "Endereço",
                 'wrapper_class' => false,
             ])
             ->addDescription()

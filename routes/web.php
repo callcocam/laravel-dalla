@@ -14,6 +14,10 @@
 Auth::routes(['register'=>false]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', function (){
+
+    return redirect('/');
+})->name('home-redirect');
 
 Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
