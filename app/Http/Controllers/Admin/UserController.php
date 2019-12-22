@@ -19,4 +19,10 @@ class UserController extends AbstractController
 
    protected $formClass = UserForm::class;
 
+    public function index()
+    {
+        $this->getSource()->where('is_admin','1');
+
+        return parent::index();
+    }
 }

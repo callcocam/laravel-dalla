@@ -5,7 +5,7 @@ namespace App\Forms;
 use App\AbstractForm;
 use App\Suports\Shinobi\Models\Role;
 
-class UserForm extends AbstractForm
+class ClientForm extends AbstractForm
 {
     public function buildForm()
     {
@@ -13,9 +13,14 @@ class UserForm extends AbstractForm
             $this->add('id', 'hidden');
         }
 
-        $this->add('is_admin', 'hidden', [
-            'value'=>'1'
-        ])
+        $role = Role::query()->where('slug','cliente')->first();
+        $this
+            ->add('role', 'hidden', [
+                'value'=>$role->id
+            ])
+            ->add('is_admin', 'hidden', [
+                'value'=>'0'
+            ])
             ->add('slug', 'hidden')
             ->add('name', 'text',[
                 'label'=>'Nome'
@@ -30,10 +35,6 @@ class UserForm extends AbstractForm
             ->add('document', 'text',[
                 'label'=>'Cpf/Cnpj'
             ])
-            ->add('cover', 'file',[
-                'label'=>'Capa'
-            ])
-            ->addRoles()
             ->add('address', 'form', [
                 'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
                 'class' => $this->formBuilder->create(AddresForm::class),
@@ -47,34 +48,6 @@ class UserForm extends AbstractForm
         parent::buildForm();
     }
 
-    protected function addRoles(){
-
-        if(!$this->getModel()){
-            return  $this;
-        }
-
-        $roles = $this->getModel()->roles()->get();
-
-        $data = [];
-
-        $map = $roles->map(function($items){
-            $data = $items->id;
-            return $data;
-        });
-
-        if($map){
-            $data = $map->toArray();
-        }
-        return  $this->add('role', 'entity', [
-            'class' => Role::class,
-            'selected' => $data,
-            //'property' => 'name',
-            //'property_key ' => 'id',
-            'multiple'=>true,
-            'expanded'=>true,
-        ]);
-
-    }
     protected function addPassword(){
 
         if($this->getModel()){

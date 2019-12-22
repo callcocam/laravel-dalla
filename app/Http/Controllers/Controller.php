@@ -43,6 +43,19 @@ class Controller extends BaseController
         return $this->model;
     }
 
+    /**
+     * @return AbstractModel
+     */
+    protected function getSource(){
+
+        if(is_string($this->model)){
+
+            $this->model = $this->model::query();
+        }
+
+        return $this->model;
+    }
+
     protected function getRules(){
 
         if(!$this->rules){

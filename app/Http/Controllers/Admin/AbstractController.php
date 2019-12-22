@@ -39,7 +39,7 @@ abstract class AbstractController extends Controller
 
         if($this->model){
 
-            $this->results['rows'] = $this->getModel()->paginate($this->perPage);
+            $this->results['rows'] = $this->getSource()->paginate($this->perPage);
         }
 
         return view(sprintf('admin.%s.index', $this->template), $this->results);

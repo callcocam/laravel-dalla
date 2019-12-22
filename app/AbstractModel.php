@@ -139,6 +139,7 @@ class AbstractModel extends ModelAlias
         return $this->created_at->format('m/d/Y H:i:s');
     }
 
+
     public function setCreatedDateAttribute($value)
     {
         try {

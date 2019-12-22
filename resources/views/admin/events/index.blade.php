@@ -44,7 +44,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($row->tasks() as $tasks)
+                                                @foreach($row->tasks()->get() as $tasks)
                                                     <tr>
                                                         <td>
                                                             <label class="radio radio-primary">
