@@ -48,11 +48,15 @@ trait Helper
     protected function convert_password(&$input)
     {
 
-        if (isset($input['password'])) {
+        if (isset($input['password']) && !empty($input['password'])) {
 
             $input['password'] = Hash::make($input['password']);
+
+            return $input;
         }
 
+        unset($input['password']);
+        
         return $input;
     }
 

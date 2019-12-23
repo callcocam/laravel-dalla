@@ -14,6 +14,10 @@
                 'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name
                 ],$options['attr'])) !!}
 
+                    @elseif($type == "password")
+                        {!! Form::input($type, $name, null, array_merge([
+               'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name
+               ],$options['attr'])) !!}
                     @else
                         {!! Form::input($type, $name, $options['value'], array_merge([
                 'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name

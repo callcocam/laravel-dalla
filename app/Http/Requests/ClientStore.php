@@ -26,6 +26,8 @@ class ClientStore extends FormRequest
     {
         return [
             'name'=>['required', 'max:190'],
+            'fantasy'=>['required', 'max:190'],
+            //'password'=>['required', 'max:20'],
             'email' => [
                 'required',
                 Rule::unique('users')->ignore($this->id),
@@ -34,6 +36,13 @@ class ClientStore extends FormRequest
                 'required',
                 Rule::unique('users')->ignore($this->id),
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required'=>"Campo obrigatório"
         ];
     }
 }

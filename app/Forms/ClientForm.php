@@ -23,7 +23,10 @@ class ClientForm extends AbstractForm
             ])
             ->add('slug', 'hidden')
             ->add('name', 'text',[
-                'label'=>'Nome'
+                'label'=>'Razão Social'
+            ])
+            ->add('fantasy', 'text',[
+                'label'=>'Nome Fantasia'
             ])
             ->add('email', 'email',[
                 'label'=>'E-Mail'
@@ -52,11 +55,12 @@ class ClientForm extends AbstractForm
     protected function addPassword(){
 
         if($this->getModel()){
-            return  $this;
+           // return  $this;
         }
 
         return  $this->add('password', 'password',[
-            'label'=>'Senha'
+            'label'=>'Senha',
+            'value'=>null
         ]);
 
     }
