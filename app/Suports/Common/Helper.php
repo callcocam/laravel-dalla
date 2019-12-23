@@ -117,7 +117,7 @@ trait Helper
             'company_id'=>get_tenant_id(),
             'uuid'=>\Str::uuid(),
             'name'=>$name,
-            'fullPath'=>$result,
+            'fullPath'=>sprintf("storage/%s",$result),
             'dir'=>'/dist/upload/images',
             'fileType'=>$image->getMimeType(),
             'ext'=>$image->getExtension(),
