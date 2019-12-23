@@ -3,7 +3,7 @@
     <div class="breadcrumb">
         <h1>{{ $tenant->name }}</h1>
         <ul>
-            <li>{{ __('Dashboard') }}</li>
+            <li>{{ __('Painel') }}</li>
         </ul>
     </div>
 @endsection

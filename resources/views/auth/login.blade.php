@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="p-4">
                         <div class="auth-logo text-center mb-4"><img src="{{ asset(get_tenant()->cover) }}" alt=""></div>
-                        <h1 class="mb-3 text-18">{{ __('Iniciar sessão') }}</h1>
+                        <h1 class="mb-3 text-18">{{ __('Logar no Sistema') }}</h1>
                         {!! form($form) !!}
                         <div class="mt-3 text-center">
                             @if (Route::has('register'))

@@ -4,7 +4,7 @@
     <div class="breadcrumb">
         <h1>{{ $tenant->name }}</h1>
         <ul>
-            <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
+            <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
             <li><a href="{{ route('admin.auto-route.index') }}">{{ __('Rotas Dinâmicas') }}</a></li>
             <li>{{ __('Excluir Rotas Dinâmicas') }} - {{ $rows->name }}</li>
         </ul>

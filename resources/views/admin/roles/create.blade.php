@@ -3,8 +3,8 @@
     <div class="breadcrumb">
         <h1>{{ $tenant->name }}</h1>
         <ul>
-            <li><a href="{{ route('admin.admin.index') }}">{{ __('Dashboard') }}</a></li>
-            <li><a href="{{ route('admin.roles.index') }}">{{ __('roles') }}</a></li>
+            <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
+            <li><a href="{{ route('admin.roles.index') }}">{{ __('Papéis') }}</a></li>
             <li>{{ __('Cadastrar') }}</li>
         </ul>
     </div>
