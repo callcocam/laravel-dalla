@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\AutoRouteForm;
 use App\Suports\AutoRoute\Model\AutoRouteModel;
+use Illuminate\Http\Request;
 
 class AutoRouteController extends AbstractController
 {
@@ -22,4 +23,13 @@ class AutoRouteController extends AbstractController
 
    protected $formClass = AutoRouteForm::class;
 
+    /**
+     * Store a newly created resource in storage.
+     * @param $request
+     * @return AutoRouteController
+     */
+    public function store(Request $request)
+    {
+        return $this->save($request);
+    }
 }

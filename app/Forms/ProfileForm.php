@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use App\AbstractForm;
 use App\Suports\Shinobi\Models\Role;
+use Illuminate\Validation\Rule;
 
 class ProfileForm extends AbstractForm
 {
@@ -14,10 +15,12 @@ class ProfileForm extends AbstractForm
         }
         $this->add('slug', 'hidden')
             ->add('name', 'text',[
-                'label'=>'Nome'
+                'label'=>'Nome',
+                'rules'=>'required'
             ])
             ->add('email', 'email',[
-                'label'=>'E-Mail'
+                'label'=>'E-Mail',
+                'rules'=>'required'
             ])
             ->addPassword()
             ->add('phone', 'tel',[
@@ -34,7 +37,6 @@ class ProfileForm extends AbstractForm
                 'wrapper_class' => false,
             ])
             ->addDescription()
-            ->getStatus()
             ->addSubmit();
 
         parent::buildForm();
@@ -47,7 +49,9 @@ class ProfileForm extends AbstractForm
             return  $this;
         }
 
-        return  $this->add('password', 'password');
+        return  $this->add('password', 'password',[
+            'label'=>'Senha'
+        ]);
 
     }
 }

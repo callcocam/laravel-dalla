@@ -56,7 +56,7 @@ class Controller extends BaseController
         return $this->model;
     }
 
-    protected function getRules(){
+    protected function getRules($data){
 
         if(!$this->rules){
 
@@ -65,7 +65,7 @@ class Controller extends BaseController
         }
         $this->rules = new $this->rules;
 
-        return $this->rules->getRules();
+        return $this->rules->getRules($data);
 
     }
 }

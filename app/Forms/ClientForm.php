@@ -40,9 +40,10 @@ class ClientForm extends AbstractForm
                 'class' => $this->formBuilder->create(AddresForm::class),
                 'wrapper' => false,
                 'wrapper_class' => false,
+                'label'=>'Endereço',
             ])
             ->addDescription()
-            ->getStatus()
+            ->getStatus("Ativo", "Inativo")
             ->addSubmit();
 
         parent::buildForm();
@@ -54,7 +55,9 @@ class ClientForm extends AbstractForm
             return  $this;
         }
 
-        return  $this->add('password', 'password');
+        return  $this->add('password', 'password',[
+            'label'=>'Senha'
+        ]);
 
     }
 }

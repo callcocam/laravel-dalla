@@ -8,7 +8,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Forms\UserForm;
+use App\Http\Requests\UserStore;
 use App\Model\Admin\User;
+use Illuminate\Http\Request;
 
 class UserController extends AbstractController
 {
@@ -24,5 +26,18 @@ class UserController extends AbstractController
         $this->getSource()->where('is_admin','1');
 
         return parent::index();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param UserStore $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserStore $request)
+    {
+
+
+        return $this->save($request);
     }
 }

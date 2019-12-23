@@ -8,7 +8,9 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Requests\CompanyStore;
 use App\Model\Admin\Company;
+use Illuminate\Http\Request;
 
 class CompanyController extends AbstractController
 {
@@ -17,5 +19,15 @@ class CompanyController extends AbstractController
 
    protected $model = Company::class;
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CompanyStore $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CompanyStore $request)
+    {
 
+        return $this->save($request);
+    }
 }

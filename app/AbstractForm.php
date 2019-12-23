@@ -30,12 +30,12 @@ abstract class AbstractForm extends Form
 
 
     }
-    protected function getStatus(){
+    protected function getStatus($published="Publicado", $draft="Rascunho"){
 
         return $this->add('status', 'choice',[
             'choices'=>[
-                'published'=>'Publicado',
-                'draft'=>'Rascunho',
+                'published'=>$published,
+                'draft'=>$draft,
             ],
             'label'=>'Situação',
             'expanded'=>true,

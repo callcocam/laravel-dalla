@@ -9,7 +9,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Forms\RoleForm;
+use App\Http\Requests\RoleStore;
 use App\Suports\Shinobi\Models\Role;
+use Illuminate\Http\Request;
 
 class RoleController extends AbstractController
 {
@@ -20,5 +22,17 @@ class RoleController extends AbstractController
 
 
    protected $formClass = RoleForm::class;
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param RoleStore $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(RoleStore $request)
+    {
+
+        return $this->save($request);
+    }
 
 }

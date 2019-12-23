@@ -32,6 +32,7 @@ abstract class AbstractController extends Controller
         $this->formBuilder = $formBuilder;
     }
 
+
     public function index(){
 
         $this->results['user'] = Auth::user();
@@ -75,16 +76,9 @@ abstract class AbstractController extends Controller
         return view(sprintf('admin.%s.create', $this->template), $this->results);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
 
-        $this->validator($request);
+
+    protected function save($request){
 
         $form = $this->formBuilder->create($this->formClass);
 
@@ -108,7 +102,6 @@ abstract class AbstractController extends Controller
             }
             return redirect()->route(sprintf($this->route, $this->getModel()->getResultLastId()))->with('success', $this->getModel()->getMessage());
         }
-        dd($this->getModel()->getMessage());
         notify()->error($this->getModel()->getMessage());
 
         return back()->withInput()->withErrors($this->getModel()->getMessage());
@@ -258,7 +251,7 @@ abstract class AbstractController extends Controller
     protected function validator($request)
     {
 
-        return Validator::make($request->all(), $this->getRules())->validate();
+        return Validator::make($request->all(), $this->getRules($request->all()))->validate();
     }
 
 }

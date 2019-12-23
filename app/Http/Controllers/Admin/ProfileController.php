@@ -9,7 +9,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Forms\ProfileForm;
+use App\Http\Requests\ProfileStore;
 use App\Model\Admin\User;
+use App\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +21,8 @@ class ProfileController extends AbstractController
     protected $template = "profile";
 
     protected $model = User::class;
+
+   // protected $rules = ProfileRequest::class;
 
     public function profile()
     {
@@ -46,13 +50,12 @@ class ProfileController extends AbstractController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param ProfileStore $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfileStore $request)
     {
 
-        $this->validator($request);
         $this->getModel()->saveBy($request->all());
 
         if($this->getModel()->getResultLastId()){

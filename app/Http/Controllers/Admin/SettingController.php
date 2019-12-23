@@ -9,7 +9,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Forms\SettingForm;
+use App\Http\Requests\CompanyStore;
 use App\Model\Admin\Company;
+use App\Requests\CompanyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,13 +52,12 @@ class SettingController extends AbstractController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CompanyStore $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyStore $request)
     {
 
-        $this->validator($request);
         $this->getModel()->saveBy($request->all());
 
         if($this->getModel()->getResultLastId()){

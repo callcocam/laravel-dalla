@@ -8,7 +8,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Forms\ClientForm;
+use App\Http\Requests\ClientStore;
 use App\Model\Admin\Client;
+use Illuminate\Http\Request;
 
 class ClientController extends AbstractController
 {
@@ -26,4 +28,14 @@ class ClientController extends AbstractController
        return parent::index();
    }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param ClientStore $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ClientStore $request)
+    {
+        return $this->save($request);
+    }
 }
