@@ -56,7 +56,7 @@ trait Helper
         }
 
         unset($input['password']);
-        
+
         return $input;
     }
 
