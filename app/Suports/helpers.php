@@ -81,7 +81,7 @@ if ( ! function_exists('get_tenant'))
      */
     function get_tenant()
     {
-        return \App\Company::find(get_tenant_id());
+        return \App\Model\Admin\Company::find(get_tenant_id());
     }
 }
 
