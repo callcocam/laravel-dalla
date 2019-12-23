@@ -50,7 +50,7 @@ protected function addDescription(){
 
     }
 
-    protected function addSubmit($label = "Finalizar Operação", $options = [], $attr = []){
+    protected function addSubmit($label = "Salvar Dados", $options = [], $attr = []){
 
         return  $this->add('submit', 'submit', array_merge(
             [
