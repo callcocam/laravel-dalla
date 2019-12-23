@@ -26,9 +26,6 @@ class ProfileForm extends AbstractForm
             ->add('document', 'text',[
                 'label'=>'Cpf/Cnpj'
             ])
-            ->add('cover', 'file',[
-                'label'=>'Foto'
-            ])
             ->add('address', 'form', [
                 'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
                 'class' => $this->formBuilder->create(AddresForm::class),
