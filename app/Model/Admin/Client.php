@@ -21,7 +21,7 @@ class Client extends AbstractModel
      * @var array
      */
     protected $fillable = [
-        'name','slug', 'email', 'password', 'is_admin',
+        'name','slug', 'fantasy','phone','document','email', 'password', 'is_admin',
     ];
 
     /**
