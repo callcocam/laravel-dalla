@@ -46,7 +46,7 @@ class ProfileForm extends AbstractForm
     protected function addPassword(){
 
         if($this->getModel()){
-            return  $this;
+            //return  $this;
         }
 
         return  $this->add('password', 'password',[
