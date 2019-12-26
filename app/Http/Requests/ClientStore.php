@@ -24,10 +24,10 @@ class ClientStore extends FormRequest
      */
     public function rules()
     {
-        return [
+      
+        $rules = [
             'name'=>['required', 'max:190'],
             'fantasy'=>['required', 'max:190'],
-            //'password'=>['required', 'max:20'],
             'email' => [
                 'required',
                 Rule::unique('users')->ignore($this->id),
@@ -37,6 +37,11 @@ class ClientStore extends FormRequest
                 Rule::unique('users')->ignore($this->id),
             ],
         ];
+
+        if(!$this->id){
+            $rules['password']  = ['required', 'max:50'];
+        }
+        return $rules;
     }
 
     public function messages()

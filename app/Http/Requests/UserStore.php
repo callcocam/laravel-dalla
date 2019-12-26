@@ -24,7 +24,7 @@ class UserStore extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name'=>['required', 'max:190'],
             'email' => [
                 'required',
@@ -35,5 +35,10 @@ class UserStore extends FormRequest
                 Rule::unique('users')->ignore($this->id),
             ],
         ];
+
+        if(!$this->id){
+            $rules['password']  = ['required', 'max:50'];
+        }
+        return $rules;
     }
 }
