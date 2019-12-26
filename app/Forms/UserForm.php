@@ -23,11 +23,7 @@ class UserForm extends AbstractForm
                 'rules' => 'required',
             ])
             ->add('email', 'email',[
-                'label'=>'E-Mail',
-                'rules' => [
-                    'required',
-                    Rule::unique('users','email')->ignore($this->getData('id'))
-                ],
+                'label'=>'E-Mail'
             ])
             ->addPassword()
             ->add('phone', 'tel',[
