@@ -132,6 +132,26 @@ if ( ! function_exists('check_status'))
 }
 
 
+if ( ! function_exists('check_status_text'))
+{
+    /**
+     * Get the configuration path.
+     *
+     * @param  string $path
+     * @return string
+     */
+    function check_status_text($status, $options = [
+        'published'=>"Publicado", 'draft'=>"Rascunho", 'deleted'=>"Deletado"
+    ])
+    {
+        if(isset($options[$status]))
+            return $options[$status];
+
+
+        return "Rascunho";
+    }
+}
+
 if (!function_exists('date_carbom_format')) {
 
     function date_carbom_format($date, $format = "d/m/Y H:i:s")

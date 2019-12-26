@@ -26,7 +26,7 @@
                             {{ $row->description }}</p>
                             <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
                             <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.show',$row->id) }}">{{ __('Excluir Cliente') }}</a>
-                            <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
+                            <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ check_status_text($row->status) }}</a>
                         </div>
                     </div>
 

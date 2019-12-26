@@ -24,7 +24,7 @@ class ClientStore extends FormRequest
      */
     public function rules()
     {
-      
+
         $rules = [
             'name'=>['required', 'max:190'],
             'fantasy'=>['required', 'max:190'],

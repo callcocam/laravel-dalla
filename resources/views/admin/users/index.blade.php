@@ -55,7 +55,7 @@
                             {{ $row->description }}</p>
                             <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.edit',$row->id) }}">{{ __('Editar Usuário') }}</a>
                             <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.show',$row->id) }}">{{ __('Excluir Usuário') }}</a>
-                            <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
+                            <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
                         </div>
                     </div>
 
