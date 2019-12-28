@@ -8,7 +8,9 @@
             <li>{{ __('Clientes') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            <a href="{{ route('admin.clients.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
+            @can('admin.clients.create')
+                <a href="{{ route('admin.clients.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
+            @endcan
         </div>
     </div>
 @endsection
@@ -24,8 +26,12 @@
                             <p class="card-text">
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.show',$row->id) }}">{{ __('Excluir Cliente') }}</a>
+                            @can('admin.clients.edit')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
+                            @endcan
+                            @can('admin.clients.show')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.show',$row->id) }}">{{ __('Excluir Cliente') }}</a>
+                            @endcan
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ check_status_text($row->status) }}</a>
                         </div>
                     </div>

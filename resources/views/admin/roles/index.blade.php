@@ -8,7 +8,9 @@
             <li>{{ __('Roles') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Papel') }}</a>
+            @can('admin.roles.create')
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Papel') }}</a>
+            @endcan
         </div>
     </div>
 @endsection
@@ -53,8 +55,12 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Editar Papél') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.show',$row->id) }}">{{ __('Excluir Papél') }}</a>
+                            @can('admin.roles.edit')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Editar Papél') }}</a>
+                            @endcan
+                        @can('admin.roles.show')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.show',$row->id) }}">{{ __('Excluir Papél') }}</a>
+                            @endcan
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
                         </div>
                     </div>

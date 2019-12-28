@@ -8,7 +8,9 @@
             <li>{{ __('Usuários') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
+            @can('admin.users.create')
             <a href="{{ route('admin.users.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Usuário') }}</a>
+            @endcan
         </div>
     </div>
 @endsection
@@ -53,8 +55,12 @@
                             </div>
                             <hr>
                             {{ $row->description }}</p>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.edit',$row->id) }}">{{ __('Editar Usuário') }}</a>
-                            <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.show',$row->id) }}">{{ __('Excluir Usuário') }}</a>
+                            @can('admin.users.edit')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.edit',$row->id) }}">{{ __('Editar Usuário') }}</a>
+                            @endcan
+                            @can('admin.users.show')
+                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.users.show',$row->id) }}">{{ __('Excluir Usuário') }}</a>
+                            @endcan
                             <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
                         </div>
                     </div>
