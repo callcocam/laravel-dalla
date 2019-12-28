@@ -19,7 +19,7 @@ class LoginForm extends AbstractForm
                 'label'=>"Senha",
                 'label_show'=>false,
             ])
-            ->addSubmit("Iniciar Sessão",[
+            ->addSubmit("Logar no sistema",[
                 'template' => 'laravel-form-builder::button-inline'
             ]);
 
