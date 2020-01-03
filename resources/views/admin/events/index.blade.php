@@ -20,73 +20,30 @@
         <div class="accordion" id="accordionExample">
             <div class="row">
                 @foreach($rows as $row)
-                    <div class="card m-2">
-                        <div class="card-header">{{ $row->name }}</div>
-                        <div class="card-body">
-                            <p class="card-text">
-                            @if($row->tasks)
-                            <div class="card ul-card__border-radius">
-                                <div class="card-header">
-                                    <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
-                                        <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Listar Tarefas") }}
-                                        </a>
-                                    </h6>
-                                </div>
 
-                                    <div class="collapse" id="accordion-item-{{$row->id}}" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <table class="table text-center" id="user_table">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">{{ __('Rascunho') }}</th>
-                                                    <th scope="col">{{ __('Publicado') }}</th>
-                                                    <th scope="col">{{ __('Completo') }}</th>
-                                                    <th scope="col">{{ __('Atualizar') }}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($row->tasks()->get() as $tasks)
-                                                    <tr>
-                                                        <td>
-                                                            <label class="radio radio-primary">
-                                                                <input type="radio" name="status" value="1"><span class="checkmark"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <label class="radio radio-primary">
-                                                                <input type="radio" name="status" value="2"><span class="checkmark"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td>
-                                                            <label class="radio radio-primary">
-                                                                <input type="radio" name="status" value="3"><span class="checkmark"></span>
-                                                            </label>
-                                                        </td>
-                                                        <td class="col-md-2 mt-3 mt-md-0">
-                                                            <button class="btn btn-primary btn-block">{{ $tasks->name }}</button>
-                                                        </td>
-
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="card mt-4 mb-4">
+                            <div class="card-body">
+                                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                    <div>
+                                        <h6>Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</h6>
+                                        <p class="ul-task-manager__paragraph mb-3">{{ $row->name }}</p>
+                                         <a href="{{ route('admin.tasks.index',$row->id) }}"><i class="ul-task-manager__fonts i-Add"></i> Adicionar tarefas</a>
+                                        <a class="btn btn-icon bg-transparent border-slate-300 text-slate rounded-round border-dashed" href=""><i class="icon-plus2"></i></a>
                                     </div>
+                                </div>
                             </div>
-
+                            <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                @can('admin.events.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
+                                @endcan
+                                    <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
+                                @can('admin.events.show')
+                                    <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Excluir Evento') }}</a>
+                                @endcan
+                            </div>
                         </div>
-                            @endif
-                        <hr>
-                        {{ $row->description }}</p>
-                            @can('admin.events.edit')
-                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
-                            @endcan
-                            @can('admin.events.show')
-                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Excluir Evento') }}</a>
-                            @endcan
-                        <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
                     </div>
-            </div>
 
             @endforeach
         </div>

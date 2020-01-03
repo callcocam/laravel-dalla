@@ -13,7 +13,7 @@ use App\AbstractModel;
 class Task extends AbstractModel
 {
     protected $fillable = [
-        'user_id','name','slug', 'description','updated_at',
+        'user_id','name','slug','status', 'description','updated_at',
     ];
 
     public function taskable(){

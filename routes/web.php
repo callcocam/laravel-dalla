@@ -39,4 +39,21 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
     \App\Suports\AutoRoute\Facade\AutoRoute::register();
 
+    $router->group(['prefix'=>'eventos'], function($router){
+
+        $router->get('/{id}/tarefas', 'Admin\\EventController@task')
+            ->name('admin.tasks.index')->middleware('can:admin.tasks.index');
+
+        $router->post('/tarefas/update', 'Admin\\EventController@updateTask')
+            ->name('admin.tasks.update')->middleware('can:admin.tasks.update');
+
+        $router->post('/tarefas/create', 'Admin\\EventController@createTask')
+            ->name('admin.tasks.update')->middleware('can:admin.tasks.update');
+
+
+        $router->post('/tarefas/delete', 'Admin\\EventController@deleteTask')
+            ->name('admin.tasks.delete')->middleware('can:admin.tasks.delete');
+    });
+
+
 });

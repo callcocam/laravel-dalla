@@ -18,3 +18,13 @@
 @endsection
 
 
+@push("scripts")
+    <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'contractor' );
+        CKEDITOR.replace( 'observations' );
+        CKEDITOR.replace( 'pre_checklist' );
+        CKEDITOR.replace( 'general_observations' );
+    </script>
+@endpush

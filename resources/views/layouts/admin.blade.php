@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="{{ asset('_dist/admin/css/themes/lite-purple.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('_dist/admin/css/plugins/perfect-scrollbar.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     @stack('styles')
     @notify_css
     <!-- Styles -->
@@ -25,7 +26,7 @@
     <div class="main-content-wrap sidenav-open d-flex flex-column">
         <!-- ============ Body content start ============= -->
 
-        <div class="main-content">
+        <div id="app" class="main-content">
             @yield('breadcrumb')
             <div class="separator-breadcrumb border-top"></div>
         @yield('content')
@@ -44,6 +45,8 @@
 <script src="{{ asset('_dist/admin/js/scripts/script.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/scripts/sidebar.large.script.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/plugins/tagging.min.js') }}"></script>
+<script src="https://kit.fontawesome.com/f248d703d3.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @notify_js
 @notify_render
 @stack('scripts')

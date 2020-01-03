@@ -19,35 +19,36 @@ class EventForm extends AbstractForm
 
         }
 
-
-        $this->add('slug', 'hidden')
+        $this->add('slug', 'hidden')->add('end_event', 'hidden')
             ->add('name', 'text',[
-                'rules' => 'required',
-                'label' => 'Nome',
+                 'label' => 'Nome',
             ])
-            ->add('subtitle', 'text',
-                [
-                    'rules' => 'required',
-                    'label'=>'Sub titulo'
-                ])
             ->add('start_event', 'date',[
-                'rules' => 'required',
                 'label' => 'Inicio Do Evento',
             ])
-            ->add('end_event', 'date',[
-                'rules' => 'required',
-                'name' => 'Fim Do Evento',
-            ])
-            ->add('cover', 'file',
+            ->add('contractor', 'textarea',
                 [
-                    'label'=>'Imagem'
+                     'label'=>'Contratante'
                 ])
+            ->add('observations', 'textarea',
+                [
+                    'label'=>'Observações'
+                ])
+
+            ->add('pre_checklist', 'textarea',
+                [
+                    'label'=>'Pre-Checklist'
+                ])
+
+            ->addDescription()
             ->add('consumption', 'text',
                 [
-                    'label'=>'Consumo'
+                    'label'=>'Consumo(pos evento)'
                 ])
-            ->addTask()
-            ->addDescription()
+            ->add('general_observations', 'textarea',
+                [
+                    'label'=>'Observações(pos evento)'
+                ])
             ->getStatus()
             ->addSubmit();
 
