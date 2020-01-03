@@ -44,8 +44,8 @@
                                                         <span class="_dot _inline-dot bg-primary"></span>
                                                     </button>
                                                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                        <a class="dropdown-item ul-widget__link--font" href="#" @click="updateStatus(task,'published')"><i class="i-Folder-Download"></i> Por fazer</a>
-                                                        <a class="dropdown-item ul-widget__link--font" href="#" @click="updateStatus(task,'completed')"><i class="i-Gears-2"></i> Feita</a>
+                                                        <a class="dropdown-item ul-widget__link--font" href="#" @click="updateStatus(task,'published')"><i class="i-Up"></i> Por fazer</a>
+                                                        <a class="dropdown-item ul-widget__link--font" href="#" @click="updateStatus(task,'completed')"><i class="i-Down"></i> Feita</a>
                                                     </div>
                                                 </td>
                                                 <td>
