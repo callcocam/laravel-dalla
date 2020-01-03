@@ -8,7 +8,7 @@
                 {!! Form::customLabel(__($name), __($options['label']), $options['label_attr']) !!}
             @endif
             @if ($showField)
-                <div class="col-md-6 col-sm-6 ">
+                <div class="col-md-9 col-sm-9 ">
                 @foreach ((array)$options['children'] as $child)
                     {!! $child->render($options['choice_options'], true, true, false) !!}
                 @endforeach

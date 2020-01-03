@@ -7,7 +7,7 @@
             @if ($showLabel && $options['label'] !== false && $options['label_show'])
                 {!! Form::customLabel(__($name), __($options['label']), $options['label_attr']) !!}
             @endif
-            <div class="col-md-6 col-sm-6 ">
+            <div class="col-md-9 col-sm-9 ">
                 @if ($showField)
                     @if($options['value'] instanceof \Illuminate\Support\Carbon)
                         {!! Form::input($type, $name, $options['value']->format('Y-m-d'), array_merge([

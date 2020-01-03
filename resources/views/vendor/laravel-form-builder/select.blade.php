@@ -6,7 +6,7 @@
             @if ($showLabel && $options['label'] !== false && $options['label_show'])
                 {!! Form::customLabel(__($name), __($options['label']), $options['label_attr']) !!}
             @endif
-            <div class="col-md-6 col-sm-6 ">
+            <div class="col-md-9 col-sm-9 ">
                 @if ($showField)
                     <?php $emptyVal = $options['empty_value'] ? ['' => $options['empty_value']] : null; ?>
                     {!! Form::select($name, (array)$emptyVal + $options['choices'], $options['selected'], $options['attr']) !!}

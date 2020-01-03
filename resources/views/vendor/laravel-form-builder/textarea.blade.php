@@ -6,7 +6,7 @@
             @if ($showLabel && $options['label'] !== false && $options['label_show'])
                 {!! Form::customLabel(__($name), __($options['label']), $options['label_attr']) !!}
             @endif
-            <div class="col-md-6 col-sm-6 ">
+            <div class="col-md-9 col-sm-9 ">
                 @if ($showField)
                     {!! Form::textarea($name, $options['value'], array_merge([
                 'placeholder'=>isset($options['label']) && !empty($options['label'])?$options['label']:$name
