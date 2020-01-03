@@ -13,7 +13,7 @@ use App\AbstractModel;
 class Event extends AbstractModel
 {
     protected $fillable = [
-        'user_id','name','slug','contractor','observations','pre_checklist','general_observations','start_event','end_event', 'consumption', 'description','updated_at',
+        'user_id','name','slug','contractor','observations','pre_checklist','general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
     ];
 
 
