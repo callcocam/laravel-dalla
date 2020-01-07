@@ -48,8 +48,6 @@
                                         </form>
                                     </btn-delete-component>
                                 @endcan
-                                <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
-
                             </div>
                         </div>
                     </div>
