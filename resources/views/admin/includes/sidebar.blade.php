@@ -24,11 +24,14 @@
                     </li>
                 @endcan
             @endif
-            @canany(['admin.events.index'])
-                <li class="nav-item" data-item="events"><a class="nav-item-hold" href="#"><i class="nav-icon i-Calendar"></i><span class="nav-text">{{ __('Eventos') }}</span></a>
-                    <div class="triangle"></div>
-                </li>
-            @endcan
+            @if (Route::has('admin.events.index'))
+                @canany(['admin.events.index'])
+                    <li class="nav-item">
+                        <a class="nav-item-hold" href="{{ route('admin.events.index') }}"><i class="nav-icon i-Calendar"></i><span class="nav-text">{{ __('Eventos') }}</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                @endcan
+            @endif
             <li class="nav-item">
                 <a class="nav-item-hold" href="{{ route('admin.auth.profile.form') }}"><i class="nav-icon i-Administrator"></i><span class="nav-text">{{ __('Minha Conta') }}</span></a>
                 <div class="triangle"></div>

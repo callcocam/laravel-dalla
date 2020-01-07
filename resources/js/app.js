@@ -25,6 +25,8 @@ Vue.use(Notifications)
 
 Vue.component('task-component', require('./components/TaskComponent.vue').default);
 Vue.component('task-form-component', require('./components/TaskFormComponent').default);
+Vue.component('btn-delete-component', require('./components/BtnDeleteComponent').default);
+Vue.component('pos-event-form-component', require('./components/PosEventFormComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -91,6 +91,10 @@ abstract class AbstractController extends Controller
 
         if($this->getModel()->getResultLastId()){
 
+            if($this->event){
+                $this->setEvent($this->getModel()->findById($this->getModel()->getResultLastId()));
+            }
+
             if(empty($this->route)){
 
                 notify()->success($this->getModel()->getMessage());

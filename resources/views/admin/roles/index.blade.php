@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 
 @section('breadcrumb')
@@ -9,7 +10,7 @@
         </ul>
         <div style="right: 2%;position: absolute;">
             @can('admin.roles.create')
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Papel') }}</a>
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Role') }}</a>
             @endcan
         </div>
     </div>
@@ -20,48 +21,47 @@
         <div class="accordion" id="accordionExample">
             <div class="row">
                 @foreach($rows as $row)
-                    <div class="card m-2">
-                        <div class="card-header">{{ $row->name }}</div>
-                        <div class="card-body">
-                            <p class="card-text">
-                            <div class="card ul-card__border-radius">
-                                <div class="card-header">
-                                    <h6 class="card-title ul-collapse__icon--size ul-collapse__right-icon mb-0">
-                                        <a  class="text-default collapsed" data-toggle="collapse"  href="#accordion-item-{{$row->id}}">
-                                            <span><i class="i-Lock-User ul-accordion__font"> </i></span> {{ __("Listar Permissões") }}
-                                        </a>
-                                    </h6>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="card mt-4 mb-4">
+                            <div class="card-body">
+                                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                                    <div>
+                                        <h5>{{ $row->name }}</h5>
+                                        <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->created_at)->format('d/m/Y') }}</p>
+                                    </div>
                                 </div>
                                 @if($row->permissions)
-                                    <div class="collapse" id="accordion-item-{{$row->id}}" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <table class="table text-center" id="user_table">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">{{ __('Nome') }}</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                   @foreach($row->permissions as $permission)
-                                                        <tr>
-                                                            <td>{{ $permission->name }}</td>
-                                                        </tr>
-                                                   @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <table class="table text-center" id="user_table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">{{ __('Nome') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($row->permissions as $permission)
+                                            <tr>
+                                                <td>{{ $permission->name }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 @endif
                             </div>
-                            <hr>
-                            {{ $row->description }}</p>
-                            @can('admin.roles.edit')
-                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Editar Papél') }}</a>
-                            @endcan
-                        @can('admin.roles.show')
-                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.show',$row->id) }}">{{ __('Excluir Papél') }}</a>
-                            @endcan
-                            <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{ $row->status }}</a>
+                            <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+                                @can('admin.roles.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.roles.edit',$row->id) }}">{{ __('Editar Role') }}</a>
+                                @endcan
+                                <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
+                                @can('admin.roles.show')
+                                    <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
+                                        <form ref="form" action="{{ route('admin.roles.destroy',$row->id) }}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                        </form>
+                                    </btn-delete-component>
+                                @endcan
+                            </div>
                         </div>
                     </div>
 
@@ -87,3 +87,4 @@
 @endsection
 
 @include("admin.includes.alert")
+

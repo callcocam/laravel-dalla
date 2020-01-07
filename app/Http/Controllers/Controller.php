@@ -30,6 +30,21 @@ class Controller extends BaseController
      */
     protected $formClass;
 
+    protected $event;
+
+    /**
+     * @return mixed
+     */
+    /**
+     * @param $handler
+     * @return void
+     */
+    public function setEvent($handler)
+    {
+
+        event(new $this->event($handler));
+    }
+
     /**
      * @return AbstractModel
      */

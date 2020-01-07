@@ -25,6 +25,20 @@ class Event extends AbstractModel
         'start_event'=>'date:d-m-Y','end_event'=>'datetime:d-m-Y','updated_at'=>'date:d-m-Y'
     ];
 
+    public function pos_event(){
+
+        return $this->hasOne(PosEvent::class);
+    }
+
+    public function pos_eventJson(){
+
+        return json_encode($this->hasOne(PosEvent::class)->first([
+            'id','event_id','customer_service', 'draft_beer_quality','event_structure','amount_beer_consumed',
+            'make_new_event','team_uniform','status', 'pos_description','updated_at'
+        ])->toArray());
+    }
+
+
     public function tasks(){
 
         return $this->morphOne(Task::class, 'taskable');

@@ -24,7 +24,10 @@ trait Helper
 
         if (!$this->slug_fixed) {
 
-            $input[Options::DEFAULT_COLUMN_SLUG] = Str::slug($input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]);
+            if (isset($input[Options::DEFAULT_COLUMN_SLUG_ORIGEM])) {
+
+                $input[Options::DEFAULT_COLUMN_SLUG] = Str::slug($input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]);
+            }
         }
 
         return $input;

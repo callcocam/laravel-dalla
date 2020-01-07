@@ -9,7 +9,7 @@
         </ul>
         <div style="right: 2%;position: absolute;">
             @can('admin.events.create')
-                <a href="{{ route('admin.events.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Event') }}</a>
+                <a href="{{ route('admin.events.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Evento') }}</a>
             @endcan
         </div>
     </div>
@@ -28,7 +28,7 @@
                                     <div>
                                         <h5>{{ $row->name }}</h5>
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
-                                     </div>
+                                    </div>
                                 </div>
                                 <a href="{{ route('admin.tasks.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
 
@@ -37,16 +37,25 @@
                                 @can('admin.events.edit')
                                     <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
                                 @endcan
-                                    <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
                                 @can('admin.events.show')
-                                    <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Excluir Evento') }}</a>
+                                    <a class="btn btn-warning btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Ver Evento') }}</a>
                                 @endcan
+                                @can('admin.events.destroy')
+                                    <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
+                                        <form ref="form" action="{{ route('admin.events.destroy',$row->id) }}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                        </form>
+                                    </btn-delete-component>
+                                @endcan
+                                <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
+
                             </div>
                         </div>
                     </div>
 
-            @endforeach
-        </div>
+                @endforeach
+            </div>
         </div>
         <div class="row">
             <div class="col-12">

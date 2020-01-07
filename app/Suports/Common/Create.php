@@ -65,7 +65,7 @@ trait Create
         endif;
         $this->lastId = $this->model->id;
         $input = array_merge($input, $this->model->toArray());
-        $message = sprintf( 'Realizada com sucesso, registro [ %s ] foi cadastrado!!', $input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]);
+        $message = sprintf( 'Realizada com sucesso, registro [ %s ] foi cadastrado!!', isset($input[Options::DEFAULT_COLUMN_SLUG_ORIGEM])?$input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]:$this->lastId);
         $this->results['type'] = Options::MESSAGE_TYPE_SUCCESS;
         $this->results['result'] = true;
         $this->messages =  $message;

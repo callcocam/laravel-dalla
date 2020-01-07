@@ -8,8 +8,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Events\PosEvent;
 use App\Forms\EventForm;
 use App\Http\Requests\EventStore;
+use App\Http\Requests\PosEventStore;
 use App\Model\Admin\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +23,8 @@ class EventController extends AbstractController
 
    protected $model = Event::class;
 
+
+   protected $event = PosEvent::class;
 
    protected $formClass = EventForm::class;
 
@@ -65,6 +69,33 @@ class EventController extends AbstractController
         }
 
         return $rows->jsonTasks();
+    }
+
+    public function posEvent(PosEventStore $request){
+
+
+        $rows = $this->getModel()->findById($request->get('event_id'));
+
+        if($rows){
+            $posEvent = $rows->pos_event()->first();
+
+            if($posEvent):
+                $posEvent->saveBy($request->all());
+
+                if($posEvent->getResultLastId()){
+                    return response()->json([
+                        'type'=>'success',
+                        'message'=>$posEvent->getMessage()
+                    ]);
+
+                }
+            endif;
+        }
+
+        return response()->json([
+            'type'=>'danger',
+            'message'=>$posEvent->getMessage()
+        ], 500);
     }
 
 

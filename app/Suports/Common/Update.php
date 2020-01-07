@@ -58,9 +58,10 @@ trait Update
 
         $input = array_merge($input, $this->model->toArray());
 
-        $message = sprintf( 'Realizada com sucesso, registro [ %s ] foi atualizado com sucesso!!', $input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]);
-     
         $this->lastId =  $id;
+
+        $message = sprintf( 'Realizada com sucesso, registro [ %s ] foi atualizado com sucesso!!', isset($input[Options::DEFAULT_COLUMN_SLUG_ORIGEM])?$input[Options::DEFAULT_COLUMN_SLUG_ORIGEM]:$this->lastId);
+
         $this->results['id'] =  $id;
         $this->results['result'] =  true;
         $this->messages = $message;

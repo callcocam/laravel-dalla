@@ -5,11 +5,11 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li>{{ __('Clientes') }}</li>
+            <li>{{ __('Events') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            @can('admin.clients.create')
-                <a href="{{ route('admin.clients.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
+            @can('admin.events.create')
+                <a href="{{ route('admin.events.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Create Event') }}</a>
             @endcan
         </div>
     </div>
@@ -28,28 +28,25 @@
                                     <div>
                                         <h5>{{ $row->name }}</h5>
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
-                                    </div>
+                                     </div>
                                 </div>
+                                <a href="{{ route('admin.tasks.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
+
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
-                                @can('admin.clients.edit')
-                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
+                                @can('admin.events.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
                                 @endcan
-                                <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
-                                @can('admin.clients.show')
-                                    <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
-                                        <form ref="form" action="{{ route('admin.clients.destroy',$row->id) }}" method="POST">
-                                            @csrf
-                                            @method("DELETE")
-                                        </form>
-                                    </btn-delete-component>
+                                    <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
+                                @can('admin.events.show')
+                                    <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Excluir Evento') }}</a>
                                 @endcan
                             </div>
                         </div>
                     </div>
 
-                @endforeach
-            </div>
+            @endforeach
+        </div>
         </div>
         <div class="row">
             <div class="col-12">
@@ -60,7 +57,7 @@
         <div class="row">
             <div class="col-12">
                 @include("admin.includes.empty", [
-                       'url' =>route('admin.clients.create')
+                       'url' =>route('admin.events.create')
                    ])
             </div>
         </div>

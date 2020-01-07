@@ -169,4 +169,8 @@ class AbstractModel extends ModelAlias
         return $this->lastId;
     }
 
+    public function getModel(){
+
+        return $this->model;
+    }
 }

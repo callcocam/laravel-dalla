@@ -12,22 +12,49 @@
 @endsection
 @section('content')
     <div class="row">
-
-       <div class="col-12">
-           <div class="card mb-4">
-               <div class="card-header">{{ $rows->name }}</div>
-               <div class="card-body">
-                   <form action="{{ route('admin.events.destroy',$rows->id) }}" method="POST">
-                       @csrf
-                       @method("DELETE")
-                       <button class="btn btn-warning btn-rounded">{{ __('Ecluir Evento') }}</button>
-                       <a class="btn btn-danger btn-rounded" href="{{ route('admin.events.index') }}">{{ __('Back Eventos') }}</a>
-                   </form>
-               </div>
-           </div>
-       </div>
-
+        <div class="col-md-12 mt-4 mb-4">
+            <div class="card">
+                <div class="card-header"><h3>{{ $rows->name }}</h3></div>
+                <div class="card-body">
+                    <!-- begin::widget-stats-1 -->
+                    <div class="ul-widget1">
+                        <div class="ul-widget__item">
+                            <div class="ul-widget__info">
+                                <h3 class="ul-widget1__title">{{ __('Contratante:') }}</h3>
+                                <span class="ul-widget__desc text-mute">{!! $rows->contractor !!}</span>
+                            </div>
+                        </div>
+                        <div class="ul-widget__item">
+                            <div class="ul-widget__info">
+                                <h3 class="ul-widget1__title">{{ __('Observações:') }}</h3>
+                                <span class="ul-widget__desc text-mute">{!! $rows->observations !!}</span>
+                            </div>
+                        </div>
+                        <div class="ul-widget__item">
+                            <div class="ul-widget__info">
+                                <h3 class="ul-widget1__title">{{ __('Pre-Checklist:') }}</h3>
+                                <span class="ul-widget__desc text-mute">{!! $rows->pre_checklist !!}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end::widget-stats-1 -->
+                    <div class="accordion" id="accordionExample">
+                        <div class="card ul-card__border-radius">
+                            <div class="collapse" id="accordion-item-group1" data-parent="#accordionExample" style="">
+                                <div class="card-body">
+                                   <pos-event-form-component :event="{{ $rows->pos_eventJson() }}"></pos-event-form-component>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-success" href="{{ route('admin.events.index') }}">{{ __('Vpltar P/ Os Eventos') }}</a>
+                    <a class="btn btn-primary" href="{{ route('admin.events.edit', $rows->id) }}">{{ __('Editar Evento') }}</a>
+                    <a class="btn btn-dark collapsed" data-toggle="collapse" href="#accordion-item-group1" aria-expanded="false">{{ __('PESQUISA POS EVENTO') }}</a>
+                </div>
+            </div>
+        </div>
     </div>
-
 @endsection
 

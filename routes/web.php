@@ -53,6 +53,9 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
         $router->post('/tarefas/delete', 'Admin\\EventController@deleteTask')
             ->name('admin.tasks.delete')->middleware('can:admin.tasks.delete');
+
+        $router->post('/pos-evento/store', 'Admin\\EventController@posEvent')
+            ->name('admin.pos-events.store')->middleware('can:admin.pos-events.store');
     });
 
 
