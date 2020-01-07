@@ -41,6 +41,14 @@ class EventForm extends AbstractForm
                 ])
 
             ->addDescription()
+            ->add('consumption', 'text',
+                [
+                    'label'=>'Consumo(pos evento)'
+                ])
+            ->add('general_observations', 'textarea',
+                [
+                    'label'=>'Observações(pos evento)'
+                ])
             ->getStatus()
             ->addSubmit();
 
@@ -51,6 +59,40 @@ class EventForm extends AbstractForm
 
     protected function addTask(){
 
+        $model = $this->getModel();
+
+        if(!$model)
+            return $this;
+
+        $tasks = $model->tasks()->get();
+
+        if($tasks->count()){
+
+            foreach ($tasks as $task) {
+
+                $this ->add(sprintf('_tasks-%s', $task->id), 'form', [
+                    'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
+                    'class' => TaskForm::class,
+                    'wrapper' => false,
+                    'label' =>$task->name,
+                    'formOptions' => [
+                        'model'=>$task
+                    ],
+                    'wrapper_class' => false,
+                ]);
+            }
+        }
+
+        $this ->add('_tasks-0', 'form', [
+            'label_attr' => ['class' => 'footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center'],
+            'class' => $this->formBuilder->create(TaskForm::class),
+            'wrapper' => false,
+            'formOptions' => [
+                'model'=>null
+            ],
+            'label' => "Tarefas",
+            'wrapper_class' => false,
+        ]);
 
         return  $this;
     }
