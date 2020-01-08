@@ -32,6 +32,14 @@
                     </li>
                 @endcan
             @endif
+            @if (Route::has('admin.visits-distributors.index'))
+                @canany(['admin.visits-distributors.index'])
+                    <li class="nav-item">
+                        <a class="nav-item-hold" href="{{ route('admin.visits-distributors.index') }}"><i class="nav-icon i-Search-People"></i><span class="nav-text">{{ __('Visitas') }}</span></a>
+                        <div class="triangle"></div>
+                    </li>
+                @endcan
+            @endif
             <li class="nav-item">
                 <a class="nav-item-hold" href="{{ route('admin.auth.profile.form') }}"><i class="nav-icon i-Administrator"></i><span class="nav-text">{{ __('Minha Conta') }}</span></a>
                 <div class="triangle"></div>

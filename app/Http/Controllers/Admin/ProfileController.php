@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Admin;
 use App\Forms\ProfileForm;
 use App\Http\Requests\ProfileStore;
 use App\Model\Admin\User;
-use App\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +32,8 @@ class ProfileController extends AbstractController
 
             $rows = $this->getModel()->findById(Auth::id());
         }
+        if(!$rows)
+            return back()->with('error', "Usuário não encontrado!!");
 
         $this->results['rows'] = $rows;
 

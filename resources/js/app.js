@@ -27,6 +27,7 @@ Vue.component('task-component', require('./components/TaskComponent.vue').defaul
 Vue.component('task-form-component', require('./components/TaskFormComponent').default);
 Vue.component('btn-delete-component', require('./components/BtnDeleteComponent').default);
 Vue.component('pos-event-form-component', require('./components/PosEventFormComponent').default);
+Vue.component('btn-fixed-component', require('./components/BtnFixedComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -2,33 +2,29 @@
 
 namespace App\Events;
 
-use App\Model\Admin\Event;
+use App\Model\Admin\VisitsDistributor;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PosEvent
+class VisitorEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     /**
-     * @var Event
+     * @var VisitsDistributor
      */
     public $event;
-
-    public $_request;
 
     /**
      * Create a new event instance.
      *
-     * @param Event $event
-     * @param $request
+     * @param VisitsDistributor $event
      */
-    public function __construct(Event $event,$request)
+    public function __construct(VisitsDistributor $event)
     {
 
 
         $this->event = $event;
-        $this->_request = $request;
     }
 
 }

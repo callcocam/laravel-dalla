@@ -42,10 +42,13 @@ abstract class AbstractForm extends Form
         ]);
 
     }
-protected function addDescription($name="description",$label="Descrição"){
+protected function addDescription($name="description",$label="Descrição", $attr =[]){
 
         return $this->add($name, 'textarea', [
-            'label'=>$label
+            'label'=>$label,
+            'attr'=>array_merge([
+                'rows'=>'5'
+            ], $attr)
         ]);
 
     }
