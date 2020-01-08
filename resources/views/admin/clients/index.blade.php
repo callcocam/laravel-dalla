@@ -26,8 +26,8 @@
                             <div class="card-body">
                                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                                     <div>
-                                        <h5>{{ $row->name }}</h5>
-                                        <p class="ul-task-manager__paragraph mb-3"> {{ $row->fantasy }}</p>
+                                        <h5>{{ $row->fantasy }}</h5>
+                                        <p class="ul-task-manager__paragraph mb-3"> {{ $row->name }}</p>
                                     </div>
                                 </div>
                             </div>

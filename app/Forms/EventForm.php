@@ -41,14 +41,14 @@ class EventForm extends AbstractForm
                 ])
 
             ->addDescription()
-            ->add('consumption', 'text',
-                [
-                    'label'=>'Consumo(pos evento)'
-                ])
-            ->add('general_observations', 'textarea',
-                [
-                    'label'=>'Observações(pos evento)'
-                ])
+//            ->add('consumption', 'text',
+//                [
+//                    'label'=>'Consumo(pos evento)'
+//                ])
+//            ->add('general_observations', 'textarea',
+//                [
+//                    'label'=>'Observações(pos evento)'
+//                ])
             ->getStatus()
             ->addSubmit();
 

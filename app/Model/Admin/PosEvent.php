@@ -14,7 +14,7 @@ class PosEvent extends AbstractModel
 {
     protected $fillable = [
         'user_id','event_id','customer_service', 'draft_beer_quality','event_structure','amount_beer_consumed',
-        'make_new_event','team_uniform','status', 'description','updated_at',
+        'make_new_event','team_uniform','status', 'pos_description','updated_at',
     ];
 
 
