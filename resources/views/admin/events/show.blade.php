@@ -6,7 +6,7 @@
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
             <li><a href="{{ route('admin.events.index') }}">{{ __('Eventos') }}</a></li>
-            <li>{{ __('Ecluir Evento') }} - {{ $rows->name }}</li>
+            <li>{{ __('Evento') }} - {{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
