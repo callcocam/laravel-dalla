@@ -15,7 +15,6 @@ class PosEvent
      */
     public $event;
 
-    public $_request;
 
     /**
      * Create a new event instance.
@@ -23,12 +22,11 @@ class PosEvent
      * @param Event $event
      * @param $request
      */
-    public function __construct(Event $event,$request)
+    public function __construct(Event $event)
     {
 
 
         $this->event = $event;
-        $this->_request = $request;
     }
 
 }
