@@ -15,6 +15,9 @@ class EventNext extends AbstractModel
 
     protected $table ="events";
 
+    protected $showColumnOrder = "start_event";
+    protected $showOrderDirection = "ASC";
+
     protected $fillable = [
         'user_id','name','slug','client_id','contractor','observations','pre_checklist','general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
     ];
