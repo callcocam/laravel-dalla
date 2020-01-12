@@ -22,9 +22,11 @@ trait Select
     public function author()
     {
         $user = $this->user()->first();
-        $user->append('avatar');
-        $user->append('avatar_filename');
-        $user->append('created_mm_dd_yyyy');
+        if($user){
+            $user->append('avatar');
+            $user->append('created_mm_dd_yyyy');
+        }
+
         return $user;
     }
 

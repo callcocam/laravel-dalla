@@ -18,6 +18,14 @@
                 <div class="card-body">
                     <!-- begin::widget-stats-1 -->
                     <div class="ul-widget1">
+                        @if($rows->author())
+                        <div class="ul-widget__item">
+                            <div class="ul-widget__info">
+                                <h3 class="ul-widget1__title">{{ __('Usuário:') }}</h3>
+                                <span class="ul-widget__desc text-mute">{!! $rows->author()->name !!}</span>
+                            </div>
+                        </div>
+                        @endif
                         <div class="ul-widget__item">
                             <div class="ul-widget__info">
                                 <h3 class="ul-widget1__title">{{ __('Responsavel:') }}</h3>
