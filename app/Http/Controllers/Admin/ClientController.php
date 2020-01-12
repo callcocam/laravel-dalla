@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class ClientController extends AbstractController
 {
 
-   protected $template = 'clients';
+   protected $template = 'clients-chooperias';
 
    protected $model = Client::class;
 

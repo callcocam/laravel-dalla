@@ -4,20 +4,18 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.visits-distributors.index') }}">{{ __('Visitas') }}</a></li>
-            <li>{{ __('Cadastrar') }}</li>
+            <li><a href="{{ route('admin.clients-chooperias.index') }}">{{ __('Clientes Chooperias') }}</a></li>
+            <li>{{ $rows->name }}</li>
         </ul>
     </div>
 @endsection
 @section('content')
     <div class="row mb-5">
         <div class="col-md-12">
-            @if ( isset($errors))
-               @dd($errors)
-            @endif
-            {!! form($form) !!}
+             {!! form($form) !!}
         </div>
     </div>
+
 @endsection
 
 

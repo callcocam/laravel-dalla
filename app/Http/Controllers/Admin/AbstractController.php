@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -80,12 +81,8 @@ abstract class AbstractController extends Controller
 
     protected function save($request){
 
-        $form = $this->formBuilder->create($this->formClass);
 
         // It will automatically use current request, get the rules, and do the validation
-        if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
-        }
 
         $this->getModel()->saveBy($request->all());
 
@@ -108,7 +105,7 @@ abstract class AbstractController extends Controller
         }
         notify()->error($this->getModel()->getMessage());
 
-        return back()->withInput()->withErrors($this->getModel()->getMessage());
+        return back()->withErrors($this->getModel()->getMessage())->withInput();
     }
 
     /**
@@ -130,9 +127,9 @@ abstract class AbstractController extends Controller
 
         if(!$this->results['rows']){
 
-            notify()->error("The model was not informed!!");
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
-            return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("The model was not informed!!");
+            return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
         }
 
@@ -153,18 +150,18 @@ abstract class AbstractController extends Controller
 
         if(!$this->model){
 
-            notify()->error("The model was not informed!!");
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
-            return back()->withErrors("The model was not informed!!");
+            return back()->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
         }
 
         $rows = $this->getModel()->findById($id);
 
         if(!$rows){
-            notify()->error(__("The model was not informed!!"));
+            notify()->error(__("O modelo não foi informado, se o problema persistir contate o administardor!!!!"));
 
-            return back()->withErrors(__("The model was not informed!!"));
+            return back()->withErrors(__("O modelo não foi informado, se o problema persistir contate o administardor!!!!"));
         }
         $form = null;
         if($this->formClass){
@@ -211,9 +208,9 @@ abstract class AbstractController extends Controller
     {
         if(!$this->model){
 
-            notify()->error("The model was not informed!!");
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
-            return back()->withErrors("The model was not informed!!");
+            return back()->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
         }
 
@@ -221,9 +218,9 @@ abstract class AbstractController extends Controller
 
         if(!$model){
 
-            notify()->error("The model was not informed!!");
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
-            return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("The model was not informed!!");
+            return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
         }
 
@@ -246,6 +243,32 @@ abstract class AbstractController extends Controller
         return back()->withErrors($this->getModel()->getMessage());
     }
 
+    public function removeFile($id){
+
+        $this->model = File::class;
+
+        $model = $this->getModel()->findById($id);
+
+        if(!$model){
+
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!");
+
+            return back()->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!");
+
+        }
+        if($this->getModel()->deleteBy($model)){
+
+
+            return back()->with('success', $this->getModel()->getMessage());
+
+        }
+
+        notify()->error($this->getModel()->getMessage());
+
+        return back()->withErrors($this->getModel()->getMessage());
+
+
+    }
     /**
      * Get a validator for an incoming registration request.
      *

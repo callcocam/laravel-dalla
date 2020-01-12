@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use App\Events\PosEvent;
+use App\Events\EventsInfoEvent;
+use App\Events\PosLastEvent;
+use App\Events\PosNextEvent;
 use App\Events\VisitorEvent;
+use App\Listeners\EventsInfoListener;
 use App\Listeners\PosListener;
 use App\Listeners\VisitorListener;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +25,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        PosEvent::class=>[
+        PosLastEvent::class=>[
+            PosListener::class
+        ],
+        PosNextEvent::class=>[
             PosListener::class
         ],
         VisitorEvent::class=>[

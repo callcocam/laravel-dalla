@@ -100,7 +100,39 @@ trait Helper
         return $this->initFile($input, $image);
     }
 
-    protected function initFile(&$input,UploadedFile  $image)
+    protected function initFiles(&$input)
+    {
+
+        if (!isset($input[Options::DEFAULT_COLUMN_FILE])) {
+
+            return $input;
+
+        }
+
+        if(is_array($input[Options::DEFAULT_COLUMN_FILE]))
+        {
+            $files = $input[Options::DEFAULT_COLUMN_FILE];
+
+            foreach ($files as $file) {
+
+                $this->initFile($input, $file, true);
+
+            }
+            unset($input[Options::DEFAULT_COLUMN_FILE]);
+
+            return $input;
+        }
+        if (!request()->hasFile(Options::DEFAULT_COLUMN_FILE) && !request()->file(Options::DEFAULT_COLUMN_FILE)->isValid()) {
+
+            return $input;
+
+        }
+        $image = $input[Options::DEFAULT_COLUMN_FILE];
+
+        return $this->initFile($input, $image);
+    }
+
+    protected function initFile(&$input,UploadedFile  $image, $ignore = false)
     {
 
 
@@ -132,11 +164,16 @@ trait Helper
          */
         $fileExist = $this->model->file();
 
-        if($fileExist->first()):
-            $fileExist->update($data);
-        else:
+        if($ignore){
             $fileExist->create($data);
-        endif;
+        }
+        else{
+            if($fileExist->first()):
+                $fileExist->update($data);
+            else:
+                $fileExist->create($data);
+            endif;
+        }
 
         return $input;
     }
@@ -193,7 +230,7 @@ trait Helper
             return $input;
 
         }
-         //REMOVE TODAS AS TAGS
+        //REMOVE TODAS AS TAGS
         $this->model->roles()->sync($input['role']);
 
         return $input;

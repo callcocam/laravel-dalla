@@ -8,21 +8,6 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class PosListener
 {
-    /**
-     * @var PosEvent
-     */
-    private $posEvent;
-
-    /**
-     * Create the event listener.
-     *
-     * @param PosEvent $posEvent
-     */
-    public function __construct(PosEvent $posEvent)
-    {
-        //
-        $this->posEvent = $posEvent;
-    }
 
     /**
      * Handle the event.

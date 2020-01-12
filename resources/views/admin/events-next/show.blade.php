@@ -5,7 +5,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.events.index') }}">{{ __('Eventos') }}</a></li>
+            <li><a href="{{ route('admin.events-next.index') }}">{{ __('Eventos') }}</a></li>
             <li>{{ __('Evento') }} - {{ $rows->name }}</li>
         </ul>
     </div>
@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-success" href="{{ route('admin.events.index') }}">{{ __('Vpltar P/ Os Eventos') }}</a>
-                    <a class="btn btn-primary" href="{{ route('admin.events.edit', $rows->id) }}">{{ __('Editar Evento') }}</a>
+                    <a class="btn btn-success" href="{{ route('admin.events-next.index') }}">{{ __('Vpltar P/ Os Eventos') }}</a>
+                    <a class="btn btn-primary" href="{{ route('admin.events-next.edit', $rows->id) }}">{{ __('Editar Evento') }}</a>
                     <a class="btn btn-dark collapsed" data-toggle="collapse" href="#accordion-item-group1" aria-expanded="false">{{ __('PESQUISA POS EVENTO') }}</a>
                 </div>
             </div>

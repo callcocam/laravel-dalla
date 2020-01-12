@@ -2,16 +2,16 @@
 
 namespace App\Events;
 
-use App\Model\Admin\Event;
+use App\Model\Admin\EventLast;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PosEvent
+class PosLastEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     /**
-     * @var Event
+     * @var EventLast
      */
     public $event;
 
@@ -19,10 +19,10 @@ class PosEvent
     /**
      * Create a new event instance.
      *
-     * @param Event $event
+     * @param EventLast $event
      * @param $request
      */
-    public function __construct(Event $event)
+    public function __construct(EventLast $event)
     {
 
 

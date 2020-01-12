@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.events.index') }}">{{ __('Evento') }}</a></li>
+            <li><a href="{{ route('admin.events-next.index') }}">{{ __('Próximo Evento') }}</a></li>
             <li>{{ $rows->name }}</li>
         </ul>
     </div>
@@ -27,9 +27,7 @@
     <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'description' );
-        CKEDITOR.replace( 'contractor' );
         CKEDITOR.replace( 'observations' );
         CKEDITOR.replace( 'pre_checklist' );
-        CKEDITOR.replace( 'general_observations' );
     </script>
 @endpush

@@ -8,33 +8,43 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Events\PosEvent;
-use App\Forms\EventForm;
-use App\Http\Requests\EventStore;
+use App\Events\PosNextEvent;
+use App\Forms\EventNextForm;
+use App\Http\Requests\EventNextStore;
 use App\Http\Requests\PosEventStore;
-use App\Model\Admin\Event;
+use App\Model\Admin\EventNext;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EventController extends AbstractController
+class EventNextController extends AbstractController
 {
 
-   protected $template = 'events';
+   protected $template = 'events-next';
 
-   protected $model = Event::class;
+   protected $model = EventNext::class;
 
 
-   protected $event = PosEvent::class;
+   protected $event = PosNextEvent::class;
 
-   protected $formClass = EventForm::class;
+   protected $formClass = EventNextForm::class;
+
+   public function index()
+   {
+       $this->getSource()->whereBetween('start_event', [
+           Carbon::now(),
+           Carbon::now()->addMonths(1000)->endOfMonth()
+       ]);
+       return parent::index();
+   }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param EventStore $request
+     * @param EventNextStore $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventStore $request)
+    public function store(EventNextStore $request)
     {
         return $this->save($request);
     }

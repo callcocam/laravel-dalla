@@ -23,6 +23,7 @@ use App\Forms\Beers\BeersScore17Form;
 use App\Forms\Beers\BeersScore18Form;
 use App\Forms\Beers\BeersScore19Form;
 use App\Forms\Beers\BeersScore20Form;
+use App\Model\Admin\Client;
 use App\Model\Admin\Task;
 use App\Suports\Shinobi\Models\Permission;
 
@@ -39,25 +40,30 @@ class VisitsDistributorForm extends AbstractForm
 
         }
 
-        $this->add('slug', 'hidden')
-            ->add('name', 'text',[
-                 'label' => 'Nome',
-            ])
-            ->add('fantasy', 'text',[
-                'label' => 'Nome fantasia',
-            ])
+        $this->addClients()
             ->add('resbonsible', 'text',
                 [
                      'label'=>'Responsável'
                 ])
-            ->add('phone', 'text',
-                [
-                    'label'=>'Telefone'
-                ])
-
             ->add('date_visit', 'date',
                 [
                     'label'=>'Data da visita'
+                ])
+            ->add('quantity_of_distributor_draft_beer', 'text',
+                [
+                    'label'=>'Quantidade de chopeiras do distribuidor'
+                ])
+            ->add('quantity_of_matriz_draft_beer', 'text',
+                [
+                    'label'=>'Quantidade de chopeiras da Dalla Carvejaria'
+                ])
+            ->add('number_of_distributor_barrels', 'text',
+                [
+                    'label'=>'Quantidade de barris do distribuidor'
+                ])
+            ->add('number_of_matriz_barrels', 'text',
+                [
+                    'label'=>'Quantidade de barris da Dalla Cervejaria'
                 ])
             ->addDescription('cities_serving_region', 'Cidades que atende na região',
                 [
@@ -90,6 +96,13 @@ class VisitsDistributorForm extends AbstractForm
             ->addDescription('considerations_distributor','Considerações Distribuidor')
             ->addDescription('considerations_beer','Considerações Da Cervejaria')
             ->addDescription('comparative_privious_year', 'Comparativo De crescimento')
+            ->add('file', 'file',
+                [
+                    'label'=>'Selecione As Imagem',
+                    'attr'=>[
+                        'multiple' => true
+                    ]
+                ])
             ->getStatus()
             ->addSubmit();
 
@@ -97,6 +110,21 @@ class VisitsDistributorForm extends AbstractForm
 
     }
 
+    protected function addClients(){
+
+
+        return  $this->add('client_id', 'entity',[
+            'class' => Client::class,
+            'query_builder' => function (Client $client) {
+                // If query builder option is not provided, all data is fetched
+                return $client->where('is_admin', 0);
+            },
+            'label'=>'Cliente',
+            'rules' => 'required',
+            'empty_value' => '=== Selecione Cliente ==='
+        ]);
+
+    }
 
     protected function addQuestion($question,$class, $label){
 

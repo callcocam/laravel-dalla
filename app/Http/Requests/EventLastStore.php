@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class VisitsDistributorStore extends FormRequest
+class EventLastStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class VisitsDistributorStore extends FormRequest
     public function rules()
     {
         return [
-            'client_id'=>['required']
+            'name'=>['required', 'max:190']
         ];
     }
 }

@@ -25,6 +25,9 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
     $router->get('/', "Admin\\AdminController@index")
         ->name('admin.admin.index');
 
+    $router->get('/remove-file/{id}', "Admin\\AdminController@removeFile")
+        ->name('admin.admin.remove-file');
+
     $router->get('/profile', 'Admin\\ProfileController@profile')
         ->name('admin.auth.profile.form');
 

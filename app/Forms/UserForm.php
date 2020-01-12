@@ -19,8 +19,7 @@ class UserForm extends AbstractForm
         ])
             ->add('slug', 'hidden')
             ->add('name', 'text',[
-                'label'=>'Nome',
-                'rules' => 'required',
+                'label'=>'Nome'
             ])
             ->add('email', 'email',[
                 'label'=>'E-Mail'

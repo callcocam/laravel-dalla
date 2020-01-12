@@ -57,6 +57,7 @@ final class Options
 
     const DEFAULT_COLUMN_AVATAR = "avatar";
     const DEFAULT_COLUMN_COVER = "cover";
+    const DEFAULT_COLUMN_FILE = "file";
     const DEFAULT_COLUMN_SLUG = "slug";
     const DEFAULT_COLUMN_SLUG_ORIGEM = "name";
 

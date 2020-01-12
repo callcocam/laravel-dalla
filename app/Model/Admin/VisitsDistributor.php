@@ -13,9 +13,22 @@ use App\AbstractModel;
 class VisitsDistributor extends AbstractModel
 {
     protected $fillable = [
-        'user_id','name','fantasy','slug','resbonsible','phone','date_visit',
+        'user_id',
+        'client_id',
+        'resbonsible',
+        'date_visit',
+        'quantity_of_distributor_draft_beer',
+        'quantity_of_matriz_draft_beer',
+        'number_of_distributor_barrels',
+        'number_of_matriz_barrels',
         'cities_serving_region','meet_each_city',
-        'disclose_and_increase_sales','date_works','comparative_privious_year','considerations_beer','comparative_privious_year','status', 'description','updated_at',
+        'disclose_and_increase_sales','date_works',
+        'comparative_privious_year',
+        'considerations_beer',
+        'comparative_privious_year',
+        'status',
+        'description',
+        'updated_at',
     ];
 
 
@@ -33,6 +46,11 @@ class VisitsDistributor extends AbstractModel
 
         return $this->hasMany(BeersScore::class);
     }
+    public function client(){
+
+        return $this->belongsTo(Client::class,'client_id');
+    }
+
     public function beers_score($question){
 
         return $this->hasMany(BeersScore::class)->where('assets', $question)->first(['visits_distributor_id','name','assets','selected','date_option', 'description']);

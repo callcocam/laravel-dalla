@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.users.index') }}">{{ __('Users') }}</a></li>
+            <li><a href="{{ route('admin.clients-chooperias.index') }}">{{ __('Clientes Chooperias') }}</a></li>
             <li>{{ __('Cadastrar') }}</li>
         </ul>
     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class EventStore extends FormRequest
+class EventsInfoStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class EventStore extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required', 'max:190']
+            'event_id'=>['required']
         ];
     }
 }

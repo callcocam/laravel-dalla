@@ -41,7 +41,7 @@ trait Select
      */
     public function file()
     {
-        return $this->morphOne(File::class, 'fileable');
+        return $this->morphMany(File::class, 'fileable');
     }
 
     public function company()

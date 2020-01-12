@@ -8,8 +8,8 @@
             <li>{{ __('Clientes') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            @can('admin.clients.create')
-                <a href="{{ route('admin.clients.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
+            @can('admin.clients-chooperias.create')
+                <a href="{{ route('admin.clients-chooperias.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
             @endcan
         </div>
     </div>
@@ -32,13 +32,13 @@
                                 </div>
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
-                                @can('admin.clients.edit')
-                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
+                                @can('admin.clients-chooperias.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients-chooperias.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
                                 @endcan
                                 <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
-                                @can('admin.clients.show')
+                                @can('admin.clients-chooperias.show')
                                     <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
-                                        <form ref="form" action="{{ route('admin.clients.destroy',$row->id) }}" method="POST">
+                                        <form ref="form" action="{{ route('admin.clients-chooperias.destroy',$row->id) }}" method="POST">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-12">
                 @include("admin.includes.empty", [
-                       'url' =>route('admin.clients.create')
+                       'url' =>route('admin.clients-chooperias.create')
                    ])
             </div>
         </div>

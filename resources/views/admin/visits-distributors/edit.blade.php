@@ -5,7 +5,7 @@
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
             <li><a href="{{ route('admin.visits-distributors.index') }}">{{ __('Visitas') }}</a></li>
-            <li>{{ $rows->name }}</li>
+            <li>{{ $rows->client->name }}</li>
         </ul>
     </div>
 @endsection
@@ -13,12 +13,24 @@
     <div class="row mb-5">
         <div class="col-md-12">
              {!! form($form) !!}
-            {{--<div class="col-md-9 col-sm-9 offset-md-3"  style="position: relative">
-                <btn-fixed-component>
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Salvar Dados') }} </button>
-                </btn-fixed-component>
-            </div>--}}
         </div>
+    </div>
+ <div class="row mb-5">
+     @if($rows->file)
+         @foreach($rows->file()->get() as $file)
+             <div class="col-lg-4 col-xl-4 mb-4">
+                 <div class="card o-hidden"><img class="d-block w-100" src="{{ url($file->fullPath) }}" alt="Second slide">
+                     <div class="card-footer bg-transparent">
+                         <div class="row">
+                             <div class="col text-center">
+                                 <a href="{{ route('admin.admin.remove-file', $file->id) }}" class="btn btn-dark btn-block">{{ __('Remover Imagem') }}</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         @endforeach
+     @endif
     </div>
 
 @endsection

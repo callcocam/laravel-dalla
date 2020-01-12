@@ -5,11 +5,11 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li>{{ __('Events') }}</li>
+            <li>{{ __('Proximos Events') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            @can('admin.events.create')
-                <a href="{{ route('admin.events.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Evento') }}</a>
+            @can('admin.events-next.create')
+                <a href="{{ route('admin.events-next.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Evento') }}</a>
             @endcan
         </div>
     </div>
@@ -27,6 +27,10 @@
                                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                                     <div>
                                         <h5>{{ $row->name }}</h5>
+                                        @if($row->client()->count())
+                                            <p class="ul-task-manager__paragraph mb-1"><b>Contratante:</b> </p>
+                                            <p class="ul-task-manager__paragraph mb-3"> {{ $row->client->name }}</p>
+                                        @endif
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
@@ -34,15 +38,15 @@
 
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
-                                @can('admin.events.edit')
-                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.events.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
+                                @can('admin.events-next.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.events-next.edit',$row->id) }}">{{ __('Editar Evento') }}</a>
                                 @endcan
-                                @can('admin.events.show')
-                                    <a class="btn btn-warning btn-rounded" href="{{ route('admin.events.show',$row->id) }}">{{ __('Ver Evento') }}</a>
+                                @can('admin.events-next.show')
+                                    <a class="btn btn-warning btn-rounded" href="{{ route('admin.events-next.show',$row->id) }}">{{ __('Ver Evento') }}</a>
                                 @endcan
-                                @can('admin.events.destroy')
+                                @can('admin.events-next.destroy')
                                     <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
-                                        <form ref="form" action="{{ route('admin.events.destroy',$row->id) }}" method="POST">
+                                        <form ref="form" action="{{ route('admin.events-next.destroy',$row->id) }}" method="POST">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -64,7 +68,7 @@
         <div class="row">
             <div class="col-12">
                 @include("admin.includes.empty", [
-                       'url' =>route('admin.events.create')
+                       'url' =>route('admin.events-next.create')
                    ])
             </div>
         </div>

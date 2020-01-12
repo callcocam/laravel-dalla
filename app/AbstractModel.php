@@ -41,13 +41,10 @@ class AbstractModel extends ModelAlias
         self::creating(function ($model) {
             $model->uuid = \Str::uuid();
             $model->company_id = get_tenant_id();
-            if (isset($model->user_id) && !(int) $model->user_id) {
-                $model->user_id = Auth::id();
-            }
+            $model->user_id = Auth::id();
         });
     }
     public function saveBy($data){
-
 
         $this->slug($data);
 
@@ -72,6 +69,8 @@ class AbstractModel extends ModelAlias
                $this->initAvatar($data);
                //RELACIONA UMA CAPA COM O REGISTRO USER OU POST ETC...
                $this->initCover($data);
+               //RELACIONA UMA CAPA COM O REGISTRO USER OU POST ETC...
+               $this->initFiles($data);
                //RELACIONA UM ADDRESS COM O REGISTRO USER OU CLIENT ETC...
                $this->initAddress($data);
                //RELACIONA OS ROLES COM USERS
@@ -98,6 +97,8 @@ class AbstractModel extends ModelAlias
                 $this->initAvatar($data);
                 //RELACIONA UMA CAPA COM O REGISTRO USER OU POST ETC...
                 $this->initCover($data);
+                //RELACIONA UMA CAPA COM O REGISTRO USER OU POST ETC...
+                $this->initFiles($data);
                 //RELACIONA UM ADDRESS COM O REGISTRO USER OU CLIENT ETC...
                 $this->initAddress($data);
                 //RELACIONA OS ROLES COM USERS
