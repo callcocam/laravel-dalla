@@ -12,9 +12,6 @@
 @section('content')
     <div class="row mb-5">
         <div class="col-md-12">
-            @if ( isset($errors))
-               @dd($errors)
-            @endif
             {!! form($form) !!}
         </div>
     </div>

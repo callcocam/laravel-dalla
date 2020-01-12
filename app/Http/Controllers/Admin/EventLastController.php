@@ -31,7 +31,8 @@ class EventLastController extends AbstractController
 
    public function index()
    {
-       $this->getSource()->whereBetween('start_event', [
+
+       $this->getSource()->orderByDesc('start_event')->whereBetween('start_event', [
            Carbon::now()->subMonths(100)->startOfMonth(),
            Carbon::now()
        ]);
