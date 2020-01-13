@@ -73,7 +73,7 @@ class EventLast extends AbstractModel
 
     public function pos_eventJson(){
 
-        return json_encode($this->hasOne(PosEvent::class)->first([
+        return json_encode($this->hasOne(PosEvent::class,'event_id')->first([
             'id','event_id','customer_service', 'draft_beer_quality','event_structure','amount_beer_consumed',
             'make_new_event','team_uniform','status', 'pos_description','updated_at'
         ])->toArray());
