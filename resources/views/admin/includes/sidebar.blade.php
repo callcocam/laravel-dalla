@@ -11,13 +11,14 @@
                     <div class="triangle"></div>
                 </li>
             @endcan
-            @canany(['admin.roles.index','admin.permissions.index'])
+            @canany(['admin.roles.index','admin.permissions.index','admin.users.index'])
                 <li class="nav-item" data-item="operacional"><a class="nav-item-hold" href="#"><i class="nav-icon i-Lock-User"></i><span class="nav-text">{{ __('Operacional') }}</span></a>
                     <div class="triangle"></div>
                 </li>
             @endcan
-            @canany(['admin.clients-chooperias.index','admin.clients-events.index','admin.users.index'])
-                <li class="nav-item" data-item="clients"><a class="nav-item-hold" href="#"><i class="nav-icon i-Lock-User"></i><span class="nav-text">{{ __('Usuários') }}</span></a>
+            @can('admin.clients.index')
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{{ route('admin.clients.index') }}"><i class="nav-icon i-Checked-User"></i><span class="nav-text">{{ __('Clientes') }}</span></a>
                     <div class="triangle"></div>
                 </li>
             @endcan
@@ -55,18 +56,6 @@
             @if (Route::has('admin.roles.index'))
                 @can('admin.roles.index')
                     <li class="nav-item"><a href="{{ route('admin.roles.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Papéis') }}</span></a></li>
-                @endcan
-            @endif
-        </ul>
-        <ul class="childNav" data-parent="clients">
-            @if (Route::has('admin.clients-chooperias.index'))
-                @can('admin.clients-chooperias.index')
-                    <li class="nav-item"><a href="{{ route('admin.clients-chooperias.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Clientes/Chooperias') }}</span></a></li>
-                @endcan
-            @endif
-            @if (Route::has('admin.clients-events.index'))
-                @can('admin.clients-events.index')
-                    <li class="nav-item"><a href="{{ route('admin.clients-events.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Clientes/Eventos') }}</span></a></li>
                 @endcan
             @endif
             @if (Route::has('admin.users.index'))
