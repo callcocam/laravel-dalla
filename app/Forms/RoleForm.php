@@ -21,9 +21,9 @@ class RoleForm extends AbstractForm
 
            ->add('special', 'choice',[
                'choices'=>[
-                   ''=>'Not Defined',
-                   'all-access'=>'All Access',
-                   'no-access'=>'No Access',
+                   ''=>'Não definido',
+                   'all-access'=>'Acesso total',
+                   'no-access'=>'Nenhum acesso',
                ],
                'expanded'=>true,
            ])
