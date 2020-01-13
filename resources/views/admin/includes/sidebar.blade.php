@@ -16,12 +16,14 @@
                     <div class="triangle"></div>
                 </li>
             @endcan
+            @if (Route::has('admin.clients.index'))
             @can('admin.clients.index')
                 <li class="nav-item">
                     <a class="nav-item-hold" href="{{ route('admin.clients.index') }}"><i class="nav-icon i-Checked-User"></i><span class="nav-text">{{ __('Clientes') }}</span></a>
                     <div class="triangle"></div>
                 </li>
             @endcan
+            @endif
             @canany(['admin.events-next.index','admin.events-last.index'])
                 <li class="nav-item" data-item="events"><a class="nav-item-hold" href="#"><i class="nav-icon i-Calendar-2"></i><span class="nav-text">{{ __('Eventos') }}</span></a>
                     <div class="triangle"></div>
@@ -70,7 +72,7 @@
                     <li class="nav-item"><a href="{{ route('admin.events-last.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Últimos Eventos') }}</span></a></li>
                 @endcan
             @endif
-            @if (Route::has('admin.events-last.index'))
+            @if (Route::has('admin.events-next.index'))
                 @can('admin.events-next.index')
                     <li class="nav-item"><a href="{{ route('admin.events-next.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Próximos Eventos') }}</span></a></li>
                 @endcan
