@@ -5,7 +5,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.events-next.index') }}">{{ __('Visita') }}</a></li>
+            <li><a href="{{ route('admin.visits-distributors.index') }}">{{ __('Visita') }}</a></li>
             <li>{{ __('Visita') }} - {{ $rows->client->name }}</li>
         </ul>
     </div>
