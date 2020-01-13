@@ -59,7 +59,7 @@ class EventLastForm extends AbstractForm
             'class' => Client::class,
             'query_builder' => function (Client $client) {
                 // If query builder option is not provided, all data is fetched
-                return $client->where('is_admin', 2);
+                return $client->where('is_admin', 0);
             },
             'label'=>'Contratante',
             'empty_value' => '=== Selecione Contratante ==='
