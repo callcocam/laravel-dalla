@@ -8,7 +8,7 @@
             <li>{{ __('Clientes') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            @can('admin.clients-events.create')
+            @can('admin.clients.create')
                 <a href="{{ route('admin.clients.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente Evento') }}</a>
             @endcan
         </div>
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-12">
                 @include("admin.includes.empty", [
-                       'url' =>route('admin.clients-events.create')
+                       'url' =>route('admin.clients.create')
                    ])
             </div>
         </div>

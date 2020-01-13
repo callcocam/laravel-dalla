@@ -68,7 +68,7 @@
         </ul>
         <ul class="childNav" data-parent="events">
             @if (Route::has('admin.events-last.index'))
-                @can('admin.events.last.index')
+                @can('admin.events-last.index')
                     <li class="nav-item"><a href="{{ route('admin.events-last.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Últimos Eventos') }}</span></a></li>
                 @endcan
             @endif
