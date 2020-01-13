@@ -6,11 +6,12 @@
 @if($questions)
 
     @foreach($questions as $question)
+        @if($rows->beers_score(sprintf("question-%s",$question)))
         <div class="ul-widget__item">
             <div class="ul-widget__info">
-                @if($rows->beers_score(sprintf("question-%s",$question))->name)
+
                 <h3 class="ul-widget1__title">{{ sprintf("%s.%s",$index,(int)$question) }} - {{ __($rows->beers_score(sprintf("question-%s",$question))->name) }}</h3>
-                @endif
+
                 @if($rows->beers_score(sprintf("question-%s",$question))->selected)
                     <span class="ul-widget__desc text-mute">{{ $rows->beers_score(sprintf("question-%s",$question))->selected }}</span>
                 @endif
@@ -20,6 +21,6 @@
                 <span class="ul-widget__desc text-mute">{{ $rows->beers_score(sprintf("question-%s",$question))->description }}</span>
             </div>
         </div>
+        @endif
     @endforeach
-
 @endif
