@@ -30,7 +30,7 @@ class Helper
     /**
      * @var array
      */
-    private $ignore = ['auth','store'];
+    private $ignore = ['auth','store','auto-route','roles','permissions','pos-events','translate'];
 
     /**
      * @var array
