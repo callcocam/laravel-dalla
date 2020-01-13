@@ -9,7 +9,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ul-todo-mobile-menu mr-3 p-2"><i class="nav-icon i-Align-Justify-All text-25 ul-contact-mobile-icon"></i></div>
 <!--                                <input v-model="configs.filter" class="form-control mr-4" id="todo-list-search" type="text" placeholder="Termo de busca" />-->
-                                <task-form-component :event="event" :task="task" v-on:input="loadTasks($event)"/>
+                                <task-form-component :route="route"  :event="event" :task="task" v-on:input="loadTasks($event)"/>
                                 <!--<div class="btn-group ml-3 mr-3">
                                     <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ordener</button>
                                     <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-96px, 33px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -71,7 +71,7 @@
     import { orderBy, isEmpty } from 'lodash';
     import filterByName from '../helpers/by-name';
     export default {
-        props:['tasks','event'],
+        props:['tasks','event','route'],
         data(){
             return {
                 rows:[],
@@ -113,7 +113,7 @@
 
                 task.event = this.event.id
 
-                axios.post('/eventos/tarefas/delete',task).then(response=>{
+                axios.post(`/${this.route}/tarefas/delete`,task).then(response=>{
 
                     this.rows = response.data
                     this.$notify({
@@ -140,7 +140,7 @@
 
                     task.status = status
 
-                    axios.post('/eventos/tarefas/update',task).then(response=>{
+                    axios.post(`/${this.route}/tarefas/update`,task).then(response=>{
 
                        this.rows = response.data
                         this.$notify({

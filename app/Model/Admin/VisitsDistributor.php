@@ -53,7 +53,7 @@ class VisitsDistributor extends AbstractModel
 
     public function beers_score($question){
 
-        return $this->hasMany(BeersScore::class)->where('assets', $question)->first(['visits_distributor_id','name','assets','selected','date_option', 'description']);
+        return $this->hasMany(BeersScore::class)->where('assets', $question)->first(['visits_distributor_id','name','visits','assets','selected','date_option', 'description']);
     }
 
     public function setQuestion($question){
@@ -195,6 +195,24 @@ class VisitsDistributor extends AbstractModel
 
 
     public function getQuestion20Attribute()
+    {
+
+        return $this->beers_score($this->question);
+    }
+
+    public function getScore01Attribute()
+    {
+
+        return $this->beers_score($this->question);
+    }
+
+    public function getScore02Attribute()
+    {
+
+        return $this->beers_score($this->question);
+    }
+
+    public function getScore03Attribute()
     {
 
         return $this->beers_score($this->question);

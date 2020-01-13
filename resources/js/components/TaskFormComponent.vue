@@ -34,7 +34,7 @@
 
 <script>
     export default {
-        props:['event', 'task'],
+        props:['event', 'task','route'],
         data() {
             return {
                 form:{
@@ -51,7 +51,7 @@
 
                 this.form.event = this.event.id
 
-                axios.post('/eventos/tarefas/update',this.form).then(response=>{
+                axios.post(`/${this.route}/tarefas/update`,this.form).then(response=>{
 
                     this.$emit('input', response.data)
                     this.$refs['close'].click()

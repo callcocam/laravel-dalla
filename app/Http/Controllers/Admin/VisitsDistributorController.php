@@ -16,13 +16,13 @@ use App\Model\Admin\VisitsDistributor;
 class VisitsDistributorController extends AbstractController
 {
 
-   protected $template = 'visits-distributors';
+    protected $template = 'visits-distributors';
 
-   protected $model = VisitsDistributor::class;
+    protected $model = VisitsDistributor::class;
 
-   protected $formClass = VisitsDistributorForm::class;
+    protected $formClass = VisitsDistributorForm::class;
 
-   protected $event = VisitorEvent::class;
+    protected $event = VisitorEvent::class;
 
     /**
      * Store a newly created resource in storage.
@@ -33,5 +33,22 @@ class VisitsDistributorController extends AbstractController
     public function store(VisitsDistributorStore $request)
     {
         return $this->save($request);
+    }
+
+    public function updateVisit(VisitsDistributorStore $request){
+
+        $this->getModel()->saveBy($request->all());
+        if($this->getModel()->getResultLastId()){
+
+            if($this->event){
+                $this->setEvent($this->getModel()->findById($this->getModel()->getResultLastId()));
+            }
+
+        }
+        return response()->json([
+            'id'=>$this->getModel()->getResultLastId(),
+            'redirect'=>route('admin.visits-distributors.edit',$this->getModel()->getResultLastId()),
+            'message'=>$this->getModel()->getMessage(),
+        ]);
     }
 }

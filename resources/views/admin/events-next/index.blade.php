@@ -34,7 +34,7 @@
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
-                                <a href="{{ route('admin.tasks.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
+                                <a href="{{ route('admin.tasks-next.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
 
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">

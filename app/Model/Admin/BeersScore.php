@@ -13,7 +13,7 @@ use App\AbstractModel;
 class BeersScore extends AbstractModel
 {
     protected $fillable = [
-        'user_id','visits_distributor_id','name','assets','selected','date_option','status', 'description','updated_at',
+        'user_id','visits_distributor_id','name','visits','assets','selected','date_option','status', 'description','updated_at',
     ];
 
 

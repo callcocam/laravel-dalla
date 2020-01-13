@@ -42,24 +42,49 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
     \App\Suports\AutoRoute\Facade\AutoRoute::register();
 
-    $router->group(['prefix'=>'eventos'], function($router){
+    $router->group(['prefix'=>'ultimos-eventos'], function($router){
 
-        $router->get('/{id}/tarefas', 'Admin\\EventController@task')
-            ->name('admin.tasks.index')->middleware('can:admin.tasks.index');
+        $router->get('/{id}/tarefas', 'Admin\\EventLastController@task')
+            ->name('admin.tasks-last.index')->middleware('can:admin.tasks-last.index');
 
-        $router->post('/tarefas/update', 'Admin\\EventController@updateTask')
-            ->name('admin.tasks.update')->middleware('can:admin.tasks.update');
+        $router->post('/tarefas/update', 'Admin\\EventLastController@updateTask')
+            ->name('admin.tasks-last.update')->middleware('can:admin.tasks-last.update');
 
-        $router->post('/tarefas/create', 'Admin\\EventController@createTask')
-            ->name('admin.tasks.update')->middleware('can:admin.tasks.update');
+        $router->post('/tarefas/create', 'Admin\\EventLastController@createTask')
+            ->name('admin.tasks-last.update')->middleware('can:admin.tasks-last.update');
 
 
-        $router->post('/tarefas/delete', 'Admin\\EventController@deleteTask')
-            ->name('admin.tasks.delete')->middleware('can:admin.tasks.delete');
+        $router->post('/tarefas/delete', 'Admin\\EventLastController@deleteTask')
+            ->name('admin.tasks-last.delete')->middleware('can:admin.tasks-last.delete');
 
-        $router->post('/pos-evento/store', 'Admin\\EventController@posEvent')
-            ->name('admin.pos-events.store')->middleware('can:admin.pos-events.store');
+        $router->post('/pos-evento/store', 'Admin\\EventLastController@posEvent')
+            ->name('admin.pos-events-last.store')->middleware('can:admin.pos-events-last.store');
     });
+
+
+    $router->group(['prefix'=>'proximos-eventos'], function($router){
+
+        $router->get('/{id}/tarefas', 'Admin\\EventNextController@task')
+            ->name('admin.tasks-next.index')->middleware('can:admin.tasks-next.index');
+
+        $router->post('/tarefas/update', 'Admin\\EventNextController@updateTask')
+            ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
+
+        $router->post('/tarefas/create', 'Admin\\EventNextController@createTask')
+            ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
+
+
+        $router->post('/tarefas/delete', 'Admin\\EventNextController@deleteTask')
+            ->name('admin.tasks-next.delete')->middleware('can:admin.tasks-next.delete');
+
+        $router->post('/pos-evento/store', 'Admin\\EventNextController@posEvent')
+            ->name('admin.pos-events-next.store')->middleware('can:admin.pos-events-next.store');
+    });
+
+    $router->post('/visitas-ditribuidor/store-json/save', 'Admin\\VisitsDistributorController@updateVisit')
+        ->name('admin.visits-distributors.update-visit-json')->middleware('can:visits-distributors.update-visit-json');
+
+
 
 
 });

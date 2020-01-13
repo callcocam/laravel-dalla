@@ -23,6 +23,9 @@ use App\Forms\Beers\BeersScore17Form;
 use App\Forms\Beers\BeersScore18Form;
 use App\Forms\Beers\BeersScore19Form;
 use App\Forms\Beers\BeersScore20Form;
+use App\Forms\Beers\Score01Form;
+use App\Forms\Beers\Score02Form;
+use App\Forms\Beers\Score03Form;
 use App\Model\Admin\Client;
 use App\Model\Admin\Task;
 use App\Suports\Shinobi\Models\Permission;
@@ -83,9 +86,11 @@ class VisitsDistributorForm extends AbstractForm
             ->addQuestion('question-08', BeersScore08Form::class,'02.7 - AVALIAÇÃO GERAL DO ESTABELECIMENTO')
             ->addQuestion('question-09', BeersScore09Form::class,'02.8 - AVALIAÇÃO GERAL DO ESTABELECIMENTO')
             ->addQuestion('question-10', BeersScore10Form::class,'02.9 - AVALIAÇÃO GERAL DO ESTABELECIMENTO')
+            ->addQuestion('score-01', Score01Form::class,'AVALIAÇÃO FINAL DO ESTABELECIMENTO')
             ->addQuestion('question-11', BeersScore11Form::class,'03 - CONDIÇÕES DA C MARA FRIA')
             ->addQuestion('question-12', BeersScore12Form::class,'03.1 - CONDIÇÕES DA C MARA FRIA')
             ->addQuestion('question-13', BeersScore13Form::class,'03.2 - CONDIÇÕES DA C MARA FRIA')
+            ->addQuestion('score-02', Score02Form::class,'AVALIAÇÃO FINAL CONDIÇÕES DA C MARA FRIA')
             ->addQuestion('question-14', BeersScore14Form::class,'04 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
             ->addQuestion('question-15', BeersScore15Form::class,'04.1 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
             ->addQuestion('question-16', BeersScore16Form::class,'04.2 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
@@ -93,6 +98,7 @@ class VisitsDistributorForm extends AbstractForm
             ->addQuestion('question-18', BeersScore18Form::class,'04.3 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
             ->addQuestion('question-19', BeersScore19Form::class,'04.4 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
             ->addQuestion('question-20', BeersScore20Form::class,'04.5 - DESEMPENHO DA DALLA CERVEJARIA COM O DISTRIBUIDOR')
+            ->addQuestion('score-03', Score03Form::class,'AVALIAÇÃO FINAL DESEMPENHO DA D. CERVEJARIA COM O DISTRIBUIDOR')
             ->addDescription('considerations_distributor','Considerações Distribuidor')
             ->addDescription('considerations_beer','Considerações Da Cervejaria')
             ->addDescription('comparative_privious_year', 'Comparativo De crescimento')

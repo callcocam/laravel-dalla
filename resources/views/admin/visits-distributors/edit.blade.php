@@ -36,3 +36,16 @@
 @endsection
 
 
+
+@push("scripts")
+    <script>
+        $(function () {
+            $('form').change(function () {
+
+                window.axios.post("{{ url('/visitas-ditribuidor/store-json/save') }}", $('form').serialize()).then(respone=>{
+                    console.log(respone)
+                })
+            })
+        })
+    </script>
+@endpush

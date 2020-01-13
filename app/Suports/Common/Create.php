@@ -58,7 +58,7 @@ trait Create
 
         if (!$this->model) :
 
-            $this->messages =  "Falhou, não foi possivel caastrar o registro!!";
+            //$this->messages =  "Falhou, não foi possivel caastrar o registro!!";
 
             return false;
 
