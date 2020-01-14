@@ -1,16 +1,5 @@
-@extends('layouts.admin')
+<h1>{{ $tenant->name }}</h1>
 
-@section('breadcrumb')
-    <div class="breadcrumb">
-        <h1>{{ $tenant->name }}</h1>
-        <ul>
-            <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.visits-distributors.index') }}">{{ __('Visita') }}</a></li>
-            <li>{{ __('Visita') }} - {{ $rows->client->name }}</li>
-        </ul>
-    </div>
-@endsection
-@section('content')
     <div class="row">
         <div class="col-md-12 mt-4 mb-4">
             <div class="card">
@@ -125,12 +114,6 @@
                         @endif
                     </div>
                 </div>
-                <div class="card-footer">
-                    <a class="btn btn-success" href="{{ route('admin.visits-distributors.index') }}">{{ __('Vpltar P/ As Visitas') }}</a>
-                    <a class="btn btn-warning" href="{{ route('admin.visits-distributors.edit', $rows->id) }}">{{ __('Editar Visita') }}</a>
-                    <a target="_blank" class="btn btn-primary" href="{{ route('admin.visits-distributors.print', $rows->id) }}">{{ __('Imprimir') }}</a>
-                </div>
             </div>
         </div>
     </div>
-@endsection

@@ -79,6 +79,9 @@ class AutoRouteDbService
                 'destroy'=>sprintf('admin.%s.destroy', $resource->route),
             ])->middleware($resource->middleware);
 
+            Route::get(sprintf("%s/{id}/imprimir",$resource->slug), sprintf("%s@%s", $resource->controller, "print"))
+                ->name(sprintf('admin.%s.print', $resource->route))->middleware($resource->middleware);
+
         } else {
 
             Route::resource($this->pattern($resource), $resource->controller)->names([
@@ -90,6 +93,9 @@ class AutoRouteDbService
                 'update'=>sprintf('admin.%s.update', $resource->route),
                 'destroy'=>sprintf('admin.%s.destroy', $resource->route),
             ]);
+
+            Route::get(sprintf("%s/{id}/imprimir",$resource->slug), sprintf("%s@%s", $resource->controller, "print"))
+                ->name(sprintf('admin.%s.print', $resource->route));
         }
 
 
@@ -132,6 +138,7 @@ class AutoRouteDbService
                 ->name($Route->route);
         }
     }
+
     private function get($Route){
         if ($this->middleware($Route)) {
             Route::get($this->pattern($Route), sprintf("%s@%s", $Route->controller, $Route->method))

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -134,6 +135,38 @@ abstract class AbstractController extends Controller
         }
 
         return view(sprintf('admin.%s.show', $this->template), $this->results);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function print($id)
+    {
+
+        $this->results['user'] = Auth::user();
+
+        $this->results['tenant'] = get_tenant();
+
+        if($this->model){
+
+            $this->results['rows'] = $this->getModel()->findById($id);
+        }
+
+        if(!$this->results['rows']){
+
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+            return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+        }
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML(view(sprintf('admin.%s.print', $this->template), $this->results));
+        return $pdf->stream();
     }
 
     /**
