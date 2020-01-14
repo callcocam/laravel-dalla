@@ -16,7 +16,8 @@ class AddresForm extends AbstractForm
                 )
             ->add('state', 'text',
                 [
-                    'label'=>'Estado'
+                    'label'=>'Estado',
+                    'rules'=>'max:2'
                 ])
             ->add('city', 'text',
                 [

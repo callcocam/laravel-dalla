@@ -35,7 +35,7 @@ class ClientStore extends FormRequest
             'document' => [
                 'required',
                 Rule::unique('users')->ignore($this->id),
-            ],
+            ]
         ];
 
         if(!$this->id){
