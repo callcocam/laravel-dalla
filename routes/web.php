@@ -47,15 +47,8 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
         $router->get('/{id}/tarefas', 'Admin\\EventLastController@task')
             ->name('admin.tasks-last.index')->middleware('can:admin.tasks-last.index');
 
-        $router->post('/tarefas/update', 'Admin\\EventLastController@updateTask')
+        $router->post('/tarefas/{id}/update', 'Admin\\EventLastController@updateTask')
             ->name('admin.tasks-last.update')->middleware('can:admin.tasks-last.update');
-
-        $router->post('/tarefas/create', 'Admin\\EventLastController@createTask')
-            ->name('admin.tasks-last.update')->middleware('can:admin.tasks-last.update');
-
-
-        $router->post('/tarefas/delete', 'Admin\\EventLastController@deleteTask')
-            ->name('admin.tasks-last.delete')->middleware('can:admin.tasks-last.delete');
 
         $router->post('/pos-evento/store', 'Admin\\EventLastController@posEvent')
             ->name('admin.pos-events-last.store')->middleware('can:admin.pos-events-last.store');
@@ -67,15 +60,8 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
         $router->get('/{id}/tarefas', 'Admin\\EventNextController@task')
             ->name('admin.tasks-next.index')->middleware('can:admin.tasks-next.index');
 
-        $router->post('/tarefas/update', 'Admin\\EventNextController@updateTask')
+        $router->post('/tarefas/{id}/update', 'Admin\\EventNextController@updateTask')
             ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
-
-        $router->post('/tarefas/create', 'Admin\\EventNextController@createTask')
-            ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
-
-
-        $router->post('/tarefas/delete', 'Admin\\EventNextController@deleteTask')
-            ->name('admin.tasks-next.delete')->middleware('can:admin.tasks-next.delete');
 
         $router->post('/pos-evento/store', 'Admin\\EventNextController@posEvent')
             ->name('admin.pos-events-next.store')->middleware('can:admin.pos-events-next.store');

@@ -15,4 +15,18 @@ class Task extends AbstractModel
     protected $fillable = [
         'user_id','name','slug','status', 'description','updated_at',
     ];
+
+
+
+    public function task(){
+
+        return $this->belongsTo(EventTask::class);
+    }
+
+
+    public function getTaskAttribute(){
+
+        return $this->task();
+    }
+
 }

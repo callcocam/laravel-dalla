@@ -10,9 +10,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\PosNextEvent;
 use App\Forms\EventNextForm;
+use App\Forms\TaskEventForm;
 use App\Http\Requests\EventNextStore;
 use App\Http\Requests\PosEventStore;
 use App\Model\Admin\EventNext;
+use App\Model\Admin\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,11 +53,19 @@ class EventNextController extends AbstractController
 
     public function task(Request $request, $id){
 
-        $this->results['form'] = null;
+        $rows = $this->getModel()->findById($id);
+
+        $this->results['form'] = $this->formBuilder->create(TaskEventForm::class,
+            [
+                'model' => $rows,
+                'method' => 'POST',
+                'url' => route("admin.tasks-next.update", $id)
+            ]);
+
 
         $this->results['user'] = Auth::user();
 
-        $this->results['rows'] = $this->getModel()->findById($id);
+        $this->results['rows'] =$rows;
 
         $this->results['tenant'] = get_tenant();
 
@@ -63,22 +73,55 @@ class EventNextController extends AbstractController
     }
 
 
-    public function updateTask(Request $request){
+    public function updateTask(Request $request,$id){
 
+       $updated = false;
 
-        $rows = $this->getModel()->findById($request->get('event'));
+        $rows = $this->getModel()->findById($id);
+
 
         if($rows){
-            $task = $rows->tasks()->where('id',$request->get('id'))->first();
 
-            if($task):
-                $task->update(array_merge($task->toArray(),$request->all()));
-            else:
-                $rows->tasks()->create($request->all());
-            endif;
+            $tasks = $request->all();
+
+            foreach ($tasks as $key => $task) {
+
+               if(Task::query()->where('slug',$key)->first()){
+
+                   if($task['name']){
+
+                       $updated = true;
+
+                       $task['event_id'] = $id;
+
+                       $eventTask = $rows->task()->where('task_id', $task['task_id'])->first();
+
+                       if($eventTask):
+                           $eventTask->saveBy(array_merge($eventTask->toArray(),$task));
+                       else:
+                           $rows->task()->create($task);
+                       endif;
+
+                   }
+                   else{
+
+                       if($task['id']){
+                           $rows->task()->where('id', $task['id'])->delete();
+                       }
+                   }
+               }
+
+            }
         }
 
-        return $rows->jsonTasks();
+        if ($updated){
+            notify()->success('Tarefas atualizadas com sucesso!!');
+
+            return back()->withInput($request->all())->with('success', 'Tarefas atualizadas com sucesso!!');
+        }
+        notify()->info('Nenhuma tarefa foi criada ou atualizada!!');
+
+        return back()->withInput($request->all())->with('info', 'Nenhuma tarefa foi criada ou atualizada!!');
     }
 
     public function posEvent(PosEventStore $request){
@@ -108,19 +151,4 @@ class EventNextController extends AbstractController
         ], 500);
     }
 
-
-    public function deleteTask(Request $request){
-
-        $rows = $this->getModel()->findById($request->get('event'));
-
-        if($rows){
-            $task = $rows->tasks()->where('id',$request->get('id'))->first();
-
-            if($task):
-                $task->delete();
-            endif;
-        }
-
-        return $rows->jsonTasks();
-    }
 }

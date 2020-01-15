@@ -12,6 +12,7 @@ namespace App;
 
 use App\Suports\Shinobi\Models\Permission;
 use App\Suports\Shinobi\Models\Role;
+use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Form;
 
 abstract class AbstractForm extends Form
@@ -58,6 +59,7 @@ protected function addDescription($name="description",$label="Descrição", $att
         return  $this->add('submit', 'submit', array_merge(
             [
                 'label' => $label,
+                'name' => Str::slug($label),
                 'attr'=>array_merge([
                     'class'=>'btn btn-primary btn-block'
                 ], $attr)]

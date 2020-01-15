@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\PosLastEvent;
 use App\Forms\EventLastForm;
+use App\Forms\TaskEventForm;
 use App\Http\Requests\EventNextStore;
 use App\Http\Requests\PosEventStore;
 use App\Model\Admin\EventLast;
@@ -28,6 +29,7 @@ class EventLastController extends AbstractController
    protected $event = PosLastEvent::class;
 
    protected $formClass = EventLastForm::class;
+
 
    public function index()
    {

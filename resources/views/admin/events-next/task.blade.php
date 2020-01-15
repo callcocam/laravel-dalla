@@ -11,7 +11,11 @@
     </div>
 @endsection
 @section('content')
-
+    <div class="row mb-5">
+        <div class="col-md-12">
+            {!! form($form) !!}
+        </div>
+    </div>
 @endsection
 
 @include("admin.includes.alert")

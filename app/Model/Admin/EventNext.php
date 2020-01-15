@@ -73,6 +73,11 @@ class EventNext extends AbstractModel
         return $this->hasOne(PosEvent::class,'event_id');
     }
 
+    public function task(){
+
+        return $this->hasMany(EventTask::class,'event_id');
+    }
+
     public function pos_eventJson(){
 
         return json_encode($this->hasOne(PosEvent::class,'event_id')->first([
