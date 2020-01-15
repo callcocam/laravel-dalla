@@ -5,11 +5,11 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li>{{ __('Clientes') }}</li>
+            <li>{{ __('Tarefas') }}</li>
         </ul>
         <div style="right: 2%;position: absolute;">
-            @can('admin.clients-chooperias.create')
-                <a href="{{ route('admin.clients-chooperias.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Cliente') }}</a>
+            @can('admin.tasks.create')
+                <a href="{{ route('admin.tasks.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Tarefa Evento') }}</a>
             @endcan
         </div>
     </div>
@@ -26,19 +26,18 @@
                             <div class="card-body">
                                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                                     <div>
-                                        <h5>{{ $row->fantasy }}</h5>
-                                        <p class="ul-task-manager__paragraph mb-3"> {{ $row->name }}</p>
-                                    </div>
+                                        <h5>{{ $row->name }}</h5>
+                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
-                                @can('admin.clients-chooperias.edit')
-                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients-chooperias.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
+                                @can('admin.tasks.edit')
+                                    <a class="btn btn-primary btn-rounded" href="{{ route('admin.tasks.edit',$row->id) }}">{{ __('Editar Tarefa') }}</a>
                                 @endcan
                                 <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
-                                @can('admin.clients-chooperias.show')
+                                @can('admin.tasks.destroy')
                                     <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
-                                        <form ref="form" action="{{ route('admin.clients-chooperias.destroy',$row->id) }}" method="POST">
+                                        <form ref="form" action="{{ route('admin.tasks.destroy',$row->id) }}" method="POST">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -60,7 +59,7 @@
         <div class="row">
             <div class="col-12">
                 @include("admin.includes.empty", [
-                       'url' =>route('admin.clients-chooperias.create')
+                       'url' =>route('admin.tasks.create')
                    ])
             </div>
         </div>

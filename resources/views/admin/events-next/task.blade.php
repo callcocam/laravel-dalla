@@ -11,7 +11,7 @@
     </div>
 @endsection
 @section('content')
-    <task-component :event="{{ json_encode($rows->toArray()) }}" :tasks="{{ $rows->jsonTasks() }}" route="proximos-eventos" />
+
 @endsection
 
 @include("admin.includes.alert")

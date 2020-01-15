@@ -15,9 +15,4 @@ class Task extends AbstractModel
     protected $fillable = [
         'user_id','name','slug','status', 'description','updated_at',
     ];
-
-    public function taskable(){
-
-        return $this->morphTo();
-    }
 }

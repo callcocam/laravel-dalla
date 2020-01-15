@@ -4,7 +4,7 @@ namespace App\Forms;
 
 use App\AbstractForm;
 
-class TaskForm extends AbstractForm
+class ItemForm extends AbstractForm
 {
     public function buildForm()
     {

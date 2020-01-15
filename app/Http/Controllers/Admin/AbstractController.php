@@ -42,6 +42,24 @@ abstract class AbstractController extends Controller
 
         if($this->model){
 
+            if(request('search')){
+
+                $term = request('search');
+
+                if(request('model')){
+
+                    $model = request('model');
+
+                    $id = $model::query()->where( app('db')->raw("CONCAT_WS(' ', name)"),"like", "%{$term}%")->select(['id'])->get();
+
+                    if($id->count())
+                        $this->getSource()->whereIn(request('id'), $id->toArray());
+                }
+                else{
+
+                    $this->getSource()->where( app('db')->raw("CONCAT_WS(' ', name)"),"like", "%{$term}%");
+                }
+            }
             $this->results['rows'] = $this->getSource()->paginate($this->perPage);
         }
 
@@ -81,7 +99,6 @@ abstract class AbstractController extends Controller
 
 
     protected function save($request){
-
 
         // It will automatically use current request, get the rules, and do the validation
 
@@ -302,6 +319,30 @@ abstract class AbstractController extends Controller
 
 
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function find(Request $request)
+    {
+        $term = trim($request->q);
+
+        if (empty($term)) {
+            return \Response::json([]);
+        }
+
+        $tags = $this->getSource()->where( app('db')->raw("CONCAT_WS(' ', name)"),"like", "%{$term}%")->limit(5)->get();
+
+        $formatted_tags = [];
+
+        foreach ($tags as $tag) {
+            $formatted_tags[] = ['id' => $tag->id, 'text' => $tag->name];
+        }
+
+        return \Response::json($formatted_tags);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *

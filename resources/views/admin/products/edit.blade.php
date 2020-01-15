@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.clients-events.index') }}">{{ __('Cliente Evento') }}</a></li>
+            <li><a href="{{ route('admin.products.index') }}">{{ __('Produto') }}</a></li>
             <li>{{ $rows->name }}</li>
         </ul>
     </div>
@@ -19,3 +19,10 @@
 @endsection
 
 
+
+@push("scripts")
+    <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+    </script>
+@endpush

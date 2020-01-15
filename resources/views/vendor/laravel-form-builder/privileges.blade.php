@@ -7,7 +7,7 @@
             @if ($showLabel && $options['label'] !== false && $options['label_show'])
                 {!! Form::customLabel($name, $options['label'], $options['label_attr']) !!}
             @endif
-            <div class="col-md-6 col-sm-6 ">
+            <div class="{{$options['label_show']? 'col-md-9 col-sm-9':'col-md-12'}}">
                 @if ($showField)
                     @isset($options['choices'])
                         @foreach($options['choices'] as $key => $option)

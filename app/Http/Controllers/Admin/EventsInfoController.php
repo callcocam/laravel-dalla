@@ -8,7 +8,6 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Forms\Beers\EventsInfoForm;
 use App\Http\Requests\VisitsDistributorStore;
 use App\Model\Admin\EventsInfo;
 

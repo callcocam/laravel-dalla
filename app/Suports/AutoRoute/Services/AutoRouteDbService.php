@@ -79,8 +79,7 @@ class AutoRouteDbService
                 'destroy'=>sprintf('admin.%s.destroy', $resource->route),
             ])->middleware($resource->middleware);
 
-            Route::get(sprintf("%s/{id}/imprimir",$resource->slug), sprintf("%s@%s", $resource->controller, "print"))
-                ->name(sprintf('admin.%s.print', $resource->route))->middleware($resource->middleware);
+
 
         } else {
 
@@ -94,9 +93,10 @@ class AutoRouteDbService
                 'destroy'=>sprintf('admin.%s.destroy', $resource->route),
             ]);
 
-            Route::get(sprintf("%s/{id}/imprimir",$resource->slug), sprintf("%s@%s", $resource->controller, "print"))
-                ->name(sprintf('admin.%s.print', $resource->route));
         }
+
+        $this->print($resource);
+        $this->find($resource);
 
 
     }
@@ -146,6 +146,25 @@ class AutoRouteDbService
         } else {
             Route::get($this->pattern($Route), sprintf("%s@%s", $Route->controller, $Route->method))
                 ->name($Route->route);
+        }
+    }
+
+    private function print($Route){
+        if ($this->middleware($Route)) {
+            Route::get(sprintf("%s/{id}/imprimir",$Route->slug), sprintf("%s@%s", $Route->controller, "print"))
+                ->name(sprintf('admin.%s.print', $Route->route))->middleware($Route->middleware);
+        } else {
+            Route::get(sprintf("%s/{id}/imprimir",$Route->slug), sprintf("%s@%s", $Route->controller, "print"))
+                ->name(sprintf('admin.%s.print', $Route->route));
+        }
+    }
+    private function find($Route){
+        if ($this->middleware($Route)) {
+            Route::get(sprintf("%s/find/select",$Route->slug), sprintf("%s@%s", $Route->controller, "find"))
+                ->name(sprintf('admin.%s.find', $Route->route))->middleware($Route->middleware);
+        } else {
+            Route::get(sprintf("%s/find/select",$Route->slug), sprintf("%s@%s", $Route->controller, "find"))
+                ->name(sprintf('admin.%s.find', $Route->route));
         }
     }
 

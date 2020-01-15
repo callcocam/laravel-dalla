@@ -85,20 +85,5 @@ class EventLast extends AbstractModel
         return $this->hasOne(EventsInfo::class, 'event_id')->first(['important']);
     }
 
-    public function tasks(){
-
-        return $this->morphOne(Task::class, 'taskable');
-    }
-
-    public function jsonTasks(){
-
-        $tasks = $this->morphOne(Task::class, 'taskable')->get(['id', 'name', 'slug', 'description', 'status']);
-
-        if($tasks->count()){
-
-            return json_encode($tasks->toArray());
-        }
-        return json_encode([]);
-    }
 
 }
