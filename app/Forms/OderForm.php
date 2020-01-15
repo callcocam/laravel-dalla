@@ -47,6 +47,18 @@ class OderForm extends AbstractForm
             ]);
         }
 
+        if(!$this->getModel()){
+
+            return $this->add('status', 'choice',[
+                'choices'=>[
+                    'open'=>'Aberto'
+                ],
+                'default_value'=>'open',
+                'label_show'=>false,
+                'expanded'=>true,
+            ]);
+        }
+
         if(in_array($this->getModel()->status, ['transit'=>'transit','completed'=>'transit'])){
 
             return $this->add('status', 'choice',[
