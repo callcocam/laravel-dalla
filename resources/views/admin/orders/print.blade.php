@@ -15,7 +15,7 @@
         <div class="row mb-5">
             <div class="col-md-12 mb-3 mb-sm-0">
                 <h5 class="font-weight-bold">Infromações do cliente</h5>
-                <p>{{ $rows->client->name }}</p><span style="white-space: pre-line">
+                <p>{{ $rows->client->name }}</p><span>
                         @if($rows->client->address)
                             @if($rows->client->address->city)
                                 {{ $rows->client->address->city }},
