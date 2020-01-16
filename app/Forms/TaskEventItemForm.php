@@ -43,8 +43,7 @@ class TaskEventItemForm extends AbstractForm
                 'default_value'=>$this->getData('status','draft'),
                 'label_show'=>false,
                 'expanded'=>true,
-            ])
-            ->addSubmit(sprintf("Atualizar Tarefa - %s",$this->getData('taskName') ));
+            ]);
 
 
         parent::buildForm();

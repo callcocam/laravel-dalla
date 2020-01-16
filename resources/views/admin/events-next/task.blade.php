@@ -19,3 +19,16 @@
 @endsection
 
 @include("admin.includes.alert")
+
+@push("scripts")
+    <script>
+        $(function () {
+            $('form').change(function () {
+
+                window.axios.post($('form').attr('action'), $('form').serialize()).then(respone=>{
+                    console.log(respone)
+                })
+            })
+        })
+    </script>
+@endpush

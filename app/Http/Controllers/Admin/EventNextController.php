@@ -33,6 +33,7 @@ class EventNextController extends AbstractController
 
    public function index()
    {
+
        $this->getSource()->orderBy('start_event')->whereBetween('start_event', [
            Carbon::now(),
            Carbon::now()->addMonths(1000)->endOfMonth()
@@ -75,6 +76,9 @@ class EventNextController extends AbstractController
 
     public function updateTask(Request $request,$id){
 
+        if (! $request->expectsJson()) {
+            return back();
+        }
        $updated = false;
 
         $rows = $this->getModel()->findById($id);
@@ -115,13 +119,16 @@ class EventNextController extends AbstractController
         }
 
         if ($updated){
-            notify()->success('Tarefas atualizadas com sucesso!!');
 
-            return back()->withInput($request->all())->with('success', 'Tarefas atualizadas com sucesso!!');
+            return response()->json([
+                'message'=>'Tarefas atualizadas com sucesso!!',
+                'result'=>$updated
+            ]);
         }
-        notify()->info('Nenhuma tarefa foi criada ou atualizada!!');
-
-        return back()->withInput($request->all())->with('info', 'Nenhuma tarefa foi criada ou atualizada!!');
+        return response()->json([
+            'message'=>'Nenhuma tarefa foi criada ou atualizada!!',
+            'result'=>$updated
+        ]);
     }
 
     public function posEvent(PosEventStore $request){
