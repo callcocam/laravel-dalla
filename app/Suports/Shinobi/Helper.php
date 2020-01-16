@@ -66,10 +66,16 @@ class Helper
             endif;
         }
 
+
+
     }
 
-    public function getPermissions(){
+    public function getPermissions($current){
 
+
+        if($current){
+            $this->setPermission($current->groups, $current->name,  Str::title(str_replace(".", " ", $current->name)));
+        }
         return $this->permissions;
     }
 

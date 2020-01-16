@@ -32,20 +32,15 @@
                                     </div>
                                 </div>
                                 @if($row->permissions)
-                                    <table class="table text-center" id="user_table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">{{ __('Nome') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($row->permissions as $permission)
-                                            <tr>
-                                                <td>{{ $permission->name }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                    <ul class="list-group list-group-flash">
+                                        <li class="list-group-item border-0">
+                                            @foreach($row->permissions as $permission)
+
+                                                <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="badge badge-{{ get_tag_color() }} r-badge">{{ $permission->name }}</a>
+
+                                            @endforeach
+                                        </li>
+                                    </ul>
                                 @endif
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">

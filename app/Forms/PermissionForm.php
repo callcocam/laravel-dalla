@@ -43,7 +43,7 @@ class PermissionForm extends AbstractForm
     protected function addPermissions(){
 
 
-        $model = $this->helper->getPermissions();
+        $model = $this->helper->getPermissions($this->getModel());
 
         if(!$model)
             return $this;
