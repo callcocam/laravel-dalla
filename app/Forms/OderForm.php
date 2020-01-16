@@ -4,7 +4,6 @@ namespace App\Forms;
 
 use App\AbstractForm;
 use App\Model\Admin\Client;
-use Illuminate\Support\Facades\Auth;
 
 class OderForm extends AbstractForm
 {
@@ -25,7 +24,10 @@ class OderForm extends AbstractForm
                     'label_show'=>false,
                 ]
             )->add('description', 'textarea',[
-                'label_show'=>false
+                'label_show'=>false,
+                'attr'=>[
+                    'placeholder'=>"Descreva aqui alguma informação pertinente ao pedido",
+                ]
             ])
             ->addStatus();
 

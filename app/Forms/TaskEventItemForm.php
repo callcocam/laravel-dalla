@@ -20,13 +20,20 @@ class TaskEventItemForm extends AbstractForm
                 [
                     'label_show'=>false,
                     'default_value'=>$this->getData('name'),
+                    'attr'=>[
+                        'placeholder'=>"Digite aqui o valor pertinente a tarefa",
+                        'title'=>"Descreva aqui o valor pertinente a tarefa, pode ser um número ou texto explicativo",
+                    ]
                 ]
             )
             ->add('description', 'text',
                 [
 
                     'label_show'=>false,
-                    'default_value'=>$this->getData('description')
+                    'default_value'=>$this->getData('description'),
+                    'attr'=>[
+                        'placeholder'=>"Descreva aqui alguma informação pertinente a tarefa",
+                    ]
                 ]
             )->add('status', 'choice',[
                 'choices'=>[
