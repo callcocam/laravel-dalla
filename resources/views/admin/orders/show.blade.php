@@ -32,14 +32,28 @@
                     <div class="col-md-12 mb-3 mb-sm-0">
                         <h5 class="font-weight-bold">Infromações do cliente</h5>
                         <p>{{ $rows->client->name }}</p><span >
-                            {{ $rows->client->address->city }}-
-                            {{ $rows->client->address->state }},
-                            {{ $rows->client->address->zip }},
-                            {{ $rows->client->address->street }}-
-                            {{ $rows->client->address->number }},
-                            {{ $rows->client->address->district }}
-                            @if($rows->client->address->complement)
-                                , {{ $rows->client->address->complement }}
+                             @if($rows->client->address)
+                                @if($rows->client->address->city)
+                                    , {{ $rows->client->address->city }}
+                                @endif
+                                @if($rows->client->address->state)
+                                    , {{ $rows->client->address->state }}
+                                @endif
+                                @if($rows->client->address->zip)
+                                    , {{ $rows->client->address->zip }}
+                                @endif
+                                @if($rows->client->address->street)
+                                    , {{ $rows->client->address->street }}
+                                @endif
+                                @if($rows->client->address->number)
+                                    , {{ $rows->client->address->number }}
+                                @endif
+                                @if($rows->client->address->district)
+                                    , {{ $rows->client->address->district }}
+                                @endif
+                                @if($rows->client->address->complement)
+                                    , {{ $rows->client->address->complement }}
+                                @endif
                             @endif
                         </span>
                     </div>
