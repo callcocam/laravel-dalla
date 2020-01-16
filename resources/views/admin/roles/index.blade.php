@@ -35,9 +35,12 @@
                                     <ul class="list-group list-group-flash">
                                         <li class="list-group-item border-0">
                                             @foreach($row->permissions as $permission)
-
-                                                <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="badge badge-{{ get_tag_color() }} r-badge">{{ $permission->name }}</a>
-
+                                                @can('admin.permissions.edit')
+                                                    <a href="{{ route('admin.permissions.edit', $role->id) }}" class="badge badge-{{ get_tag_color() }} r-badge">{{ $role->name }}</a>
+                                                @endcan
+                                                @cannot('admin.permissions.edit')
+                                                    <span class="badge badge-{{ get_tag_color() }} r-badge">{{ $role->name }}</span>
+                                                @endcannot
                                             @endforeach
                                         </li>
                                     </ul>

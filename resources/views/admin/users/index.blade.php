@@ -32,20 +32,19 @@
                                     </div>
                                 </div>
                                 @if($row->roles)
-                                    <table class="table text-center" id="user_table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">{{ __('Nome') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($row->roles as $role)
-                                            <tr>
-                                                <td>{{ $role->name }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                    <ul class="list-group list-group-flash">
+                                        <li class="list-group-item border-0">
+                                            @foreach($row->roles as $role)
+                                                @can('admin.roles.edit')
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="badge badge-{{ get_tag_color() }} r-badge">{{ $role->name }}</a>
+                                                @endcan
+                                                @cannot('admin.roles.edit')
+                                                    <span class="badge badge-{{ get_tag_color() }} r-badge">{{ $role->name }}</span>
+                                                @endcannot
+
+                                            @endforeach
+                                        </li>
+                                    </ul>
                                 @endif
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
