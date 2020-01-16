@@ -42,4 +42,9 @@ class Client extends AbstractModel
     {
         return $this->belongsToMany(config('shinobi.models.role'), 'role_user', 'user_id', 'role_id')->withTimestamps();
     }
+
+    public function orders(){
+
+        return $this->hasMany(Order::class);
+    }
 }

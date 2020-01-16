@@ -35,4 +35,10 @@ class User extends AbstractModel
         return $this->morphOne(Addres::class, 'addresable');
     }
 
+
+    public function orders(){
+
+        return $this->hasMany(Order::class);
+    }
+
 }
