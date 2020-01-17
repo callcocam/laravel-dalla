@@ -9,9 +9,9 @@ class OderForm extends AbstractForm
 {
     public function buildForm()
     {
-        $this ->add('id', 'hidden')
+        $this ->add('id', 'text')
             ->addClient()
-            ->add('number', 'text',
+            ->add('number', 'hidden',
                 [
                     'label_show'=>false,
                     'attr'=>[

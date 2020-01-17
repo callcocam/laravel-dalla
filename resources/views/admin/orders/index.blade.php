@@ -50,7 +50,7 @@
                                 @foreach($rows as $row)
                                     @can('view', $row)
                                     <tr>
-                                        <th scope="row">#{{ $row->number }}</th>
+                                        <th scope="row">#{{ str_pad($row->id, 5, '0', STR_PAD_LEFT) }}</th>
                                         <td class="collection-item">
                                             <div class="font-weight-bold"><a href="{{ route('admin.clients.show', $row->client->id) }}">{{ $row->client->name }}</a></div>
                                             <div class="text-muted">{{ $row->client->description }}</div>

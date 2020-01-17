@@ -16,16 +16,16 @@
                 <!-- ==== Edit Area =====-->
 
                 {!! form_start($form) !!}
+                {!! form_row($form->number) !!}
                 <div class="d-flex mb-5"><span class="m-auto"></span>
                     <button class="btn btn-success btn-lg"><i class="fa fa-save"></i> {{ __('Atualizar Pedido') }}</button>
                 </div>
-                {!! form_row($form->id) !!}
                 <div class="row justify-content-between">
                     <div class="col-md-6">
                         <h4 class="font-weight-bold">Informações do pedido</h4>
                         <div class="col-sm-4 form-group mb-3 pl-0">
                             <label for="orderNo">Número Do Pedido</label>
-                            {!! form_row($form->number) !!}
+                            <span class="form-control">{{ $form->id }}</span>
                         </div>
                     </div>
                     <div class="col-md-3 text-right">
@@ -33,10 +33,7 @@
                         <div class="pr-0 mb-4">
                             {!! form_row($form->status) !!}
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="order-datepicker">{{ __('Date Prevista para entrega') }}</label>
-                            {!! form_row($form->delivery_date) !!}
-                        </div>
+
                     </div>
                 </div>
                 <div class="mt-3 mb-4 border-top"></div>

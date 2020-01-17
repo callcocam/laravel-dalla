@@ -22,6 +22,7 @@
                         <h4 class="font-weight-bold">Informações do pedido</h4>
                         <div class="col-sm-4 form-group mb-3 pl-0">
                             <label for="orderNo">Número Do Pedido</label>
+                            <span class="form-control">#0000</span>
                             {!! form_row($form->number,['value' => \Faker\Provider\Uuid::numerify()]) !!}
                         </div>
                     </div>
