@@ -47,7 +47,7 @@ class OrderController extends AbstractController
 
         $data['delivery_date'] = date('Y-m-d');
 
-        $data['status'] = 'open';
+        $data['status'] = 'not-accepted';
 
         if(auth()->user()->hasAnyRole('cliente')){
 
