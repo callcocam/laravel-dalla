@@ -9,7 +9,7 @@ class OderForm extends AbstractForm
 {
     public function buildForm()
     {
-        $this ->add('id', 'text')
+        $this ->add('id', 'hidden')
             ->addClient()
             ->add('number', 'hidden',
                 [
@@ -19,9 +19,10 @@ class OderForm extends AbstractForm
                     ],
                 ]
             )
-            ->add('delivery_date', 'date',
+            ->add('delivery_date', 'hidden',
                 [
                     'label_show'=>false,
+                    'default_value'=>date("Y-m-d")
                 ]
             )->add('description', 'textarea',[
                 'label_show'=>false,

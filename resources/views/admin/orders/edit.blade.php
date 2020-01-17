@@ -17,6 +17,7 @@
 
                 {!! form_start($form) !!}
                 {!! form_row($form->number) !!}
+                {!! form_row($form->id) !!}
                 <div class="d-flex mb-5"><span class="m-auto"></span>
                     <button class="btn btn-success btn-lg"><i class="fa fa-save"></i> {{ __('Atualizar Pedido') }}</button>
                 </div>

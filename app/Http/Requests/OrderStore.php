@@ -25,16 +25,8 @@ class OrderStore extends FormRequest
     public function rules()
     {
         return [
-            'client_id'=>['required'],
-            'delivery_date'=>['required'],
+            'client_id'=>['required']
         ];
     }
 
-    public function messages()
-    {
-         return [
-             'delivery_date'=>['required'=>'Campo obrigatorio'],
-         ];
-
-    }
 }

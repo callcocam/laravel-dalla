@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\OderForm;
 use App\Http\Requests\OrderStore;
+use App\Model\Admin\Client;
 use App\Model\Admin\Order;
 use App\Model\Admin\Product;
 
@@ -24,6 +25,9 @@ class OrderController extends AbstractController
 
    protected $formClass = OderForm::class;
 
+   protected $classSearch = Client::class;
+
+   protected $searchId = 'client_id';
 
     /**
      * Store a newly created resource in storage.
@@ -34,6 +38,25 @@ class OrderController extends AbstractController
     public function store(OrderStore $request)
     {
         return $this->save($request);
+    }
+
+    public function create()
+    {
+
+        $data['number'] = \Faker\Provider\Uuid::numerify();
+
+        $data['delivery_date'] = date('Y-m-d');
+
+        $data['status'] = 'open';
+
+        if(auth()->user()->hasAnyRole('cliente')){
+
+            $data['client_id'] = auth()->user()->id;
+        }
+
+        $this->getModel()->saveBy($data);
+
+        return redirect()->route('admin.orders.edit', $this->getModel()->getResultLastId());
     }
 
     public function edit($id)

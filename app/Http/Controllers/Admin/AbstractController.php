@@ -21,6 +21,9 @@ abstract class AbstractController extends Controller
     protected $template = 'dashboard';
     protected $route = '';
     protected $perPage = 12;
+    protected $classSearch;
+    protected $search = 'name';
+    protected $searchId = 'id';
     /**
      * @var FormBuilder
      */
@@ -39,26 +42,36 @@ abstract class AbstractController extends Controller
 
         $this->results['user'] = Auth::user();
         $this->results['tenant'] = get_tenant();
+        $this->results['search'] = '';
+        $this->results['status'] = '';
 
         if($this->model){
 
             if(request('search')){
 
+                $this->results['search'] = request('search');
+
                 $term = request('search');
 
-                if(request('model')){
+                $search = $this->search;
 
-                    $model = request('model');
+                if($this->classSearch){
 
-                    $id = $model::query()->where( app('db')->raw("CONCAT_WS(' ', name)"),"like", "%{$term}%")->select(['id'])->get();
+                    $id = $this->classSearch::query()->where( app('db')->raw("CONCAT_WS(' ', {$search})"),"like", "%{$term}%")->select(['id'])->get();
 
                     if($id->count())
-                        $this->getSource()->whereIn(request('id'), $id->toArray());
+                        $this->getSource()->whereIn($this->searchId, $id->toArray());
                 }
                 else{
 
-                    $this->getSource()->where( app('db')->raw("CONCAT_WS(' ', name)"),"like", "%{$term}%");
+                    $this->getSource()->where( app('db')->raw("CONCAT_WS(' ', {$search})"),"like", "%{$term}%");
                 }
+            }
+
+            if(request('status')){
+                $this->results['status'] = request('status');
+                $this->getSource()->where('status',request('status'));
+
             }
             $this->results['rows'] = $this->getSource()->paginate($this->perPage);
         }

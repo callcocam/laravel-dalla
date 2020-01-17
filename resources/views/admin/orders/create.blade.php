@@ -13,10 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <!-- ==== Edit Area =====-->
-
             {!! form_start($form) !!}
-
-
                 <div class="row justify-content-between">
                     <div class="col-md-6">
                         <h4 class="font-weight-bold">Informações do pedido</h4>
@@ -30,10 +27,6 @@
                         <label class="d-block text-12 text-muted">{{ __('Situação do pedido') }}</label>
                         <div class="pr-0 mb-4">
                             {!! form_row($form->status) !!}
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="order-datepicker">{{ __('Date Prevista para entrega') }}</label>
-                            {!! form_row($form->delivery_date) !!}
                         </div>
                     </div>
                 </div>
