@@ -25,7 +25,7 @@
                         <h4 class="font-weight-bold">Informações do pedido</h4>
                         <div class="col-sm-4 form-group mb-3 pl-0">
                             <label for="orderNo">Número Do Pedido</label>
-                            <span class="form-control">{{ $form->id }}</span>
+                            <span class="form-control">#{{ str_pad($rows->id, 5, '0', STR_PAD_LEFT) }}</span>
                         </div>
                     </div>
                     <div class="col-md-3 text-right">
