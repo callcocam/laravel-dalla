@@ -30,6 +30,9 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
+        if($user->hasAnyRole('pedidos')){
+            return true;
+        }
         return $user->id == $order->client_id;
     }
 
