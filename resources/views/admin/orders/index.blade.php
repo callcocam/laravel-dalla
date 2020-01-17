@@ -75,7 +75,7 @@
                                             @endif
                                         </td>
                                         <td class="custom-align">
-                                            <span class="badge badge-pill badge-outline-{{ check_status($row->status,['not-accepted'=>'danger','open'=>'primary','transit'=>'warning','completed'=>'success']) }} p-2 m-1">{{ check_status_text($row->status,['not-accepted'=>'Não aceito','open'=>'Aberto','transit'=>'Em transito','completed'=>'Completo']) }}</span>
+                                            <span class="badge badge-pill badge-outline-{{ check_status($row->status,['not-accepted'=>'danger','open'=>'primary','transit'=>'warning','completed'=>'success']) }} p-2 m-1">{{ check_status_text($row->status,['not-accepted'=>'Aguardando Aprovação','open'=>'Aberto','transit'=>'Em transito','completed'=>'Completo']) }}</span>
                                         </td>
                                         <td class="custom-align">
                                             @can('admin.orders.edit')
