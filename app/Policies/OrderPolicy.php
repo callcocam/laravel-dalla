@@ -56,6 +56,10 @@ class OrderPolicy
      */
     public function update(User $user, Order $order)
     {
+        if($user->hasAnyRole('pedidos')){
+            return true;
+        }
+
         return $user->id == $order->client_id;
     }
 
@@ -68,6 +72,9 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order)
     {
+        if($user->hasAnyRole('pedidos')){
+            return true;
+        }
         return $user->id == $order->client_id;
     }
 
@@ -80,6 +87,9 @@ class OrderPolicy
      */
     public function restore(User $user, Order $order)
     {
+        if($user->hasAnyRole('pedidos')){
+            return true;
+        }
         return $user->id == $order->client_id;
     }
 
@@ -92,6 +102,9 @@ class OrderPolicy
      */
     public function forceDelete(User $user, Order $order)
     {
+        if($user->hasAnyRole('pedidos')){
+            return true;
+        }
         return $user->id == $order->client_id;
     }
 }
