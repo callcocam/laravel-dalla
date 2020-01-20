@@ -18,7 +18,9 @@ class EventLast extends AbstractModel
     protected $showOrderDirection = "ASC";
 
     protected $fillable = [
-        'user_id','name','client_id','slug','contractor','observations','pre_checklist','general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
+        'user_id','name','client_id','slug','contractor','observations','local','chopp_price',
+        'trucks','truck_driver','team','departure_date_and_time',
+        'arrival_date_and_time','start_time_event','pre_checklist','general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
     ];
 
 

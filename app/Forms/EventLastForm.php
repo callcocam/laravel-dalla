@@ -32,6 +32,38 @@ class EventLastForm extends AbstractForm
                 [
                     'label'=>'Contato do contratante'
                 ])
+            ->add('local', 'text',
+                [
+                    'label'=>'Local do evento'
+                ])
+            ->add('chopp_price', 'text',
+                [
+                    'label'=>'Valor do chopp'
+                ])
+            ->add('trucks', 'text',
+                [
+                    'label'=>'Caminhão'
+                ])
+            ->add('truck_driver', 'text',
+                [
+                    'label'=>'Motorista'
+                ])
+            ->add('team', 'text',
+                [
+                    'label'=>'Equipe'
+                ])
+            ->add('departure_date_and_time', 'text',
+                [
+                    'label'=>'Data e horário de Saída da empresa'
+                ])
+            ->add('arrival_date_and_time', 'text',
+                [
+                    'label'=>'Data e horário de Chegada no evento'
+                ])
+            ->add('start_time_event', 'text',
+                [
+                    'label'=>'Horário de Início do evento'
+                ])
             ->add('observations', 'textarea',
                 [
                     'label'=>'Observações'

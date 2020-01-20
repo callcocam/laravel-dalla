@@ -19,7 +19,10 @@ class EventNext extends AbstractModel
     protected $showOrderDirection = "ASC";
 
     protected $fillable = [
-        'user_id','name','slug','client_id','contractor','observations','pre_checklist','general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
+        'user_id','name','slug','client_id','contractor','observations','local','chopp_price',
+        'trucks','truck_driver','team','departure_date_and_time',
+        'arrival_date_and_time','start_time_event','pre_checklist',
+        'general_observations','start_event','end_event', 'consumption','status', 'description','updated_at',
     ];
 
 
