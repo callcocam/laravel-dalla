@@ -19,7 +19,7 @@
             @if (Route::has('admin.users.index'))
             @can('admin.users.index')
                 <li class="nav-item">
-                    <a class="nav-item-hold" href="{{ route('admin.users.index') }}"><i class="nav-icon i-Add-User"></i><span class="nav-text">{{ __('User') }}</span></a>
+                    <a class="nav-item-hold" href="{{ route('admin.users.index') }}"><i class="nav-icon i-Add-User"></i><span class="nav-text">{{ __('Usuários') }}</span></a>
                     <div class="triangle"></div>
                 </li>
             @endcan
