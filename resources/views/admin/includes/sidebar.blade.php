@@ -11,11 +11,19 @@
                     <div class="triangle"></div>
                 </li>
             @endcan
-            @canany(['admin.roles.index','admin.permissions.index','admin.users.index'])
+            @canany(['admin.roles.index','admin.permissions.index'])
                 <li class="nav-item" data-item="operacional"><a class="nav-item-hold" href="#"><i class="nav-icon i-Lock-User"></i><span class="nav-text">{{ __('Operacional') }}</span></a>
                     <div class="triangle"></div>
                 </li>
             @endcan
+            @if (Route::has('admin.users.index'))
+            @can('admin.users.index')
+                <li class="nav-item">
+                    <a class="nav-item-hold" href="{{ route('admin.users.index') }}"><i class="nav-icon i-Add-User"></i><span class="nav-text">{{ __('User') }}</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endcan
+            @endif
             @if (Route::has('admin.clients.index'))
             @can('admin.clients.index')
                 <li class="nav-item">
@@ -65,11 +73,6 @@
             @if (Route::has('admin.roles.index'))
                 @can('admin.roles.index')
                     <li class="nav-item"><a href="{{ route('admin.roles.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Papéis') }}</span></a></li>
-                @endcan
-            @endif
-            @if (Route::has('admin.users.index'))
-                @can('admin.events.index')
-                    <li class="nav-item"><a href="{{ route('admin.users.index') }}"><i class="nav-icon i-Arrow-Forward-2"></i><span class="item-name">{{ __('Usuários') }}</span></a></li>
                 @endcan
             @endif
         </ul>
