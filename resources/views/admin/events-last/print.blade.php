@@ -1,17 +1,7 @@
-@extends('layouts.admin')
-
-@section('breadcrumb')
-    <div class="breadcrumb">
-        <h1>{{ $tenant->name }}</h1>
-        <ul>
-            <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.events-last.index') }}">{{ __('Eventos') }}</a></li>
-            <li>{{ __('Tarefas') }}</li>
-        </ul>
-    </div>
-@endsection
+@extends('layouts.print')
 @section('content')
-    @if($rows)
+    <div id="print-area">
+    @if($rows->task->count())
         @foreach($rows->task as $row)
             <div class="item">
                 <div class="border pt-3 pr-3 pl-3 pb-1">
@@ -37,13 +27,6 @@
                 </div>
             </div>
         @endforeach
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route('admin.events-last.print', $rows->id) }}" class="btn btn-gray-300 btn-block mb-5"><i class="icon i-Finger-Print"></i> Imprimir Tarefas</a>
-            </div>
-        </div>
     @endif
-
+    </div>
 @endsection
-
-@include("admin.includes.alert")

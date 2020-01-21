@@ -16,6 +16,7 @@ use App\Http\Requests\PosEventStore;
 use App\Model\Admin\EventLast;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class EventLastController extends AbstractController
@@ -66,6 +67,30 @@ class EventLastController extends AbstractController
         return view(sprintf('admin.%s.task', $this->template), $this->results);
     }
 
+
+    public function print($id)
+    {
+        $rows = $this->getModel()->findById($id);
+
+        if(!$rows){
+
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+            return back()->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+        }
+        $this->results['user'] = Auth::user();
+
+        $this->results['rows'] =$rows;
+
+        $this->results['tenant'] = get_tenant();
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML(view(sprintf('admin.%s.print', $this->template), $this->results));
+        
+        return $pdf->stream();
+    }
 
     public function taskList (Request $request, $id){
 
