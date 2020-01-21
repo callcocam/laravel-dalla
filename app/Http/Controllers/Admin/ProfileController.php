@@ -10,9 +10,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\ProfileForm;
 use App\Http\Requests\ProfileStore;
+use App\Model\Admin\Client;
 use App\Model\Admin\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class ProfileController extends AbstractController
 {
@@ -21,10 +23,23 @@ class ProfileController extends AbstractController
 
     protected $model = User::class;
 
-   // protected $rules = ProfileRequest::class;
+    public function __construct(FormBuilder $formBuilder)
+    {
+        parent::__construct($formBuilder);
+
+
+    }
+
+    // protected $rules = ProfileRequest::class;
 
     public function profile()
     {
+
+        if(Auth::user()->hasAnyRole('cliente')){
+
+            $this->model = Client::class;
+        }
+
         $this->results['user'] = Auth::user();
         $this->results['tenant'] = get_tenant();
         $rows = [];
