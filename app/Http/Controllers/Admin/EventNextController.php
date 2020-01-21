@@ -17,6 +17,7 @@ use App\Model\Admin\EventNext;
 use App\Model\Admin\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class EventNextController extends AbstractController
@@ -96,6 +97,29 @@ class EventNextController extends AbstractController
     }
 
 
+    public function print($id)
+    {
+        $rows = $this->getModel()->findById($id);
+
+        if(!$rows){
+
+            notify()->error("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+            return back()->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
+
+        }
+        $this->results['user'] = Auth::user();
+
+        $this->results['rows'] =$rows;
+
+        $this->results['tenant'] = get_tenant();
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML(view(sprintf('admin.%s.print', $this->template), $this->results));
+
+        return $pdf->stream();
+    }
 
 
     public function updateTask(Request $request,$id){

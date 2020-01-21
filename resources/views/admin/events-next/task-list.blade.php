@@ -52,6 +52,11 @@
             </div>
         </form>
     @endforeach
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ route('admin.events-next.print', $rows->id) }}" class="btn btn-gray-300 btn-block mb-5"><i class="icon i-Finger-Print"></i> Imprimir Tarefas</a>
+        </div>
+    </div>
 @endif
 
 @endsection

@@ -88,7 +88,7 @@ class EventLastController extends AbstractController
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML(view(sprintf('admin.%s.print', $this->template), $this->results));
-        
+
         return $pdf->stream();
     }
 
