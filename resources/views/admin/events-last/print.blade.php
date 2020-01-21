@@ -1,5 +1,4 @@
-@extends('layouts.print')
-@section('content')
+
     <div id="print-area">
     @if($rows->task->count())
         @foreach($rows->task as $row)
@@ -29,4 +28,3 @@
         @endforeach
     @endif
     </div>
-@endsection
