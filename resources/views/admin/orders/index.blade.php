@@ -79,7 +79,9 @@
                                         </td>
                                         <td class="custom-align">
                                             @can('admin.orders.edit')
-                                                <a class="btn btn-primary btn-rounded" href="{{ route('admin.orders.edit',$row->id) }}">{{ __('Editar Pedido') }}</a>
+                                                @can('status', $row)
+                                                  <a class="btn btn-primary btn-rounded" href="{{ route('admin.orders.edit',$row->id) }}">{{ __('Editar Pedido') }}</a>
+                                                @endcan
                                             @endcan
                                             @can('admin.orders.show')
                                                 <a class="btn btn-warning btn-rounded" href="{{ route('admin.orders.show',$row->id) }}">{{ __('Ver Pedido') }}</a>

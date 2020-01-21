@@ -23,13 +23,6 @@ class ProfileController extends AbstractController
 
     protected $model = User::class;
 
-    public function __construct(FormBuilder $formBuilder)
-    {
-        parent::__construct($formBuilder);
-
-
-    }
-
     // protected $rules = ProfileRequest::class;
 
     public function profile()

@@ -23,6 +23,10 @@ class Item extends AbstractModel
 
         $product = Product::find($data['product_id']);
 
+        if(!$product){
+            $this->messages = "Falhou, não foi possivel adicionar o registro, modelo não foi encontrado!!";
+            return false;
+        }
         $data['total'] = form_w(Calcular(form_read($data['amount']), form_read($product->price), '*'));
         $data['price'] = $product->price;
 

@@ -37,6 +37,21 @@ class OrderPolicy
     }
 
     /**
+     * Determine whether the user can view the order.
+     *
+     * @param \App\User $user
+     * @param Order $order
+     * @return mixed
+     */
+    public function status(User $user,Order $order)
+    {
+        if($user->hasAnyRole('pedidos')){
+            return !in_array($order->status, ['completed']);
+        }
+        return $order->status == 'not-accepted';
+    }
+
+    /**
      * Determine whether the user can create orders.
      *
      * @param  \App\User  $user
