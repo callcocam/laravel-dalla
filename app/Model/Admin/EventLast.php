@@ -73,6 +73,11 @@ class EventLast extends AbstractModel
         return $this->belongsTo(Client::class);
     }
 
+    public function task(){
+
+        return $this->hasMany(EventTask::class,'event_id');
+    }
+
     public function pos_eventJson(){
 
         return json_encode($this->hasOne(PosEvent::class,'event_id')->first([

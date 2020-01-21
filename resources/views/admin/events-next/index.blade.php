@@ -34,9 +34,11 @@
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
-                                @can('admin.tasks-next.list')
-                                    <a href="{{ route('admin.tasks-next.list',$row->id) }}" class="btn btn-outline-success btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
-                                @endcan
+                                @if($row->task->count())
+                                    @can('admin.tasks-next.list')
+                                        <a href="{{ route('admin.tasks-next.list',$row->id) }}" class="btn btn-outline-success btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
+                                    @endcan
+                                @endif
                                 @can('admin.tasks-next.index')
                                     <a href="{{ route('admin.tasks-next.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Edit"></i> Gerenciar tarefas</a>
                                 @endcan

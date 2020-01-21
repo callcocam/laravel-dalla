@@ -34,8 +34,11 @@
                                         <p class="ul-task-manager__paragraph mb-3">Data: {{ date_carbom_format($row->start_event)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
-                                <a href="{{ route('admin.tasks-last.index',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Add"></i> Listar tarefas</a>
-
+                                @if($row->task->count())
+                                    @can('admin.tasks-last.list')
+                                        <a href="{{ route('admin.tasks-last.list',$row->id) }}" class="btn btn-outline-primary btn-block"><i class="ul-task-manager__fonts i-Tablet-Secure"></i> Listar tarefas</a>
+                                    @endcan
+                                @endif
                             </div>
                             <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
                                 @can('admin.events-last.edit')

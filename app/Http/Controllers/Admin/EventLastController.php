@@ -67,6 +67,19 @@ class EventLastController extends AbstractController
     }
 
 
+    public function taskList (Request $request, $id){
+
+        $rows = $this->getModel()->findById($id);
+
+        $this->results['user'] = Auth::user();
+
+        $this->results['rows'] =$rows;
+
+        $this->results['tenant'] = get_tenant();
+
+        return view(sprintf('admin.%s.task-list', $this->template), $this->results);
+    }
+
     public function updateTask(Request $request){
 
 

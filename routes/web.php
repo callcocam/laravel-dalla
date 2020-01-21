@@ -52,6 +52,12 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
         $router->post('/pos-evento/store', 'Admin\\EventLastController@posEvent')
             ->name('admin.pos-events-last.store')->middleware('can:admin.pos-events-last.store');
+
+
+        $router->get('/{id}/lista/tarefas', 'Admin\\EventLastController@taskList')
+            ->name('admin.tasks-last.list')->middleware('can:admin.tasks-last.list');
+
+
     });
 
 
