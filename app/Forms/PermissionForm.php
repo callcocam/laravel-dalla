@@ -46,7 +46,7 @@ class PermissionForm extends AbstractForm
         $model = $this->helper->getPermissions($this->getModel());
 
         if(!$model)
-            return $this;
+            return $this ->add('name', 'text');
 
 
         return  $this->add('name', 'select',[
