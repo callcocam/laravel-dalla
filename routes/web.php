@@ -60,6 +60,9 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
         $router->get('/{id}/tarefas', 'Admin\\EventNextController@task')
             ->name('admin.tasks-next.index')->middleware('can:admin.tasks-next.index');
 
+        $router->get('/{id}/lista/tarefas', 'Admin\\EventNextController@taskList')
+            ->name('admin.tasks-next.list')->middleware('can:admin.tasks-next.list');
+
         $router->post('/tarefas/{id}/update', 'Admin\\EventNextController@updateTask')
             ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
 

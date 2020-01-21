@@ -13,7 +13,7 @@ use App\AbstractModel;
 class EventTask extends AbstractModel
 {
     protected $fillable = [
-        'user_id','task_id','event_id','name','date_limit','description','status','updated_at',
+        'user_id','updated_by','task_id','event_id','name','date_limit','description','observations','status','updated_at',
     ];
 
 
@@ -21,5 +21,9 @@ class EventTask extends AbstractModel
         'updated_at'=>'date:d-m-Y'
     ];
 
+    public function task(){
+
+        return $this->belongsTo(Task::class);
+    }
 
 }
