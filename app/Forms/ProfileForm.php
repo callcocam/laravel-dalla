@@ -12,6 +12,7 @@ class ProfileForm extends AbstractForm
     {
         if($this->getModel()){
             $this->add('id', 'hidden');
+            $this->getModel()->append('address');
         }
         $this->add('slug', 'hidden')
             ->add('name', 'text',[

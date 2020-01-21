@@ -41,4 +41,8 @@ class User extends AbstractModel
         return $this->hasMany(Order::class);
     }
 
+    public function getAddressAttribute(){
+
+        return $this->address()->first(['zip','city','state','country', 'street','district','number','complement']);
+    }
 }
