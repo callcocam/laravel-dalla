@@ -55,7 +55,7 @@ class ClientForm extends AbstractForm
     protected function addPassword(){
 
         if($this->getModel()){
-           // return  $this;
+            $this->getModel()->append('address');
         }
 
         return  $this->add('password', 'password',[

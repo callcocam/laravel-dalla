@@ -52,6 +52,8 @@ class UserForm extends AbstractForm
             return  $this;
         }
 
+        $this->getModel()->append('address');
+
         $roles = $this->getModel()->roles()->get();
 
         $data = [];
