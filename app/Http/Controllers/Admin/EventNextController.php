@@ -137,8 +137,8 @@ class EventNextController extends AbstractController
             $tasks = $request->all();
 
             foreach ($tasks as $key => $task) {
-
-               if(Task::query()->where('slug',$key)->first()){
+               $parent = Task::query()->where('slug',$key)->first();
+               if($parent){
 
                    if($task['name']){
 
@@ -147,9 +147,9 @@ class EventNextController extends AbstractController
                        $task['event_id'] = $id;
 
                        $eventTask = $rows->task()->where('task_id', $task['task_id'])->first();
-
                        if($eventTask):
-                           $eventTask->saveBy(array_merge($eventTask->toArray(),$task));
+                           $task['id'] = $eventTask->id;
+                           $eventTask->saveBy($task);
                        else:
                            $rows->task()->create($task);
                        endif;

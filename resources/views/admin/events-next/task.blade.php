@@ -25,8 +25,8 @@
         $(function () {
             $('form').change(function () {
 
-                window.axios.post($('form').attr('action'), $('form').serialize()).then(respone=>{
-                    console.log(respone)
+                window.axios.post($(this).attr('action'), $(this).serialize()).then(respone=>{
+                    //window.location.reload();
                 })
             })
         })
