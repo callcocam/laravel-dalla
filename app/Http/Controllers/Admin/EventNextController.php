@@ -16,6 +16,7 @@ use App\Http\Requests\PosEventStore;
 use App\Model\Admin\EventNext;
 use App\Model\Admin\Task;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -114,11 +115,15 @@ class EventNextController extends AbstractController
 
         $this->results['tenant'] = get_tenant();
 
+        /**
+         * @var Dompdf $pdf
+         */
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML(view(sprintf('admin.%s.print', $this->template), $this->results));
 
         return $pdf->stream();
+        //return view(sprintf('admin.%s.print', $this->template), $this->results);
     }
 
 

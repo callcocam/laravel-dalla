@@ -1,5 +1,20 @@
 
     <div id="print-area">
+        <h1 style="width: 100%; text-align: left">{{ $rows->name }}</h1>
+        @if($rows->client)
+            <h3 style="width: 100%; text-align: left">{{ $rows->client->name }}, {{ $rows->client->document }},
+                {{ $rows->client->phone }}</h3>
+                <div  style="width: 100%; text-align: left">Contato:{{ $rows->contractor }}</div>
+        @endif
+        <p style="width: 100%; text-align: left">
+            @if($rows->description)
+                {{ strip_tags($rows->description) }}
+            @endif
+            @if($rows->observations)
+                {{ strip_tags($rows->observations) }}
+            @endif
+        </p>
+        CHECKLIST
     @if($rows->task->count())
         @foreach($rows->task as $row)
             <div class="item">
@@ -7,11 +22,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             {{ $row->task->name }}: <b>{{ $row->name }}</b><br/>
-                            Descrição: <b>{{ $row->description }}</b><br/>
-                            Situação: <b><span class="badge badge-pill badge-{{ check_status($row->status) }} p-2 m-1">{{ check_status_text($row->status,[
-        'published'=>"Feito", 'draft'=>"A Fazer"
-    ]) }}</span></b>
-
+                            Descrição: <b>{{ $row->description }}</b>
                         </div>
                     </div>
                     <div class="row">
@@ -24,6 +35,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
             </div>
         @endforeach
     @endif
