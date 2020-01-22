@@ -8,10 +8,10 @@
         @endif
         <p style="width: 100%; text-align: left">
             @if($rows->description)
-                {{ strip_tags($rows->description) }}
+                {!! $rows->description !!}
             @endif
             @if($rows->observations)
-                {{ strip_tags($rows->observations) }}
+                {!! $rows->observations !!}
             @endif
         </p>
         CHECKLIST
