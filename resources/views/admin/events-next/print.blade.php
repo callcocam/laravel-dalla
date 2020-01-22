@@ -1,20 +1,22 @@
 
-    <div id="print-area">
-        <h1 style="width: 100%; text-align: left">{{ $rows->name }}</h1>
-        @if($rows->client)
-            <h3 style="width: 100%; text-align: left">{{ $rows->client->name }}, {{ $rows->client->document }},
-                {{ $rows->client->phone }}</h3>
-                <div  style="width: 100%; text-align: left">Contato:{{ $rows->contractor }}</div>
+<div id="print-area">
+    <h1 style="width: 100%; text-align: center">{{ $rows->name }}</h1>
+    @if($rows->client)
+        <h3 style="width: 100%; text-align: center">{{ $rows->client->name }}, {{ $rows->client->document }},
+            {{ $rows->client->phone }}</h3>
+        <div  style="width: 100%; text-align: left">Contato:{{ $rows->contractor }}</div>
+        <div  style="width: 100%; text-align: left">Local:{{ $rows->local }}</div>
+    @endif
+    <p style="width: 100%; text-align: left">
+        @if($rows->description)
+            {!! $rows->description !!}
         @endif
-        <p style="width: 100%; text-align: left">
-            @if($rows->description)
-                {!! $rows->description !!}
-            @endif
-            @if($rows->observations)
-                {!! $rows->observations !!}
-            @endif
-        </p>
-        CHECKLIST
+        @if($rows->observations)
+            {!! $rows->observations !!}
+        @endif
+    </p>
+    CHECKLIST
+    <hr>
     @if($rows->task->count())
         @foreach($rows->task as $row)
             <div class="item">
@@ -39,4 +41,4 @@
             </div>
         @endforeach
     @endif
-    </div>
+</div>
