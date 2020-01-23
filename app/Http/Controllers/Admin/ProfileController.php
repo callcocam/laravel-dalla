@@ -70,7 +70,7 @@ class ProfileController extends AbstractController
 
             $this->model = Client::class;
         }
-        
+
         $this->getModel()->saveBy($request->all());
 
         if($this->getModel()->getResultLastId()){
