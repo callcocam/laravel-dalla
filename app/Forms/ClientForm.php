@@ -14,6 +14,7 @@ class ClientForm extends AbstractForm
         }
 
         $role = Role::query()->where('slug','cliente')->first();
+
         $this
             ->add('role', 'hidden', [
                 'value'=>$role->id

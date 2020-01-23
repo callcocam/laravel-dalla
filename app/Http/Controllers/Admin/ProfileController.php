@@ -66,6 +66,11 @@ class ProfileController extends AbstractController
     public function store(ProfileStore $request)
     {
 
+        if(Auth::user()->hasAnyRole('cliente')){
+
+            $this->model = Client::class;
+        }
+        
         $this->getModel()->saveBy($request->all());
 
         if($this->getModel()->getResultLastId()){
