@@ -30,7 +30,7 @@ class Item extends AbstractModel
         $curentItem = null;
 
         if(isset($data['id'])){
-            $curentItem = parent::findById($data['id']);
+            //$curentItem = parent::findById($data['id']);
         }
 
         $data['total'] = form_w(Calcular(form_read($data['amount']), form_read($product->price), '*'));
@@ -49,7 +49,7 @@ class Item extends AbstractModel
 
             $order->update();
 
-            $this->addBonus($data,$order,$curentItem);
+            //$this->addBonus($data,$order,$curentItem);
 
         }
 
