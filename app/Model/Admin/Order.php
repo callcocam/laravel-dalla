@@ -22,6 +22,13 @@ class Order extends AbstractModel
 
         return $this->hasMany(Item::class);
     }
+
+    public function itemsProducts(){
+
+        $items = $this->hasMany(Item::class)->get();
+        dd($items);
+        return ;
+    }
     public function client(){
 
         return $this->belongsTo(Client::class);

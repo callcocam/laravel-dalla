@@ -49,6 +49,28 @@ class Client extends AbstractModel
         return $this->hasMany(Order::class);
     }
 
+
+    public function ordersProduct(){
+
+        $orders = $this->hasMany(Order::class)->get();
+
+        $products = [];
+
+        foreach ($orders as $order) {
+
+            $items = $order->items()->get();
+
+            foreach ($items as $item) {
+
+                $product = $item->products()->first();
+
+                $products[$product->id] = $product;
+            }
+        }
+
+        return $products;
+    }
+
     public function getAddressAttribute(){
 
         return $this->address()->first(['zip','city','state','country', 'street','district','number','complement']);

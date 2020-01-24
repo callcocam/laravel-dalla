@@ -22,6 +22,16 @@ class Product extends AbstractModel
         return $this->hasMany(Item::class);
     }
 
+    public function amount($product){
+
+        $data = $product->items()->select( DB::raw('sum( amount ) as quantity') )->first();
+
+        if($data)
+            return $data->quantity;
+
+        return '0';
+    }
+
     public function bonus(){
 
         return $this->hasMany(Bonu::class);

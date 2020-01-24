@@ -95,25 +95,23 @@
                  <br>
                  <br>
                    <div class="card-body">
-                       <div class="card-title">{{ __("Últimos produto adquiridos") }}</div>
-                       @if($rows->orders)
-                           @foreach($rows->orders as $order)
-                               @can('view', $order)
-                                   @foreach($order->items as $item)
-                                       <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{ asset($item->products->cover) }}" alt="{{ $item->products->name }}">
-                                           <div class="flex-grow-1">
-                                               <h5><a href="{{ route('admin.products.show', $item->products->id) }}">{{ $item->products->name }}</a></h5>
-                                               <p class="m-0 text-small text-muted">{{ __('Quantidade') }}: {{ str_pad((int)$item->amount, 5, '0', STR_PAD_LEFT) }}</p>
-                                               <p class="text-small text-danger m-0"> R$ {{ form_read($item->products->price) }}</p>
-                                           </div>
-                                           <div>
-                                               <a title="Ver detalhes do pedido" href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
-                                                   {{ __('Ver Pedido') }}
-                                               </a>
-                                           </div>
+                       <div class="card-title">{{ __("Quantidade de produtos adquiridos") }}</div>
+                       @if($rows->ordersProduct())
+                           @foreach($rows->ordersProduct() as $item)
+                                   <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{ asset($item->cover) }}" alt="{{ $item->name }}">
+                                       <div class="flex-grow-1">
+                                           <h5><a href="{{ route('admin.products.show', $item->id) }}">{{ $item->name }}</a></h5>
+                                           <p class="m-0 text-small text-muted">{{ __('Quantidade') }}: {{ form_read($item->amount($item)) }}</p>
+                                           <p class="m-0 text-small text-muted">{{ __('Quantidade vezes unidade') }}: {{ Calcular(form_read($item->und), form_read($item->amount($item)), '*') }}</p>
+                                           <p class="text-small text-danger m-0"> R$ {{ form_read($item->price) }}</p>
+                                           <p class="text-small text-danger m-0"> R$ {{ Calcular(form_read($item->price), form_read($item->amount($item)), '*') }}</p>
                                        </div>
-                                   @endforeach
-                               @endcan
+                                       <div>
+                                           <a title="Ver detalhes do pedido" href="{{ route('admin.products.show', $item->id) }}" class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
+                                               {{ __('Ver Produto') }}
+                                           </a>
+                                       </div>
+                                   </div>
                            @endforeach
                        @endif
                    </div>
