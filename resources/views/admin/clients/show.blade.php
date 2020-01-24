@@ -101,6 +101,7 @@
                                    <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{ asset($item->cover) }}" alt="{{ $item->name }}">
                                        <div class="flex-grow-1">
                                            <h5><a href="{{ route('admin.products.show', $item->id) }}">{{ $item->name }}</a></h5>
+                                           <p class="m-0 text-small text-muted">{{ __('Unidade') }}: {{ form_read($item->und) }}</p>
                                            <p class="m-0 text-small text-muted">{{ __('Quantidade') }}: {{ form_read($item->amount($item)) }}</p>
                                            <p class="m-0 text-small text-muted">{{ __('Quantidade vezes unidade') }}: {{ Calcular(form_read($item->und), form_read($item->amount($item)), '*') }}</p>
                                            <p class="text-small text-danger m-0"> R$ {{ form_read($item->price) }}</p>
