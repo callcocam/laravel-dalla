@@ -42,6 +42,23 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
     \App\Suports\AutoRoute\Facade\AutoRoute::register();
 
+    $router->group(['prefix'=>'produtos'], function($router){
+
+        $router->post('/bonus/cadastrar', 'Admin\\ProductController@bonus')
+            ->name('admin.products.bonus.stores')->middleware('can:admin.products.bonus.stores');
+
+        $router->get('/bonus/{product}/delete/{bonus}', 'Admin\\ProductController@destroyBonu')
+            ->name('admin.products.bonus.destroy')->middleware('can:admin.products.bonus.destroy');
+
+    });
+
+    $router->group(['prefix'=>'bonificacoes'], function($router){
+
+        $router->get('/{id}/aplicar', 'Admin\\BonificationController@application')
+            ->name('admin.bonificacoes.application')->middleware('can:admin.bonificacoes.application');
+
+    });
+
     $router->group(['prefix'=>'ultimos-eventos'], function($router){
 
         $router->get('/{id}/tarefas', 'Admin\\EventLastController@task')
@@ -78,8 +95,5 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
     $router->post('/visitas-ditribuidor/store-json/save', 'Admin\\VisitsDistributorController@updateVisit')
         ->name('admin.visits-distributors.update-visit-json')->middleware('can:visits-distributors.update-visit-json');
-
-
-
 
 });

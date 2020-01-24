@@ -21,12 +21,12 @@
         <section class="product-cart">
             <div class="row list-grid">
                 @foreach($rows as $row)
-                <div class="list-item col-md-3">
+                <div class="list-item col-md-4">
 
                     <div class="card o-hidden mb-4 d-flex flex-column">
                         <div class="list-thumb d-flex"><img alt="{{ $row->name }}" src="{{ asset($row->cover) }}"></div>
                         <div class="flex-grow-1 d-bock">
-                            <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center"><a class="w-40 w-sm-100" href="">
+                            <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center"><a class="w-40 w-sm-100" href="{{ route('admin.products.edit',$row->id) }}">
                                     <div class="item-title">
                                         {{ $row->name }}
                                     </div>
@@ -46,12 +46,17 @@
                                 <div class="row">
                                     <div class="col text-center">
                                         @can('admin.products.edit')
-                                            <a class="btn btn-outline-primary btn-rounded" href="{{ route('admin.products.edit',$row->id) }}">{{ __('Editar Produto') }}</a>
+                                            <a class="btn btn-warning btn-rounded text-cyan-50" href="{{ route('admin.products.edit',$row->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                                {{ __('Editar Produto') }}
+                                            </a>
                                         @endcan
                                     </div>
                                     <div class="col text-center">
                                         @can('admin.products.show')
-                                            <a class="btn btn-outline-info btn-rounded" href="{{ route('admin.products.show',$row->id) }}">{{ __('Ver Produto') }}</a>
+                                            <a class="btn btn-success btn-rounded" href="{{ route('admin.products.show',$row->id) }}">
+                                                <i class="fa fa-eye"></i>
+                                                {{ __('Ver Produto') }}</a>
                                         @endcan
                                     </div>
                                     <div class="col text-center">

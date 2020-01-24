@@ -1,6 +1,6 @@
 <template>
     <div :id="event">
-        <button :class="classOption" @click="deleteConfirm()"> {{ text }}</button>
+        <button :class="classOption" @click="deleteConfirm()"><i class="fa fa-trash"></i> {{ text }}</button>
         <slot></slot>
     </div>
 </template>

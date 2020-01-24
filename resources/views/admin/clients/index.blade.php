@@ -35,7 +35,9 @@
                                 @can('admin.clients.edit')
                                     <a class="btn btn-primary btn-rounded" href="{{ route('admin.clients.edit',$row->id) }}">{{ __('Editar Cliente') }}</a>
                                 @endcan
-                                <a class="btn btn-outline-{{ check_status($row->status) }} btn-rounded">{{  check_status_text($row->status) }}</a>
+                                @can('admin.clients.show')
+                                    <a class="btn btn-info btn-rounded" href="{{ route('admin.clients.show',$row->id) }}">{{ __('Ver Cliente') }}</a>
+                                @endcan
                                 @can('admin.clients.show')
                                     <btn-delete-component event="{{ sprintf("form-%s", $row->id) }}">
                                         <form ref="form" action="{{ route('admin.clients.destroy',$row->id) }}" method="POST">

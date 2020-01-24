@@ -24,6 +24,7 @@ abstract class AbstractController extends Controller
     protected $classSearch;
     protected $search = 'name';
     protected $searchId = 'id';
+    protected $appends = [];
     /**
      * @var FormBuilder
      */
@@ -109,6 +110,20 @@ abstract class AbstractController extends Controller
         return view(sprintf('admin.%s.create', $this->template), $this->results);
     }
 
+    /**
+     * @return array
+     */
+    public function getAppends(): array
+    {
+        if($this->appends){
+
+            foreach ($this->appends as $append) {
+
+                $this->results['rows']->append($append);
+            }
+        }
+        return $this->appends;
+    }
 
 
     protected function save($request){
@@ -163,6 +178,8 @@ abstract class AbstractController extends Controller
             return redirect()->route(sprintf("admin.%s.index", $this->template))->withErrors("O modelo não foi informado, se o problema persistir contate o administardor!!!!");
 
         }
+
+        $this->getAppends();
 
         return view(sprintf('admin.%s.show', $this->template), $this->results);
     }

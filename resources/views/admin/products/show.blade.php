@@ -67,6 +67,90 @@
                 </div>
             </div>
         </section>
+
+        <section class="ul-product-detail__box">
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Lista de bonificações</h4>
+                                    <p>Cadastre e atualize bonificações relacionados ao produto - {{ $rows->name }}</p>
+                                    <div class="card mb-5">
+                                        <div class="card-body">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul class="list">
+                                                        @foreach ($errors->all() as $error)
+                                                            <li class="nav-item">{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <form action="{{ route('admin.products.bonus.stores') }}" method="post">
+                                                <div class="row row-xs">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $rows->id }}">
+                                                    <input type="hidden" name="slug">
+                                                    <div class="col-md-3">
+                                                        <input name="name" class="form-control" value="{{ old('name') }}" type="text" placeholder="Nome do bunus">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input name="meta" class="form-control" type="number" placeholder="Meta" value="{{ old('meta') }}">
+                                                    </div>
+                                                    <div class="col-md-5 mt-3 mt-md-0">
+                                                        <input name="description" class="form-control" type="text" placeholder="Bonificação" value="{{ old('description') }}">
+                                                    </div>
+                                                    <div class="col-md-2 mt-3 mt-md-0">
+                                                        <button class="btn btn-primary btn-block">Cadastrar</button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                            @if($rows->bonus->count())
+                                                @foreach($rows->bonus as $bonus)
+                                                <div class="card-body">
+                                                    <form action="{{ route('admin.products.bonus.stores') }}" method="post">
+                                                        <div class="row row-xs">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id" value="{{ $rows->id }}">
+                                                            <input type="hidden" name="id" value="{{ $bonus->id }}">
+                                                            <input type="hidden" name="slug">
+                                                            <div class="col-md-3">
+                                                                <input name="name" class="form-control" type="text" placeholder="Nome do bunus"  value="{{ $bonus->name }}">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <input name="meta" class="form-control" type="number" placeholder="Meta" value="{{ $bonus->meta }}">
+                                                            </div>
+                                                            <div class="col-md-5 mt-3 mt-md-0">
+                                                                <input name="description" class="form-control" type="text" placeholder="Bonificação" value="{{ $bonus->description }}">
+                                                            </div>
+                                                            <div class="col-md-1 mt-3 mt-md-0">
+                                                                <button class="btn btn-success btn-block"><i class="fa fa-edit"></i> </button>
+                                                            </div>
+                                                            <div class="col-md-1 mt-3 mt-md-0">
+                                                                <a href="{{ route('admin.products.bonus.destroy', [
+                                                                'product'=>$rows->id,
+                                                                'bonus'=>$bonus->id
+                                                                ]) }}" class="btn btn-danger btn-block"><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                @endforeach
+                                            @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </section>
 
 @endsection

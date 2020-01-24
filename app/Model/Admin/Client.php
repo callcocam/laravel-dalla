@@ -9,6 +9,7 @@ namespace App\Model\Admin;
 use App\AbstractModel;
 use App\Suports\Shinobi\Concerns\HasRolesAndPermissions;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class Client extends AbstractModel
 {
@@ -51,5 +52,17 @@ class Client extends AbstractModel
     public function getAddressAttribute(){
 
         return $this->address()->first(['zip','city','state','country', 'street','district','number','complement']);
+    }
+
+    public function getBonificationAttribute(){
+
+
+        $Bonifications = $this->hasMany(Bonification::class, 'client_id')->where('status','published')->get();
+
+        if(!$Bonifications->count())
+            return false;
+
+        return $Bonifications;
+
     }
 }

@@ -11,25 +11,17 @@ namespace App\Model\Admin;
 use App\AbstractModel;
 use Illuminate\Support\Facades\DB;
 
-class Product extends AbstractModel
+class Bonu extends AbstractModel
 {
     protected $fillable = [
-        'user_id','name','slug','price','stock','und','status', 'description','updated_at',
+        'user_id','product_id','name','slug','meta','status', 'description','updated_at',
     ];
 
-    public function items(){
+    public function product(){
 
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Product::class);
     }
 
-    public function bonus(){
-
-        return $this->hasMany(Bonu::class);
-    }
-    public function bonu(){
-
-        return $this->belongsTo(Bonu::class);
-    }
     public function bonifications(){
 
         return $this->hasMany(Bonification::class);
@@ -37,7 +29,7 @@ class Product extends AbstractModel
 
     public function countItems(){
 
-        $data = $this->items()->select( DB::raw('sum( amount ) as quantity') )->first();
+        $data = $this->product()->items()->select( DB::raw('sum( amount ) as quantity') )->first();
 
         if($data)
             return $data->quantity;

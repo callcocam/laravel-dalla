@@ -14,7 +14,6 @@
         <div class="row mb-5">
             <div class="col-md-12">
                 <!-- ==== Edit Area =====-->
-
                 {!! form_start($form) !!}
                 {!! form_row($form->number) !!}
                 {!! form_row($form->id) !!}
@@ -53,6 +52,22 @@
                         </div>
                     @endif
                     <div class="col-md-12">
+                        @if(!$user->hasAnyRole('cliente'))
+                            @if($rows->client)
+                                @if($rows->client->bonification)
+                                    <div class="ul-widget__item">
+                                        <div class="ul-widget__info">
+                                            <h3 class="ul-widget1__title">{{ __(sprintf('Esse cliente tem (%s) bonificação:',count($rows->client->bonification))) }}</h3>
+                                            @foreach($rows->client->bonification as $bonification)
+                                                <span class="ul-widget__desc text-mute">
+                               {{ $bonification->bonusId($bonification)->name }},  {{ $bonification->bonusId($bonification)->description }}
+                           </span><a href="{{ route('admin.bonificacoes.application', $bonification->id) }}">Aplicar bonificação</a><br>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endif
                         {!! form_row($form->description) !!}
                     </div>
                 </div>

@@ -21,12 +21,15 @@ class ClientController extends AbstractController
 
    protected $formClass = ClientForm::class;
 
+   protected $appends = ['bonification'];
+
    public function index()
    {
        $this->getSource()->where('is_admin','0');
 
        return parent::index();
    }
+
 
     /**
      * Store a newly created resource in storage.

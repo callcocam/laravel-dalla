@@ -24,6 +24,11 @@ class ProductForm extends AbstractForm
                 [
                     'label'=>'Estoque'
                 ]
+            ) ->add('und', 'text',
+                [
+                    'default_value'=>'1',
+                    'label'=>'Unidade'
+                ]
             )
             ->add('cover', 'file',
                 [
