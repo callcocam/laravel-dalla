@@ -61,7 +61,7 @@
                         </div>
                     @endif
                     <div class="col-md-12">
-                        @if(!$user->hasAnyRole('cliente'))
+                        @if(!$user->hasAnyRole('cliente') && 1==2)
                             @if($rows->client)
                                 @if($rows->client->bonification)
                                     <div class="ul-widget__item">

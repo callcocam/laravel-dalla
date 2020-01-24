@@ -67,7 +67,7 @@
                 </div>
             </div>
         </section>
-
+        @if(1==2)
         <section class="ul-product-detail__box">
             <div class="row">
                 <div class="col-md-12 mt-4">
@@ -150,7 +150,7 @@
                 </div>
             </div>
         </section>
-
+        @endif
     </section>
 
 @endsection

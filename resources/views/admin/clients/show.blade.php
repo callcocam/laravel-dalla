@@ -17,7 +17,7 @@
            <div class="card mb-4">
                <div class="card-header">{{ $rows->name }}</div>
                <div class="card-body">
-                   @if(!$user->hasAnyRole('cliente'))
+                   @if(!$user->hasAnyRole('cliente') && 1==2)
                        @if($rows->bonification)
                            <div class="ul-widget__item">
                                <div class="ul-widget__info">
