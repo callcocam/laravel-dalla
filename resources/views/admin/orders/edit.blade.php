@@ -11,6 +11,13 @@
 @endsection
 @section('content')
     @can('update', $rows)
+        <div class="row justify-content-between">
+            <div class="col-md-12">
+                <div class="alert alert-card alert-danger" role="alert"><strong class="text-capitalize">ATENÇÃO!!</strong>
+                    Se você está fazendo este pedido entre o período de segunda ao meio dia e sexta feira a noite, o seu pedido só será processado na próxima semana, para maiores informações, ligue para a fábrica.
+                </div>
+            </div>
+        </div>
         <div class="row mb-5">
             <div class="col-md-12">
                 <!-- ==== Edit Area =====-->
@@ -20,6 +27,7 @@
                 <div class="d-flex mb-5"><span class="m-auto"></span>
                     <button class="btn btn-success btn-lg"><i class="fa fa-save"></i> {{ __('Atualizar Pedido') }}</button>
                 </div>
+
                 <div class="row justify-content-between">
                     <div class="col-md-6">
                         <h4 class="font-weight-bold">Informações do pedido</h4>
@@ -33,9 +41,10 @@
                         <div class="pr-0 mb-4">
                             {!! form_row($form->status) !!}
                         </div>
-
                     </div>
+
                 </div>
+
                 <div class="mt-3 mb-4 border-top"></div>
                 <div class="row mb-5">
 
