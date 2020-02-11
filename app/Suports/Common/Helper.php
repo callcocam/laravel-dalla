@@ -150,7 +150,6 @@ trait Helper
 
         $data = [
             'company_id'=>get_tenant_id(),
-            'uuid'=>\Str::uuid(),
             'name'=>$name,
             'fullPath'=>sprintf("storage/%s",$result),
             'dir'=>'/dist/upload/images',

@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Suports\Activitylog\ActivitylogServiceProvider;
+use App\Suports\AutoRouteServiceProvider;
+use App\Suports\Intl\IntlServiceProvider;
 use App\Suports\Shinobi\ShinobiServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,9 +18,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        $this->app->singleton(\Faker\Generator::class, function () {
+            return \Faker\Factory::create('pt_BR');
+        });
+
+        //$this->app->bind('path.public', function () {
+
+        //    return base_path("sistema") ;
+
+       // });
+        $this->app->register(IntlServiceProvider::class);
+        $this->app->register(AutoRouteServiceProvider::class);
         $this->app->register(ShinobiServiceProvider::class);
         $this->app->register(\App\Suports\Notify\NotifyServiceProvider::class);
-        $this->app->register(ActivitylogServiceProvider::class);
 
         include app_path("Suports/helpers.php");
     }
@@ -41,20 +53,24 @@ class AppServiceProvider extends ServiceProvider
 
     public function bluePrintMacros()
     {
-        Blueprint::macro('tenant', function(){
-            $this->unsignedBigInteger('company_id')->nullable();
+        Blueprint::macro('id', function($name="id"){
+            $this->uuid($name)->primary();
+        });
+
+        Blueprint::macro('tenant', function($name="company_id"){
+            $this->uuid($name)->nullable();
             $this
-                ->foreign('company_id')
+                ->foreign($name)
                 ->references('id')
                 ->on('companies')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
 
-        Blueprint::macro('user', function(){
-            $this->unsignedBigInteger('user_id')->nullable();
+        Blueprint::macro('user', function($name="user_id"){
+            $this->uuid($name)->nullable();
             $this
-                ->foreign('user_id')
+                ->foreign($name)
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')

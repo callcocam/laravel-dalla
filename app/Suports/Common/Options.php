@@ -13,12 +13,12 @@ final class Options
 {
     const DEFAULT_COLUMN_ODER_DIRECTION = 'id';
     const DEFAULT_COLUMN_STATUS = 'status';
-    const DEFAULT_INITIAL_STATUS = '';
+    const DEFAULT_INITIAL_STATUS = 'all';
     const DEFAULT_PUBLISHED_STATUS = 'published';
     const DEFAULT_DRAFT_STATUS = 'draft';
     const DEFAULT_DELETED_STATUS = 'deleted';
-    const DEFAULT_COLUMN_DATE = 'created_at';
-    const DEFAULT_COLUMN_UPDATE = 'updated_at';
+    const DEFAULT_COLUMN_DATE = 'date';
+    const DEFAULT_COLUMN_UPDATE = 'updated';
     const DEFAULT_TITLE = 'Basic Table';
     const DEFAULT_ORDER_DESC = 'DESC';
     const DEFAULT_ORDER_ASC = 'ASC';

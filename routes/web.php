@@ -14,86 +14,38 @@
 Auth::routes(['register'=>false]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/home', function (){
 
     return redirect('/');
 })->name('home-redirect');
+Route::get('/linksimbolico', function (){
+
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+});
 
 Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
 
     //BLOCK USERS ADMIN
-    $router->get('/', "Admin\\AdminController@index")
-        ->name('admin.admin.index');
 
-    $router->get('/remove-file/{id}', "Admin\\AdminController@removeFile")
-        ->name('admin.admin.remove-file');
-
-    $router->get('/profile', 'Admin\\ProfileController@profile')
-        ->name('admin.auth.profile.form');
-
-    $router->post('/profile', 'Admin\\ProfileController@store')
-        ->name('admin.auth.profile');
-
-    $router->get('/empresa', 'Admin\\SettingController@setting')
-        ->name('admin.settings.setting')->middleware('can:admin.settings.show');
-
-    $router->post('/empresa', 'Admin\\SettingController@store')
-        ->name('admin.settings.store')->middleware('can:admin.settings.store');
-
-    \App\Suports\AutoRoute\Facade\AutoRoute::register();
-
-    $router->group(['prefix'=>'produtos'], function($router){
-
-        $router->post('/bonus/cadastrar', 'Admin\\ProductController@bonus')
-            ->name('admin.products.bonus.stores')->middleware('can:admin.products.bonus.stores');
-
-        $router->get('/bonus/{product}/delete/{bonus}', 'Admin\\ProductController@destroyBonu')
-            ->name('admin.products.bonus.destroy')->middleware('can:admin.products.bonus.destroy');
-
-    });
-
-    $router->group(['prefix'=>'bonificacoes'], function($router){
-
-        $router->get('/{id}/aplicar', 'Admin\\BonificationController@application')
-            ->name('admin.bonificacoes.application')->middleware('can:admin.bonificacoes.application');
-
-    });
-
-    $router->group(['prefix'=>'ultimos-eventos'], function($router){
-
-        $router->get('/{id}/tarefas', 'Admin\\EventLastController@task')
-            ->name('admin.tasks-last.index')->middleware('can:admin.tasks-last.index');
-
-        $router->post('/tarefas/{id}/update', 'Admin\\EventLastController@updateTask')
-            ->name('admin.tasks-last.update')->middleware('can:admin.tasks-last.update');
-
-        $router->post('/pos-evento/store', 'Admin\\EventLastController@posEvent')
-            ->name('admin.pos-events-last.store')->middleware('can:admin.pos-events-last.store');
+    \App\Suports\AutoRoute::get("/","AdminController","index","admin.admin.index");
+    \App\Suports\AutoRoute::get("/remove-file/{id}","AdminController","removeFile","admin.admin.remove-file");
+    \App\Suports\AutoRoute::get("profile","ProfileController","profile","admin.auth.profile.form");
+    \App\Suports\AutoRoute::post("profile","ProfileController","profile","admin.auth.profile");
+    \App\Suports\AutoRoute::get("empresa","SettingController","setting","admin.settings.setting");
+    \App\Suports\AutoRoute::post("empresa","SettingController","store","admin.settings.store");
 
 
-        $router->get('/{id}/lista/tarefas', 'Admin\\EventLastController@taskList')
-            ->name('admin.tasks-last.list')->middleware('can:admin.tasks-last.list');
+    \App\Suports\AutoRoute::resources("usuarios","UserController","users");
+    \App\Suports\AutoRoute::resources("roles","RoleController","roles");
+    \App\Suports\AutoRoute::resources("permissioes","PermissionController","permissions");
+    \App\Suports\AutoRoute::resources("empresas","CompanyController","companies");
+    \App\Suports\AutoRoute::resources("fornecedores","ProviderController","providers");
+    \App\Suports\AutoRoute::resources("grades","GridController","grids");
+    \App\Suports\AutoRoute::resources("produtos","ProductController","products");
 
 
-    });
 
 
-    $router->group(['prefix'=>'proximos-eventos'], function($router){
-
-        $router->get('/{id}/tarefas', 'Admin\\EventNextController@task')
-            ->name('admin.tasks-next.index')->middleware('can:admin.tasks-next.index');
-
-        $router->get('/{id}/lista/tarefas', 'Admin\\EventNextController@taskList')
-            ->name('admin.tasks-next.list')->middleware('can:admin.tasks-next.list');
-
-        $router->post('/tarefas/{id}/update', 'Admin\\EventNextController@updateTask')
-            ->name('admin.tasks-next.update')->middleware('can:admin.tasks-next.update');
-
-        $router->post('/pos-evento/store', 'Admin\\EventNextController@posEvent')
-            ->name('admin.pos-events-next.store')->middleware('can:admin.pos-events-next.store');
-    });
-
-    $router->post('/visitas-ditribuidor/store-json/save', 'Admin\\VisitsDistributorController@updateVisit')
-        ->name('admin.visits-distributors.update-visit-json')->middleware('can:visits-distributors.update-visit-json');
 
 });

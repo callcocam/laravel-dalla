@@ -168,7 +168,6 @@ return [
         /*
          * Package Service Providers...
          */
-        \App\Suports\AutoRoute\AutoRouteDbServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...

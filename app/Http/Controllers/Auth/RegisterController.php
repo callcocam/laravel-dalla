@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Forms\RedisterForm;
+use App\Forms\RegisterForm;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -56,7 +56,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $form = $this->formBuilder->create(RedisterForm::class, [
+        $form = $this->formBuilder->create(RegisterForm::class, [
             'method' => 'POST',
             'url' => route('register')
         ]);

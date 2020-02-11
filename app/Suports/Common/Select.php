@@ -8,9 +8,9 @@
 
 namespace App\Suports\Common;
 
-use App\Model\Admin\Company;
+use App\Company;
 use App\User;
-use App\Model\Admin\File;
+use App\File;
 use Illuminate\Database\Query\Builder;
 
 trait Select
@@ -49,12 +49,6 @@ trait Select
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    
-    public function input(){
-
-        return Input::query()->where('assets', $this->getTable())->get();
     }
 
     /**

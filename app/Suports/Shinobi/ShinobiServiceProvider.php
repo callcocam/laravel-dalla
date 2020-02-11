@@ -1,14 +1,17 @@
 <?php
+/**
+ * Created by Claudio Campos.
+ * User: callcocam@gmail.com
+ * https://www.sigasmart.com.br
+ */
 
 namespace App\Suports\Shinobi;
 
 use Exception;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Authorizable;
-use Illuminate\Support\Str;
 
 class ShinobiServiceProvider extends ServiceProvider
 {
@@ -42,7 +45,7 @@ class ShinobiServiceProvider extends ServiceProvider
         $this->app->singleton('shinobi', function ($app) {
             $auth = $app->make('Illuminate\Contracts\Auth\Guard');
 
-            return new \App\Suports\Shinobi\Shinobi($auth);
+            return new \App\Suports\Shinobi\Shinobi();
         });
     }
 

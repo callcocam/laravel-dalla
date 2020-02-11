@@ -10,6 +10,6 @@ $factory->define(\App\Suports\Shinobi\Models\Role::class, function (Faker $faker
     return [
         'company_id' => get_tenant_id(),
         'user_id' => null,
-        'uuid' => Str::uuid()
+        'id' => \Ramsey\Uuid\Uuid::uuid4(),
     ];
 });

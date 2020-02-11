@@ -30,7 +30,7 @@ class AddPermissionsComand extends Command
     /**
      * @var array
      */
-    private $ignore = ['auth','store'];
+    private $ignore = ['auth','store','remove-file','auto-route','translate','profile','roles','permissions'];
 
     /**
      * @var array

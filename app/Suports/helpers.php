@@ -81,7 +81,7 @@ if ( ! function_exists('get_tenant'))
      */
     function get_tenant()
     {
-        return \App\Model\Admin\Company::find(get_tenant_id());
+        return \App\Company::find(get_tenant_id());
     }
 }
 
@@ -172,6 +172,28 @@ if ( ! function_exists('check_status_text'))
 
 
         return "Rascunho";
+    }
+}
+
+
+if ( ! function_exists('set_header_order'))
+{
+    /**
+     * Get the configuration path.
+     *
+     * @param  string $path
+     * @return string
+     */
+    function set_header_order($params,$options,$header)
+    {
+        $order = "DESC";
+        if($params['order'] == "DESC"){
+            $order = "ASC";
+        }
+        return route(sprintf("admin.%s.index", $options['endpoint']),array_merge($params,[
+            'order'=>$order,
+            'column'=>$header['key'],
+        ]));
     }
 }
 

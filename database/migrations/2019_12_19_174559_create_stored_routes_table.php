@@ -14,7 +14,7 @@ class CreateStoredRoutesTable extends Migration
     public function up()
     {
         Schema::create('stored_routes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->tenant();
             $table->user();
             $table->uuid('uuid');

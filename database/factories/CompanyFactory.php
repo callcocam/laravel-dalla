@@ -16,13 +16,15 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(\App\Model\Admin\Company::class, function (Faker $faker) {
+$factory->define(\App\Company::class, function (Faker $faker) {
     $name = $faker->name;
+    $uuid = \Ramsey\Uuid\Uuid::uuid4()->toString();
+
     return [
-        'company_id' => get_tenant_id(),
         'user_id' => null,
-        'uuid' => Str::uuid(),
+        'id' => $uuid,
         'name' => $name,
+        'assets' => env('APP_URL','localhost.maks.test'),
         'slug' => Str::slug($name),
         'email' => $faker->unique()->safeEmail,
         'phone' => $faker->phoneNumber,

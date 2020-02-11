@@ -3,42 +3,34 @@
 namespace App\Forms;
 
 use App\AbstractForm;
+use App\Suports\Shinobi\Models\Role;
 
 class ProductForm extends AbstractForm
 {
     public function buildForm()
     {
-        $this ->add('id', 'hidden')
+        if($this->getModel()){
+            $this->add('id', 'hidden');
+        }
+
+        $this
             ->add('slug', 'hidden')
-            ->add('name', 'text',
-                [
-                    'label'=>'Nome'
-                ]
-            )
-            ->add('price', 'text',
-                [
-                    'label'=>'Valor'
-                ]
-            )
-            ->add('stock', 'text',
-                [
-                    'label'=>'Estoque'
-                ]
-            ) ->add('und', 'text',
-                [
-                    'default_value'=>'1',
-                    'label'=>'Unidade'
-                ]
-            )
-            ->add('cover', 'file',
-                [
-                    'label'=>'Imagem'
-                ]
-            )
+            ->add('name', 'text',[
+                'label'=>'Nome'
+            ])
+            ->add('reference', 'text',[
+                'label'=>'Refarencia'
+            ])
+            ->add('cover', 'file',[
+                'label'=>'Foto'
+            ])
+            ->addDescription('information',"Informações")
+            ->addDescription('details','Detalhes')
             ->addDescription()
-            ->getStatus()
+            ->getStatus("Ativo", "Inativo")
             ->addSubmit();
 
         parent::buildForm();
     }
+
 }

@@ -14,7 +14,7 @@
             },
             textQuestion:{
                 type:String,
-                default:'Excluir Registro?'
+                default:''
             },
             textConfirm:{
                 type:String,

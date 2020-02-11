@@ -2,22 +2,28 @@
 
 namespace App\Suports\Shinobi\Models;
 
-use App\AbstractModel;
+use App\Suports\Call\Resources\Fields\Facades\HTML;
+use App\Suports\Call\Resources\Fields\Facades\ID;
+use App\Suports\Call\Resources\Fields\Facades\TEXT;
+use App\TraitModel;
+use App\TraitTable;
 use Illuminate\Database\Eloquent\Model;
 use App\Suports\Shinobi\Concerns\HasPermissions;
 use App\Suports\Shinobi\Contracts\Role as RoleContract;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Role extends AbstractModel implements RoleContract
+class Role extends Model implements RoleContract
 {
-    use HasPermissions;
-    
+    use HasPermissions, TraitModel,TraitTable;
+    public $incrementing = false;
+
+    protected $keyType = "string";
     /**
      * The attributes that are fillable via mass assignment.
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'description', 'special', 'status'];
+    protected $fillable = ['name', 'slug','description', 'special', 'status'];
 
     /**
      * Create a new Role instance.
@@ -30,6 +36,13 @@ class Role extends AbstractModel implements RoleContract
         parent::__construct($attributes);
 
         $this->setTable(config('shinobi.tables.roles'));
+        $this->defaultOptions['endpoint'] = "roles";
+        $this->headers = [
+            ID::make('id')->hiddenList()->hiddenShow()->render(),
+            TEXT::make('name')->filter()->render(),
+            HTML::make('permissions')->render(),
+            TEXT::make('description')->filter()->render(),
+        ];
     }
 
     /**
@@ -65,5 +78,22 @@ class Role extends AbstractModel implements RoleContract
         }
 
         return true;
+    }
+
+    public function init()
+    {
+        $this->getHeader('permissions')->getCell()->addDecorator('callable', [
+            'closure' => function ($context, $record) {
+               return view("vendor.table.roles-permissions", [
+                   'row'=>$record
+               ])->render();
+            },
+        ]);
+
+    }
+
+    public function initFilter($query)
+    {
+        // TODO: Implement initFilter() method.
     }
 }

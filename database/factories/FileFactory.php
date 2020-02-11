@@ -4,8 +4,8 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\App\Model\Admin\File::class, function (Faker $faker) {
+$factory->define(\App\File::class, function (Faker $faker) {
     return [
-        'fullPath'=>$faker->imageUrl(1024, 1024)
+        'fullPath'=>$faker->image(storage_path('products'), 640,  480)
     ];
 });

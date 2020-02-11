@@ -6,12 +6,9 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-$factory->define(\App\Model\Admin\Addres::class, function (Faker $faker) {
+$factory->define(\App\Addres::class, function (Faker $faker) {
     $name = $faker->name;
     return [
-        'company_id' => get_tenant_id(),
-        'user_id' => null,
-        'uuid' => Str::uuid(),
         'name' => $name,
         'slug' => Str::slug($name),
         'zip' => $faker->postcode,

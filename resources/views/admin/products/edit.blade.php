@@ -19,10 +19,3 @@
 @endsection
 
 
-
-@push("scripts")
-    <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace( 'description' );
-    </script>
-@endpush

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Created by Claudio Campos.
+ * User: callcocam@gmail.com
+ * https://www.sigasmart.com.br
+ */
 
 namespace App\Suports\Shinobi;
 
@@ -10,8 +15,9 @@ class Shinobi
 {
     /**
      * Fetch an instance of the Role model.
-     * 
+     *
      * @return Role
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function role()
     {
@@ -20,8 +26,9 @@ class Shinobi
 
     /**
      * Fetch an instance of the Permission model.
-     * 
+     *
      * @return Permission
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function permission()
     {
@@ -30,31 +37,31 @@ class Shinobi
 
     /**
      * Assign roles to a user.
-     * 
-     * @param  string|array  $roles
-     * @return \App\Suports\Shinobi\Tactic\AssignRoleTo
+     *
+     * @param string|array $roles
+     * @return AssignRoleTo
      */
     public function assign($roles): AssignRoleTo
     {
         return new AssignRoleTo($roles);
     }
-    
+
     /**
      * Give permissions to a user or role
-     * 
-     * @param  string|array  $permissions
-     * @return \App\Suports\Shinobi\Tactic\GivePermissionTo
+     *
+     * @param string|array $permissions
+     * @return GivePermissionTo
      */
     public function give($permissions): GivePermissionTo
     {
         return new GivePermissionTo($permissions);
     }
-    
+
     /**
      * Revoke permissions from a user or role
-     * 
-     * @param  string|array  $permissions
-     * @return \App\Suports\Shinobi\Tactic\RevokePermissionFrom
+     *
+     * @param string|array $permissions
+     * @return RevokePermissionFrom
      */
     public function revoke($permissions): RevokePermissionFrom
     {

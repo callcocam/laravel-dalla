@@ -18,15 +18,12 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(\App\Model\Admin\User::class, function (Faker $faker) {
+$factory->define(\App\User::class, function (Faker $faker) {
     $name = $faker->name;
     return [
-        'company_id' => get_tenant_id(),
-        'user_id' => null,
-        'uuid' => Str::uuid(),
-        'name' => $name,
-        'slug' => Str::slug($name),
-        'email' => $faker->unique()->safeEmail,
+        'name' => "Super Admin",
+        'slug' => Str::slug("Super Admin"),
+        'email' => sprintf("supera-admin@%s", request()->getHost()),
         'phone' => $faker->phoneNumber,
         'document' => $faker->creditCardNumber,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

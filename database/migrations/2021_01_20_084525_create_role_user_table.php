@@ -15,10 +15,9 @@ class CreateRoleUserTable extends Migration
         $name = config('shinobi.tables.role_user');
 
         Schema::create($name, function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('role_id')->index();
+            $table->uuid('role_id')->index();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->index();
+            $table->uuid('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

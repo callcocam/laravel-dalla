@@ -2,7 +2,7 @@
 
 namespace App\Tenant;
 
-use App\Model\Admin\Company;
+use App\Company;
 use App\Tenant\Facades\Tenant;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,16 +26,16 @@ class TenantServiceProvider extends ServiceProvider
         try {
             $this->company = Company::query()->where('assets', request()->getHost())->first();
 
-            $tenant = 1;
+            $tenant = null;
 
             if ($this->company) :
 
                 $tenant = $this->company->id;
                 //die(response("Nenhuma empresa cadastrada com esse endereço " . str_replace("admin.", "", request()->getHost()), 401));
-
+                Tenant::addTenant("company_id", $tenant);
             endif;
 
-            Tenant::addTenant("company_id", $tenant);
+
 
         } catch (\Throwable $th) {
             //throw $th;

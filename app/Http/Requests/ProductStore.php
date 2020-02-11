@@ -24,8 +24,17 @@ class ProductStore extends FormRequest
      */
     public function rules()
     {
+
+        $rules = [
+            'name'=>['required', 'max:190'],
+        ];
+        return $rules;
+    }
+
+    public function messages()
+    {
         return [
-            'name'=>['required']
+            'required'=>"Campo obrigatório"
         ];
     }
 }

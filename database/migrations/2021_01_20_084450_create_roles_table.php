@@ -15,10 +15,9 @@ class CreateRolesTable extends Migration
         $name = config('shinobi.tables.roles');
 
         Schema::create($name, function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->tenant();
             $table->user();
-            $table->uuid('uuid');
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();

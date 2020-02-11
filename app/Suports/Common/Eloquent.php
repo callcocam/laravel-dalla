@@ -8,50 +8,9 @@ namespace App\Suports\Common;
 
 
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\Log;
 
 trait Eloquent
 {
-    protected $showTitle = Options::DEFAULT_TITLE;
-
-    protected $showColumnOrder = Options::DEFAULT_COLUMN_ODER_DIRECTION;
-
-    protected $showStatusColumn = Options::DEFAULT_COLUMN_STATUS;
-
-    protected $showDateColumn = Options::DEFAULT_COLUMN_DATE;
-
-    protected $showOrderDirection = Options::DEFAULT_ORDER_DESC;
-
-    protected $showEndpoint = '';
-
-    protected $showEndpointBack = '';
-
-    protected $showStatusItems = [
-        ['value'=>'','text'=>"all"],
-        ['value'=>'published','text'=>"published"],
-        ['value'=>'draft','text'=>"draft"],
-        ['value'=>'deleted','text'=>"deleted"],
-    ];
-    protected $showSortOptions = [
-        ['value'=>'ASC','text'=>"Ascending"],
-        ['value'=>'DESC','text'=>"Descending"]
-    ];
-
-    protected $showItems = [6,12,24,48,95];
-
-    protected $showSearch  = Options::DEFAULT_INITIAL_SHOW_SEARCH;
-
-    protected $showDownloadCSV  = Options::DEFAULT_INITIAL_DOWNLOAD_CSV;
-
-    protected $showDownloadPDF  = Options::DEFAULT_INITIAL_DOWNLOAD_PDF;
-
-    protected $showDownloadPRINT  = Options::DEFAULT_INITIAL_DOWNLOAD_PRINT;
-
-    protected $showDownloadZIP  = Options::DEFAULT_INITIAL_DOWNLOAD_ZIP;
-
-    protected $showStatus  = Options::DEFAULT_INITIAL_STATUS;
-
-    protected $showItemPerPage = 12;
 
     /**
      * @var Builder
@@ -60,9 +19,10 @@ trait Eloquent
 
     protected function order()
     {
-        $column = request()->get('column',$this->showColumnOrder);
 
-        $order = request()->get('sort',$this->showOrderDirection);
+        $column = $this->getParams()->column;
+
+        $order = $this->getParams()->order;
 
         $this->queryBuilder->orderBy($column, $order);
     }
@@ -71,31 +31,30 @@ trait Eloquent
     {
 
 
+        if ($this->getParams()->status) {
 
-        if ($this->showStatusColumn) {
-
-            if (request()->get($this->showStatusColumn, false)) {
-                $this->queryBuilder->where([$this->showStatusColumn => request()->get($this->showStatusColumn)]);
+            if ($this->getParams()->status !="all") {
+                $this->queryBuilder->where([$this->getOption(Options::DEFAULT_COLUMN_STATUS) => $this->getParams()->status]);
             }
         }
 
 
-        if (request()->has('start') && request()->has('end')) {
-            $this->queryBuilder->whereBetween($this->showDateColumn, [
-                date_carbom_format(request()->get('start'))->format('Y-m-d 00:00:00'),
-                date_carbom_format(request()->get('end'))->format('Y-m-d 23:59:59')
+        if ($this->getParams()->start && $this->getParams()->end) {
+            $this->queryBuilder->whereBetween($this->getOption(Options::DEFAULT_COLUMN_DATE), [
+                date_carbom_format($this->getParams()->start)->format('Y-m-d 00:00:00'),
+                date_carbom_format($this->getParams()->end)->format('Y-m-d 23:59:59')
             ]);
         }
 
 
         if (request()->has('year'))
-            $this->queryBuilder->whereYear($this->showDateColumn, '=', request()->get('year'));
+            $this->queryBuilder->whereYear($this->getOption(Options::DEFAULT_COLUMN_DATE), '=', $this->getParams()->year);
         if (request()->has('month'))
-            $this->queryBuilder->whereMonth($this->showDateColumn, '=', request()->get('month'));
+            $this->queryBuilder->whereMonth($this->getOption(Options::DEFAULT_COLUMN_DATE), '=', $this->getParams()->month);
         if (request()->has('day'))
-            $this->queryBuilder->whereDay($this->showDateColumn, '=', request()->get('day'));
+            $this->queryBuilder->whereDay($this->getOption(Options::DEFAULT_COLUMN_DATE), '=', $this->getParams()->day);
         if (request()->has('date'))
-            $this->queryBuilder->whereDate($this->showDateColumn, '=', request()->get('date'));
+            $this->queryBuilder->whereDate($this->getOption(Options::DEFAULT_COLUMN_DATE), '=', $this->getParams()->date);
         if (request()->has('number'))
             $this->queryBuilder->where('number', '=', request()->get('number'));
 
@@ -105,20 +64,17 @@ trait Eloquent
 
             foreach ($headers as $values) :
 
-                if (isset($values['value'])) :
+                if (isset($values['filter']) && $values['filter']) :
 
-                    if (isset($values['alias']) && $values['alias']) :
+                    $Searchs[] = $values['key'];
 
-                        $Searchs[] = $values['value'];
-
-                    endif;
                 endif;
 
             endforeach;
 
         endif;
 
-        $anyKeyword = request()->get('search', null);
+        $anyKeyword = $this->getParams()->search;
 
         if ($Searchs && !is_null($anyKeyword)) :
 
@@ -136,7 +92,10 @@ trait Eloquent
     public function getData($columns = ["*"])
     {
 
-        $headers = $this->initTable();
+        if($this->data)
+            return $this->data;
+
+        $headers = $this->getTables()->getHeaders();
 
         $this->queryBuilder = $this->getQuery();
 
@@ -146,56 +105,15 @@ trait Eloquent
 
         $this->initQuery($headers);
 
-        $rows = $this->queryBuilder->paginate(request()->get('limit',$this->showItemPerPage));
+        $this->data = $this->queryBuilder->orderBy($this->getParams()->column, $this->getParams()->order)->paginate($this->getParams()->perPage);
 
-        $rows->each(function ($result) {
 
-            $result->append('avatar');
-            $result->append('created_mm_dd_yyyy');
-            $result->append('avatar_filename');
-
-        });
-
-        Log::debug($this->queryBuilder->toSql());
+        //Log::debug($this->queryBuilder->toSql());
         //Log::debug("Params: page -> {$this->getParams()->page}, search -> {$this->getParams()->search}, limit -> {$this->getParams()->limit}, between -> {$this->getParams()->between}, status -> {$this->getParams()->status}");
         // $resource = $this->tables->getResource();
 
 
-        return [
-            'query'=>$this->getQueryParams(),
-            'rows'=>$rows->items(),
-            'items'=>$rows->items(),
-            "firstPageUrl"=>null,
-            "lastPageUrl"=>$rows->nextPageUrl(),
-            "nextPageUrl"=> $rows->nextPageUrl(),
-            "path"=> $rows->path(),
-            "prevPageUrl"=> $rows->previousPageUrl(),
-            'headers'=>$headers,
-            'options'=>[
-                'currentPage' => $rows->currentPage(),
-                "from"=> $rows->firstItem(),
-                "lastPage"=> $rows->lastPage(),
-                "perPage"=> $rows->perPage(),
-                "to"=> $rows->lastItem(),
-                "total"=> $rows->total(),
-                "itemPerPage"=> $this->showItemPerPage,
-                "showStatusColumn"=> $this->showStatusColumn,
-                "showDateColumn"=> $this->showDateColumn,
-                "showTitle"=> $this->showTitle,
-                "showSortOptions"=> $this->showSortOptions,
-                "showOrderDirection"=> $this->showOrderDirection,
-                "showEndpoint"=> $this->showEndpoint,
-                "showEndpointBack"=> $this->showEndpointBack,
-                "showStatusItems"=> $this->showStatusItems,
-                "showItems"=> $this->showItems,
-                "showSearch"=> $this->showSearch,
-                "showStatus"=> $this->showStatus,
-                "showDownloadCSV"=> $this->showDownloadCSV,
-                "showDownloadPDF"=> $this->showDownloadPDF,
-                "showDownloadPRINT"=> $this->showDownloadPRINT,
-                "showDownloadZIP"=> $this->showDownloadZIP,
-            ]
-        ];
+        return $this->data;
     }
 
     protected function getQueryParams(){

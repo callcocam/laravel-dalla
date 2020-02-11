@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Suports\Call\Resources\Fields\Facades\COVER;
+use App\Suports\Call\Resources\Fields\Facades\ID;
+use App\Suports\Call\Resources\Fields\Facades\TEXT;
 use App\Suports\Shinobi\Concerns\HasRolesAndPermissions;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +12,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRolesAndPermissions;
+    use Notifiable, HasRolesAndPermissions, TraitModel, TraitTable;
+
+    public $incrementing = false;
+
+    protected $keyType = "string";
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','slug', 'email','phone','document', 'password', 'is_admin',
     ];
 
     /**
@@ -26,15 +33,37 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','email_verified_at'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->defaultOptions['endpoint'] = "users";
+        $this->headers = [
+            ID::make('id')->hiddenList()->hiddenShow()->render(),
+            COVER::make('cover')->render(),
+            TEXT::make('name')->filter()->render(),
+        ];
+    }
+    public function address(){
+
+        return $this->morphOne(Addres::class, 'addresable');
+    }
+
+    public function getAddressAttribute(){
+
+        return $this->address()->first(['zip','city','state','country', 'street','district','number','complement']);
+    }
+
+    public function init()
+    {
+        // TODO: Implement init() method.
+    }
+
+    public function initFilter($query)
+    {
+        // TODO: Implement initFilter() method.
+    }
 }

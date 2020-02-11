@@ -30,26 +30,7 @@
                     <div class="card-body">
                         <div class="card-title">{{ __("Últimos produto adquiridos") }}</div>
 
-                        @if($rows->orders)
-                            @foreach($rows->orders as $order)
-                                @can('view', $order)
-                                    @foreach($order->items as $item)
-                                        <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-3"><img class="avatar-lg mb-3 mb-sm-0 rounded mr-sm-3" src="{{ asset($item->products->cover) }}" alt="{{ $item->products->name }}">
-                                            <div class="flex-grow-1">
-                                                <h5><a href="{{ route('admin.products.show', $item->products->id) }}">{{ $item->products->name }}</a></h5>
-                                                <p class="m-0 text-small text-muted">{{ __('Quantidade') }}: {{ str_pad((int)$item->amount, 5, '0', STR_PAD_LEFT) }}</p>
-                                                <p class="text-small text-danger m-0"> R$ {{ form_read($item->products->price) }}</p>
-                                            </div>
-                                            <div>
-                                                <a title="Ver detalhes do pedido" href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline-primary mt-3 mb-3 m-sm-0 btn-rounded btn-sm">
-                                                    {{ __('Ver Pedido') }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endcan
-                            @endforeach
-                        @endif
+
                     </div>
                 </div>
              </div>
