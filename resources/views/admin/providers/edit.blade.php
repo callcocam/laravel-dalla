@@ -4,7 +4,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.providers.index') }}">{{ __('Fornecedor') }}</a></li>
+            <li><a href="{{ route('admin.providers.index', request()->query()) }}">{{ __('Fornecedor') }}</a></li>
             <li>{{ $rows->name }}</li>
         </ul>
     </div>

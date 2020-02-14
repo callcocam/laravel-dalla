@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\InputProcessStep;
+use App\Observers\InputProcessStepObserver;
 use App\Suports\AutoRouteServiceProvider;
 use App\Suports\Intl\IntlServiceProvider;
+use App\Suports\Menus\MenuServiceProvider;
 use App\Suports\Shinobi\ShinobiServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -30,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
        // });
         $this->app->register(IntlServiceProvider::class);
         $this->app->register(AutoRouteServiceProvider::class);
+        $this->app->register(MenuServiceProvider::class);
         $this->app->register(ShinobiServiceProvider::class);
         $this->app->register(\App\Suports\Notify\NotifyServiceProvider::class);
 
@@ -46,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength('191');
         $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
-
+        InputProcessStep::observe(InputProcessStepObserver::class);
         $this->bluePrintMacros();
     }
 

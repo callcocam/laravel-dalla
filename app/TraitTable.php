@@ -10,6 +10,7 @@ namespace App;
 
 use App\Suports\Call\Resources\Fields\Facades\ACTION;
 use App\Suports\Call\Resources\Fields\Facades\DATE;
+use App\Suports\Call\Resources\Fields\Facades\TEXT;
 use App\Suports\Table\Header;
 use App\Suports\Table\Render;
 use App\Suports\Table\Row;
@@ -22,6 +23,8 @@ trait TraitTable
     protected $tableInit = false;
     protected $rows;
     protected $renderer;
+    protected $endpoint="";
+    protected $alias="usuario";
     protected $prependHeaders = [];
     protected $headers = [];
 
@@ -37,26 +40,29 @@ trait TraitTable
 
     public function actions()
     {
+        if(empty($this->endpoint)){
+            $this->endpoint = $this->getTable();
+        }
         $this->getHeader('action')->getCell()->addDecorator('callable', [
             'closure' => function ($context, $record) {
                 $actions = [];
-                if (Gate::allows(sprintf('admin.%s.edit', $this->getTable()))) {
+                if (Gate::allows(sprintf('admin.%s.edit', $this->endpoint))) {
 
                     $actions['edit'] = [
-                        'name' => route(sprintf('admin.%s.edit', $this->getTable()), $record['id']),
+                        'name' => route(sprintf('admin.%s.edit', $this->endpoint), array_merge([$this->alias=>$record['id']], request()->all())),
                         'id' => $record['id']
                     ];
                 }
-                if (Gate::allows(sprintf('admin.%s.destroy', $this->getTable()))) {
+                if (Gate::allows(sprintf('admin.%s.destroy', $this->endpoint))) {
                     $actions['destroy'] = [
-                        'name' => route(sprintf('admin.%s.destroy', $this->getTable()), $record['id']),
+                        'name' => route(sprintf('admin.%s.destroy', $this->endpoint), array_merge([$this->alias=>$record['id']], request()->all())),
                         'id' => $record['id']
                     ];
                 }
 
-                if (Gate::allows(sprintf('admin.%s.show', $this->getTable()))) {
+                if (Gate::allows(sprintf('admin.%s.show', $this->endpoint))) {
                     $actions['show'] = [
-                        'name' => route(sprintf('admin.%s.show', $this->getTable()), $record['id']),
+                        'name' => route(sprintf('admin.%s.show', $this->endpoint), array_merge([$this->alias=>$record['id']], request()->all())),
                         'id' => $record['id']
                     ];
                 }
@@ -90,9 +96,9 @@ trait TraitTable
     {
 
         $this->appendHeaders = [
-            DATE::make('created_at')->sortable()->render(),
+            DATE::make('created_at')->hiddenList()->render(),
             DATE::make('updated_at')->hiddenList()->render(),
-            DATE::make('status')->sortable()->render(),
+            TEXT::make('status')->sortable()->render(),
             ACTION::make('action',['label'=>"#"])->width()->hiddenShow()->render()
         ];
 
@@ -198,7 +204,7 @@ trait TraitTable
 
             foreach ($this->headers as $header) {
 
-                $headers[] = $header;
+                $headers[$header['key']] = $header;
             }
         }
 

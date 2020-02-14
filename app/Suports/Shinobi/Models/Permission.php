@@ -35,6 +35,8 @@ class Permission extends Model implements PermissionContract
     {
         parent::__construct($attributes);
 
+        $this->alias = "permissio";
+
         $this->setTable(config('shinobi.tables.permissions'));
         $this->defaultOptions['endpoint'] = "permissions";
         $this->headers = [

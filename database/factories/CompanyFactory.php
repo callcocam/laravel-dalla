@@ -19,9 +19,8 @@ use Illuminate\Support\Str;
 $factory->define(\App\Company::class, function (Faker $faker) {
     $name = $faker->name;
     $uuid = \Ramsey\Uuid\Uuid::uuid4()->toString();
-
+    \App\Tenant\Facades\Tenant::addTenant('company_id',$uuid);
     return [
-        'user_id' => null,
         'id' => $uuid,
         'name' => $name,
         'assets' => env('APP_URL','localhost.maks.test'),

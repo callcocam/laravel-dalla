@@ -34,6 +34,7 @@ class Role extends Model implements RoleContract
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+        $this->alias = 'role';
 
         $this->setTable(config('shinobi.tables.roles'));
         $this->defaultOptions['endpoint'] = "roles";

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AbstractForm;
-use App\AbstractModel;
 use App\AbstractRequest;
+use App\TraitModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     protected $results = [];
     /**
-     * @var AbstractModel
+     * @var TraitModel
      */
     protected $model;
 
@@ -46,7 +46,7 @@ class Controller extends BaseController
     }
 
     /**
-     * @return AbstractModel
+     * @return TraitModel
      */
     protected function getModel(){
 
@@ -59,7 +59,7 @@ class Controller extends BaseController
     }
 
     /**
-     * @return AbstractModel
+     * @return TraitModel
      */
     protected function getSource(){
 
@@ -82,5 +82,19 @@ class Controller extends BaseController
 
         return $this->rules->getRules($data);
 
+    }
+
+    protected function get(){
+
+        $requests = request()->query();
+        $data =[];
+
+        if($requests):
+
+            foreach ($requests as $key => $request){
+               $data[$key] = $request;
+            }
+
+        endif;
     }
 }

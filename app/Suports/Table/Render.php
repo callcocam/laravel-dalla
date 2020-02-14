@@ -76,6 +76,7 @@ class Render
         $option['showItems'] = $this->options->showItems;
         $option['order'] = $this->options->order;
         $option['endpoint'] = $this->options->endpoint;
+        $option['endpoint'] = $this->options->endpoint;
         $option['column'] = $this->options->column;
         return $option;
     }
@@ -87,6 +88,8 @@ class Render
         $query['perPage'] = $this->param->perPage;
         $query['order'] = $this->param->order;
         $query['column'] = $this->param->column;
+        $query['start'] = $this->param->start;
+        $query['end'] = $this->param->end;
         $query['total'] = $data->total();
         $query['page'] = $data->currentPage();
         if ($data->total() <= $this->param->perPage) {

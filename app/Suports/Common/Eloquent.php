@@ -17,11 +17,13 @@ trait Eloquent
      */
     protected $queryBuilder;
 
-    protected function order()
+    protected function order($headers)
     {
-
         $column = $this->getParams()->column;
 
+        if(isset($headers[$column])){
+            $column = $headers[$column]['alias'];
+        }
         $order = $this->getParams()->order;
 
         $this->queryBuilder->orderBy($column, $order);
@@ -66,7 +68,7 @@ trait Eloquent
 
                 if (isset($values['filter']) && $values['filter']) :
 
-                    $Searchs[] = $values['key'];
+                    $Searchs[] = $values['alias'];
 
                 endif;
 
@@ -95,17 +97,17 @@ trait Eloquent
         if($this->data)
             return $this->data;
 
-        $headers = $this->getTables()->getHeaders();
+        $headers = $this->getTables()->getHeadersArray();
 
-        $this->queryBuilder = $this->getQuery();
+        $this->queryBuilder = $this->getSources();
 
         $this->queryBuilder->select($columns);
 
-        $this->order();
+        $this->order($headers);
 
         $this->initQuery($headers);
 
-        $this->data = $this->queryBuilder->orderBy($this->getParams()->column, $this->getParams()->order)->paginate($this->getParams()->perPage);
+        $this->data = $this->queryBuilder->paginate($this->getParams()->perPage);
 
 
         //Log::debug($this->queryBuilder->toSql());
@@ -114,26 +116,6 @@ trait Eloquent
 
 
         return $this->data;
-    }
-
-    protected function getQueryParams(){
-
-        $query = array_merge([
-            'column'=> $this->showColumnOrder,
-            'limit'=> $this->showItemPerPage,
-            'page'=> 1,
-            'search'=> null,
-            'sort'=> $this->showOrderDirection,
-            'status'=> $this->showStatus,
-        ], request()->all());
-
-        foreach ($query as $key =>$value) {
-
-            if(is_numeric($value)){
-                $query[$key] = (int)$value;
-            }
-        }
-        return $query;
     }
 
 }

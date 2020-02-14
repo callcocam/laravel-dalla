@@ -21,9 +21,6 @@ trait TraitModel
 
     use Select, Eloquent, Delete, Helper, Create, Update, BelongsToTenants, SoftDeletes;
 
-
-
-
     protected $results = [
         'tabla' => null,
         'result' => false,
@@ -42,19 +39,12 @@ trait TraitModel
         parent::boot();
         //evento executado antes de se criar o model no banco de dados
         self::creating(function ($model) {
-            $model->id = Uuid::uuid4();
-            if($model->tenant){
-                $model->company_id = get_tenant_id();
+            if(!$model->id){
+                $model->id = Uuid::uuid4();
             }
-            else{
-                $model->company_id = null;
-            }
-
+            $model->company_id = get_tenant_id();
             if(Auth::check()){
                 $model->user_id = Auth::id();
-            }
-            else{
-                $model->user_id = 'acd05d59-883e-4d9a-b02d-5f38a19e7a8e';
             }
             //
 
@@ -70,9 +60,11 @@ trait TraitModel
 
         $this->initArray($data);
 
+        $this->initCod($data);
 
 
-        if(isset($data['id']) && (int)$data['id']){
+
+        if(isset($data['id']) && $data['id']){
 
            if($this->updateBy($data, $data['id'])){
               //SITEMA DE TAGS
@@ -183,7 +175,20 @@ trait TraitModel
 
     public function getResultLastId()
     {
+        if(is_string($this->lastId)){
+            return $this->lastId;
+        }
+        if($this->lastId){
+            return $this->lastId->toString();
+        }
         return $this->lastId;
+    }
+
+    public function getAlias(){
+
+        return [
+            $this->alias => $this->getResultLastId()
+        ];
     }
 
     public function getModel(){

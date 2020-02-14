@@ -368,6 +368,25 @@ trait Helper
         return $input;
     }
 
+    public function initCod(&$input)
+    {
+
+        if (!array_key_exists('codigo',$input)) :
+
+            return $input;
+
+        endif;
+        if (empty($input['codigo'])) :
+            $cod =  static::withTrashed()->max('codigo');
+            if(!$cod){
+
+                $cod= 0;
+            }
+            $input['codigo'] = ($cod+=1);
+        endif;
+        return $input;
+    }
+
 
     protected $titile = 'Lista de Company';
 

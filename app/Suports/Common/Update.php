@@ -9,7 +9,8 @@
 namespace App\Suports\Common;
 
 
-use App\AbstractModel;
+
+use App\TraitModel;
 
 trait Update
 {
@@ -21,12 +22,11 @@ trait Update
         $this->results['table'] = $this->table;
 
         /**
-         * @var $model AbstractModel
+         * @var $model TraitModel
          */
         $model = $this->find($id);
 
         $data =[];
-        
         foreach ($this->fillable as $value):           
             try{                
                 

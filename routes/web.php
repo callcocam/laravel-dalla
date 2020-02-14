@@ -21,7 +21,8 @@ Route::get('/home', function (){
 })->name('home-redirect');
 Route::get('/linksimbolico', function (){
 
-    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    //\Illuminate\Support\Facades\Artisan::call('storage:link');
+    \Illuminate\Support\Facades\Artisan::call('config:cache');
 });
 
 Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
@@ -43,9 +44,14 @@ Route::group(['prefix'=>'/'],function (\Illuminate\Routing\Router $router) {
     \App\Suports\AutoRoute::resources("fornecedores","ProviderController","providers");
     \App\Suports\AutoRoute::resources("grades","GridController","grids");
     \App\Suports\AutoRoute::resources("produtos","ProductController","products");
+    \App\Suports\AutoRoute::resources("aviamentos","AviamentController","aviaments");
+    \App\Suports\AutoRoute::resources("tecidos","FabricController","fabrics");
+    \App\Suports\AutoRoute::resources("pagamentos","PaymentController","payments");
+    \App\Suports\AutoRoute::resources("etapas","StageController","stages");
 
+    \App\Suports\AutoRoute::resources("ordem-servicos","OrderController","orders");
 
-
+    \App\Suports\AutoRoute::resources("ordem-servicos-etapas-entradas","InputProcessStepController","inputs");
 
 
 });

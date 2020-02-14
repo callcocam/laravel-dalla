@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="{{ asset('_dist/admin/css/themes/lite-purple.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('_dist/admin/css/plugins/perfect-scrollbar.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('_dist/admin/css/plugins/daterangepicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     @stack('styles')
     @notify_css
@@ -29,6 +30,7 @@
         <div id="app" class="main-content">
             @yield('breadcrumb')
             <div class="separator-breadcrumb border-top"></div>
+
         @yield('content')
             <!-- end of main-content -->
 
@@ -42,11 +44,15 @@
 <script src="{{ asset('_dist/admin/js/plugins/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/plugins/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('_dist/admin/js/plugins/pt-br.js') }}"></script>
+<script src="{{ asset('_dist/admin/js/plugins/moment.min.js') }}"></script>
+<script src="{{ asset('_dist/admin/js/plugins/daterangepicker.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/scripts/script.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/scripts/sidebar.large.script.min.js') }}"></script>
 <script src="{{ asset('_dist/admin/js/plugins/tagging.min.js') }}"></script>
 <script src="https://kit.fontawesome.com/f248d703d3.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+
 @notify_js
 @notify_render
 @stack('scripts')

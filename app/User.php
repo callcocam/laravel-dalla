@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Suports\Call\Resources\Fields\Facades\COVER;
+//use App\Suports\Call\Resources\Fields\Facades\COVER;
+use App\Suports\Call\Resources\Fields\Facades\HTML;
 use App\Suports\Call\Resources\Fields\Facades\ID;
 use App\Suports\Call\Resources\Fields\Facades\TEXT;
 use App\Suports\Shinobi\Concerns\HasRolesAndPermissions;
@@ -17,6 +18,7 @@ class User extends Authenticatable
     public $incrementing = false;
 
     protected $keyType = "string";
+
 
     /**
      * The attributes that are mass assignable.
@@ -43,8 +45,9 @@ class User extends Authenticatable
         $this->defaultOptions['endpoint'] = "users";
         $this->headers = [
             ID::make('id')->hiddenList()->hiddenShow()->render(),
-            COVER::make('cover')->render(),
+            //COVER::make('cover')->render(),
             TEXT::make('name')->filter()->render(),
+            HTML::make('permissions')->render(),
         ];
     }
     public function address(){
@@ -59,7 +62,18 @@ class User extends Authenticatable
 
     public function init()
     {
-        // TODO: Implement init() method.
+        $this->getHeader('permissions')->getCell()->addDecorator('callable', [
+            'closure' => function ($context, $record) {
+                return view("vendor.table.users-roles", [
+                    'row'=>$record
+                ])->render();
+            },
+        ]);
+        $this->getHeader('status')->getCell()->addDecorator('callable', [
+            'closure' => function ($context, $record) {
+                return view('vendor.table.status', compact('context'));
+            },
+        ]);
     }
 
     public function initFilter($query)

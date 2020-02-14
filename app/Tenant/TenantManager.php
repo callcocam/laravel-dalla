@@ -118,9 +118,7 @@ class TenantManager
     public function getTenantId($tenant)
     {
         if (!$this->hasTenant($tenant)) {
-            throw new TenantColumnUnknownException(
-                '$tenant must be a string key or an instance of \Illuminate\Database\Eloquent\Model'
-            );
+            return null;
         }
 
         return $this->tenants->get($this->getTenantKey($tenant));

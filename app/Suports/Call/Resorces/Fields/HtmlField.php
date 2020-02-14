@@ -12,6 +12,7 @@ class HtmlField extends AbstractFiled
     public function make($name, $opitions=null)
     {
         $this->render['name']=$name;
+        $this->render['alias']=$name;
         $this->render['format']="html";
         return  parent::make($name,$opitions);
     }

@@ -5,7 +5,7 @@
         <h1>{{ $tenant->name }}</h1>
         <ul>
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
-            <li><a href="{{ route('admin.grids.index') }}">{{ __('Grades') }}</a></li>
+            <li><a href="{{ route('admin.grids.index', request()->query()) }}">{{ __('Grades') }}</a></li>
             <li>{{ __('Visualizar Grade') }} - {{ $rows->name }}</li>
         </ul>
     </div>

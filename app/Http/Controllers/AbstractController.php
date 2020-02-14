@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 abstract class AbstractController extends Controller
@@ -41,10 +42,11 @@ abstract class AbstractController extends Controller
 
     public function index(){
 
+
         $this->results['user'] = Auth::user();
         $this->results['tenant'] = get_tenant();
         if($this->model){
-            $this->results['rows'] = $this->getModel()->setParams(request()->all())->render($this->templateList);
+            $this->results['rows'] = $this->getModel()->setParams(request()->query())->render($this->templateList);
         }
 
         return view(sprintf('admin.%s.index', $this->template), $this->results);
@@ -65,7 +67,7 @@ abstract class AbstractController extends Controller
             $form = $this->formBuilder->create($this->formClass,
                 [
                     'method' => 'POST',
-                    'url' => route(sprintf("admin.%s.store", $this->template))
+                    'url' => route(sprintf("admin.%s.store", $this->template),request()->query())
                 ]);
 
         }
@@ -97,30 +99,32 @@ abstract class AbstractController extends Controller
 
     protected function save($request){
 
-        // It will automatically use current request, get the rules, and do the validation
-
         $this->getModel()->saveBy($request->all());
 
-        if($this->getModel()->getResultLastId()){
+        $message = $this->getModel()->getMessage();
 
+        $uuid = $this->getModel()->getResultLastId();
+
+        if($uuid){
             if($this->event){
-                $this->setEvent($this->getModel()->findById($this->getModel()->getResultLastId()));
+                $this->setEvent($this->getModel()->findById($uuid));
             }
 
             if(empty($this->route)){
 
-                notify()->success($this->getModel()->getMessage());
+                notify()->success($message);
 
-                if($this->getModel()->getResultLastId()){
-                    return redirect()->route(sprintf("admin.%s.edit", $this->template), $this->getModel()->getResultLastId())->with('success', $this->getModel()->getMessage());
+                if($uuid){
+                    return redirect()->route(sprintf("admin.%s.edit", $this->template),array_merge($this->getModel()->getAlias(), request()->query()))->with('success', $message);
                 }
-                return back()->with('success', $this->getModel()->getMessage());
-            }
-            return redirect()->route(sprintf($this->route, $this->getModel()->getResultLastId()))->with('success', $this->getModel()->getMessage());
-        }
-        notify()->error($this->getModel()->getMessage());
 
-        return back()->withErrors($this->getModel()->getMessage())->withInput();
+                return back()->with('success', $message)->withInput();
+            }
+            return redirect()->route(sprintf($this->route, $uuid))->with('success', $message);
+        }
+        notify()->error($message);
+
+        return back()->withErrors($message)->withInput();
     }
 
     /**
@@ -208,6 +212,7 @@ abstract class AbstractController extends Controller
         $rows = $this->getModel()->findById($id);
 
         if(!$rows){
+
             notify()->error(__("O modelo não foi informado, se o problema persistir contate o administardor!!!!"));
 
             return back()->withErrors(__("O modelo não foi informado, se o problema persistir contate o administardor!!!!"));
@@ -221,7 +226,7 @@ abstract class AbstractController extends Controller
             ]);
             $form->setFormOption('model',$rows);
             $form->setFormOption('method','POST');
-            $form->setFormOption('url',route(sprintf("admin.%s.store", $this->template)));
+            $form->setFormOption('url',route(sprintf("admin.%s.store", $this->template),request()->all()));
 
         }
 

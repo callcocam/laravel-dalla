@@ -7,11 +7,6 @@
             <li><a href="{{ route('admin.admin.index') }}">{{ __('Painel') }}</a></li>
             <li>{{ __('Grades') }}</li>
         </ul>
-        <div style="right: 2%;position: absolute;">
-            @can('admin.grids.create')
-                <a href="{{ route('admin.grids.create') }}" class="btn btn-success btn-rounded pull-right"><span class="icon i-Add-File"></span> {{ __('Cadastrar Grade') }}</a>
-            @endcan
-        </div>
     </div>
 @endsection
 @section('content')

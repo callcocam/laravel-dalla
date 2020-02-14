@@ -1,8 +1,10 @@
 <?php
-
-
+/**
+ * Created by Claudio Campos.
+ * User: callcocam@gmail.com
+ * https://www.sigasmart.com.br
+ */
 namespace App;
-
 
 use App\Suports\Call\Resources\Fields\Facades\COVER;
 use App\Suports\Call\Resources\Fields\Facades\ID;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use TraitModel, TraitTable;
+
     public $incrementing = false;
 
     protected $keyType = "string";
@@ -39,7 +42,11 @@ class Company extends Model
 
     public function init()
     {
-        // TODO: Implement init() method.
+        $this->getHeader('status')->getCell()->addDecorator('callable', [
+            'closure' => function ($context, $record) {
+                return view('vendor.table.status', compact('context'));
+            },
+        ]);
     }
 
     public function initFilter($query)

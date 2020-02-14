@@ -1,4 +1,4 @@
-@if($row->permissions)
+@if($row->permissions->count())
     <ul class="list-group list-group-flash">
         <li class="list-group-item border-0">
             @foreach($row->permissions as $permission)

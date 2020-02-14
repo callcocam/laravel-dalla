@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Created by Claudio Campos.
+ * User: callcocam@gmail.com
+ * https://www.sigasmart.com.br
+ */
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -30,11 +34,11 @@ class ProviderStore extends FormRequest
             'fantasy'=>['required', 'max:190'],
             'email' => [
                 'required',
-                Rule::unique('users')->ignore($this->id),
+                Rule::unique('providers')->ignore($this->id),
             ],
             'document' => [
                 'required',
-                Rule::unique('users')->ignore($this->id),
+                Rule::unique('providers')->ignore($this->id),
             ]
         ];
         return $rules;
